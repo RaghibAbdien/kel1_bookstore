@@ -13,10 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route Authentication
 Route::get('/', function () {
+    return view('auth.login');
+});
+Route::get('/register', function () {
+    return view('auth.register');
+});
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+});
+
+// Route Dashboard
+Route::get('/dashboard', function () {
     return view('index');
 });
 
+// Route Users Management
 Route::get('/list-user', function () {
     return view('users.index');
 });

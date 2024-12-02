@@ -3,8 +3,8 @@
         <!-- Sidebar Menu-->
         <ul class="sidebar-menu">
             <li class="nav-level">--- Admin</li>
-            <li class="treeview {{ request()->is('/') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/">
+            <li class="treeview {{ request()->is('dashboard') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/dashboard">
                     <i class="icon-speedometer"></i><span> Dashboard</span>
                 </a>
             </li>
