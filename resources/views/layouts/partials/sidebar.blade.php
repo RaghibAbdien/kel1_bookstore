@@ -3,13 +3,13 @@
         <!-- Sidebar Menu-->
         <ul class="sidebar-menu">
             <li class="nav-level">--- Admin</li>
-            <li class="active treeview">
-                <a class="waves-effect waves-dark" href="index.html">
+            <li class="treeview {{ request()->is('/') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/">
                     <i class="icon-speedometer"></i><span> Dashboard</span>
                 </a>
             </li>
-            <li class="">
-                <a class="waves-effect waves-dark" href="user-management.html">
+            <li class="treeview {{ request()->is('list-user') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/list-user">
                     <i class="icofont icofont-user"></i><span> User Management</span>
                 </a>
             </li>
