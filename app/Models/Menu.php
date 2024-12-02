@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Menu extends Model
 {
     use HasFactory;
 
@@ -13,12 +13,6 @@ class Role extends Model
 
     public function role_menu()
     {
-        return $this->hasMany(RoleMenu::class, 'role_id');
+        return $this->hasMany(RoleMenu::class, 'menu_id');
     }
-
-    public function user()
-    {
-        return $this->hasMany(User::class, 'role_id');
-    }
-
 }

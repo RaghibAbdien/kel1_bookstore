@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class RoleMenu extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function role_menu()
+    public function role()
     {
-        return $this->hasMany(RoleMenu::class, 'role_id');
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
-    public function user()
+    public function menu()
     {
-        return $this->hasMany(User::class, 'role_id');
+        return $this->belongsTo(Menu::class, 'menu_id');
     }
-
 }
