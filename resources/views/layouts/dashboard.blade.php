@@ -62,6 +62,16 @@
         <!-- Main content starts -->
         <div class="content-wrapper">
             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 p-0">
+                        <div class="main-header">
+                            <h4>@yield('page-title')</h4>
+                            @unless (request()->is('/') || request()->is('list-user'))
+                                @include('layouts.partials.breadcrumb')
+                            @endunless
+                        </div>
+                    </div>
+                </div>
                 @yield('content')
             </div>
         </div>

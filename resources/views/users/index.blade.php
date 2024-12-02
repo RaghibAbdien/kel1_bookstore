@@ -3,16 +3,11 @@
 @section('page-title', 'User Management')
 
 @section('content')
-    <div class="row">
-        <div class="main-header">
-            <h4>User Management</h4>
-        </div>
-    </div>
     <!-- Hover effect table starts -->
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title=""
-                href="#" role="button" data-original-title="Add User">
+                href="/add-user" role="button" data-original-title="Add User">
                 <i class="ti-plus"></i> Add User
             </a>
         </div>

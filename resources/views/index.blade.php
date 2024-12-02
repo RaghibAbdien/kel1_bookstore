@@ -3,12 +3,6 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-    <div class="row">
-        <div class="main-header">
-            <h4>Dashboard</h4>
-        </div>
-    </div>
-
     <!-- statistics -->
     <div class="row dashboard-header">
         <div class="col-lg-3 col-md-6">

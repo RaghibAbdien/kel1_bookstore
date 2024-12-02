@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::get('/list-user', function () {
     return view('users.index');
 });
+Route::get('/add-user', function () {
+    return view('users.add-user');
+});
