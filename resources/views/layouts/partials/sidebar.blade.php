@@ -8,7 +8,8 @@
                     <i class="icon-speedometer"></i><span> Dashboard</span>
                 </a>
             </li>
-            <li class="treeview {{ request()->is('list-user') || request()->is('add-user') ? 'active' : '' }}">
+            <li
+                class="treeview {{ request()->is('list-user') || request()->is('add-user') || request()->is('edit-user') ? 'active' : '' }}">
                 <a class="waves-effect waves-dark" href="/list-user">
                     <i class="icofont icofont-user"></i><span> User Management</span>
                 </a>

@@ -23,3 +23,6 @@ Route::get('/list-user', function () {
 Route::get('/add-user', function () {
     return view('users.add-user');
 });
+Route::get('/edit-user', function () {
+    return view('users.edit-user');
+});
