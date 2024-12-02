@@ -9,24 +9,25 @@
                 </a>
             </li>
             <li
-                class="treeview {{ request()->is('list-user') || request()->is('add-user') || request()->is('edit-user') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/list-user">
-                    <i class="icofont icofont-user"></i><span> User Management</span>
+                class="treeview {{ request()->is('manage-user') || request()->is('add-user') || request()->is('edit-user') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-user">
+                    <i class="icofont icofont-user"></i><span> Manage User</span>
                 </a>
             </li>
-            <li class="">
-                <a class="waves-effect waves-dark" href="role-access.html">
-                    <i class="icofont icofont-lock"></i><span> Role & Access Management</span>
+            <li
+                class="{{ request()->is('manage-role') || request()->is('manage-role') || request()->is('edit-role') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-role">
+                    <i class="icofont icofont-lock"></i><span> Manage Role & Access</span>
                 </a>
             </li>
             <li class="">
                 <a class="waves-effect waves-dark" href="catalog-management.html">
-                    <i class="icofont icofont-tag"></i><span> Catalog Management</span>
+                    <i class="icofont icofont-tag"></i><span> Manage Catalog</span>
                 </a>
             </li>
             <li class="">
                 <a class="waves-effect waves-dark" href="stock-management.html">
-                    <i class="icofont icofont-box"></i><span> Stock Management</span>
+                    <i class="icofont icofont-box"></i><span> Manage Stock</span>
                 </a>
             </li>
             <li class="">

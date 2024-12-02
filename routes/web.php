@@ -29,8 +29,8 @@ Route::get('/dashboard', function () {
     return view('index');
 });
 
-// Route Users Management
-Route::get('/list-user', function () {
+// Route Manage Users
+Route::get('/manage-user', function () {
     return view('users.index');
 });
 Route::get('/add-user', function () {
@@ -38,4 +38,15 @@ Route::get('/add-user', function () {
 });
 Route::get('/edit-user', function () {
     return view('users.edit-user');
+});
+
+// Route Manage Role & Access
+Route::get('/manage-role', function () {
+    return view('roles.index');
+});
+Route::get('/add-role', function () {
+    return view('roles.add-role');
+});
+Route::get('/edit-role', function () {
+    return view('roles.edit-role');
 });

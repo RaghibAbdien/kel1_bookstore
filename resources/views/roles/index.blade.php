@@ -1,14 +1,14 @@
 @extends('layouts.dashboard')
 
-@section('page-title', 'Manage User')
+@section('page-title', 'Manage Role & Access')
 
 @section('content')
     <!-- Hover effect table starts -->
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title=""
-                href="/add-user" role="button" data-original-title="Add User">
-                <i class="ti-plus"></i> Add User
+                href="/add-role" role="button" data-original-title="Add User">
+                <i class="ti-plus"></i> Add Role
             </a>
         </div>
         <div class="card-block">
@@ -18,25 +18,19 @@
                         <thead>
                             <tr>
                                 <th style="width: 1%;">#</th>
-                                <th style="width: 20%;">Fullname</th>
-                                <th style="width: 20%;">Email</th>
-                                <th style="width: 12%;">Role</th>
-                                <th style="width: 20%;">Registration Date</th>
-                                <th style="width: 7%;">Status</th>
+                                <th style="width: 20%;">Role Name</th>
+                                <th style="width: 40%;">Access Level</th>
                                 <th class="text-center" style="width: 20%; ">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Prisalindut</td>
-                                <td>prisandut@gmail.com</td>
                                 <td>Admin</td>
-                                <td>3 Des 2024</td>
-                                <td>Active</td>
+                                <td>create, read, update, delete</td>
                                 <td class="text-center">
                                     <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="/edit-user" role="button"
+                                        data-placement="top" title="" href="/edit-role" role="button"
                                         data-original-title="edit ">
                                         <i class="ti-pencil"></i>
                                     </a>

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('root-page', 'User Management')
+@section('root-page', 'Manage User')
 @section('page-title', 'Edit User')
 
 @section('content')
