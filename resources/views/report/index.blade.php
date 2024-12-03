@@ -5,81 +5,61 @@
 @section('content')
     {{-- Report Analytics --}}
     <div class="row dashboard-header">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
-                <span>Employee</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <span class="label label-primary">Views</span><a href="">Show Report</a>
-                <div class="side-box">
-                    <i class="ti-id-badge text-primary-color"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card dashboard-product">
-                <span>Total Invoice</span>
-                <h2 class="dashboard-total-products">37,500</h2>
-                <span class="label label-warning">Views</span><a href="">Show Report</a>
-                <div class="side-box">
-                    <i class="ti-user text-warning-color"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card dashboard-product">
-                <span>Stock Invoice</span>
+                <span>Total <br> Invoice</span>
                 <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <span class="label label-danger">Views</span><a href="">Show Report</a>
-                <div class="side-box">
-                    <i class="ti-direction-alt text-danger-color"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card dashboard-product">
-                <span>Warehouse Invoice</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <span class="label label-info">Views</span><a href="">Show Report</a>
+                <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-package text-info-color"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
-                <span>Purchasing Invoice</span>
+                <span>Stock <br> Invoice</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-direction-alt text-danger-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Purchasing <br> Invoice</span>
                 <h2 class="dashboard-total-products">4500</h2>
-                <span class="label label-primary">Sales</span><a href="">Show Report</a>
+                <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-wallet text-primary-color"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
-                <span>Delivery Invoice</span>
+                <span>Delivery <br> Invoice</span>
                 <h2 class="dashboard-total-products">37,500</h2>
-                <span class="label label-warning">Sales</span><a href="">Show Report</a>
+                <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-shopping-cart text-warning-color"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
-                <span>Failed Invoice</span>
+                <span>Failed <br> Invoice</span>
                 <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <span class="label label-danger">Views</span><a href="">Show Report</a>
+                <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-archive text-danger-color"></i>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
-                <span>Successful Invoice</span>
+                <span>Successful <br> Invoice</span>
                 <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <span class="label label-success">Sales</span><a href="">Show Report</a>
+                <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-truck text-success-color"></i>
                 </div>
@@ -122,7 +102,7 @@
                                         <i class="ti-eye"></i>
                                     </a>
                                     <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="/edit-invoice" role="button"
+                                        data-placement="top" title="" href="/edit-report" role="button"
                                         data-original-title="edit ">
                                         <i class="ti-pencil"></i>
                                     </a>

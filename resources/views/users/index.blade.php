@@ -3,50 +3,120 @@
 @section('page-title', 'Manage User')
 
 @section('content')
-    <!-- Filter User start -->
-    <div class="row">
-        <div class="col-lg-12">
-            <!-- Form Control starts -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="col-lg-12">
-                        <h5 class="card-header-text">Filter</h5>
-                    </div>
-                </div>
-
-                <div class="card-block">
-                    <form>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleRole" class="form-control-label">Role</label>
-                                <select class="form-control" id="exampleRole" name="">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleStatus" class="form-control-label">Status</label>
-                                <select class="form-control" id="exampleStatus" name="">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
+    {{-- User Analytics --}}
+    <div class="row dashboard-header">
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Total <br> Employee</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
                 </div>
             </div>
-            <!-- Form Control ends -->
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Customer <br> Service</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Logistic <br> Manager</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Purchasing <br> Agent</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Delivery <br> Driver</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Head <br> Manager</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>HR Manager</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Cashier</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-direction-alt text-danger-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Admin</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-package text-info-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Customer</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-truck text-success-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Total User</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Filter User end -->
+    {{-- User Analytics --}}
     <!-- User table starts -->
     <div class="card">
         <div class="card-header">

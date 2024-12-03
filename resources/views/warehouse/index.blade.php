@@ -3,62 +3,50 @@
 @section('page-title', 'Manage Warehouse')
 
 @section('content')
-    <!-- Filter Warehouse start -->
-    <div class="row">
-        <div class="col-lg-12">
-            <!-- Form Control starts -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="col-lg-12">
-                        <h5 class="card-header-text">Filter</h5>
-                    </div>
-                </div>
-
-                <div class="card-block">
-                    <form>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="exampleProductVariant" class="form-control-label">Product Variant</label>
-                                <select class="form-control" id="exampleProductVariant" name="">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="exampleQuantity" class="form-control-label">Quantity</label>
-                                <select class="form-control" id="exampleQuantity" name="">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="exampleStatus" class="form-control-label">Status</label>
-                                <select class="form-control" id="exampleStatus" name="">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
+    {{-- Warehouse Analytics --}}
+    <div class="row dashboard-header">
+        <div class="col-lg-3 col-md-6">
+            <div class="card dashboard-product">
+                <span>In Stock</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-truck text-success-color"></i>
                 </div>
             </div>
-            <!-- Form Control ends -->
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card dashboard-product">
+                <span>Low of Stock</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-package text-info-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card dashboard-product">
+                <span>Out of Stock</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-direction-alt text-danger-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card dashboard-product">
+                <span>Need Restock</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Filter Warehouse end -->
+    {{-- Warehouse Analytics --}}
     <!-- Warehouse table starts -->
     <div class="card">
         <div class="card-block">

@@ -3,38 +3,130 @@
 @section('page-title', 'Manage Catalog')
 
 @section('content')
-    <!-- Filter Catalog start -->
-    <div class="row">
-        <div class="col-lg-12">
-            <!-- Form Control starts -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="col-lg-12">
-                        <h5 class="card-header-text">Filter</h5>
-                    </div>
-                </div>
-
-                <div class="card-block">
-                    <form>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleProductVariant" class="form-control-label">Product Variant</label>
-                                <select class="form-control" id="exampleProductVariant" name="">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
+    {{-- Catalog Analytics --}}
+    <div class="row dashboard-header">
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Biography</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-truck text-success-color"></i>
                 </div>
             </div>
-            <!-- Form Control ends -->
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Comics</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-package text-info-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Culture</span>
+                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-direction-alt text-danger-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Self-Dev</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Economics</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Geography</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>History</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Language</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Novel</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Religion</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Science</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="card dashboard-product">
+                <span>Technology</span>
+                <h2 class="dashboard-total-products">4500</h2>
+                <a href="">Show</a>
+                <div class="side-box">
+                    <i class="ti-wallet text-primary-color"></i>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Filter Catalog end -->
+    {{-- Catalog Analytics --}}
     <!-- Catalog table starts -->
     <div class="card">
         <div class="card-header">
