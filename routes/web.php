@@ -72,3 +72,33 @@ Route::get('/add-quantity', function () {
 Route::get('/edit-quantity', function () {
     return view('stock.edit-quantity');
 });
+
+// Route Manage Warehouse
+Route::get('/manage-warehouse', function () {
+    return view('warehouse.index');
+});
+Route::get('/add-warehouse-quantity', function () {
+    return view('warehouse.add-warehouse-quantity');
+});
+Route::get('/edit-warehouse-quantity', function () {
+    return view('warehouse.edit-warehouse-quantity');
+});
+
+// Route Manage Purchase
+Route::get('/manage-purchase', function () {
+    return view('purchase.index');
+});
+Route::get('/add-purchase-quantity', function () {
+    return view('purchase.add-purchase-quantity');
+});
+Route::get('/edit-purchase-quantity', function () {
+    return view('purchase.edit-purchase-quantity');
+});
+
+// Route Manage Delivery
+Route::get('/manage-delivery', function () {
+    return view('delivery.index');
+});
+Route::get('/edit-delivery', function () {
+    return view('delivery.edit-delivery');
+});

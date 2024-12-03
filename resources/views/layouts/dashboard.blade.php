@@ -70,7 +70,10 @@
                                     request()->is('manage-user') ||
                                     request()->is('manage-role') ||
                                     request()->is('manage-catalog') ||
-                                    request()->is('manage-stock'))
+                                    request()->is('manage-stock') ||
+                                    request()->is('manage-warehouse') ||
+                                    request()->is('manage-purchase') ||
+                                    request()->is('manage-delivery'))
                                 @include('layouts.partials.breadcrumb')
                             @endunless
                         </div>

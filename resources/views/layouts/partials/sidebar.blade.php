@@ -33,19 +33,19 @@
                 </a>
             </li>
             <li
-                class="{{ request()->is('manage-warehouse') ? 'active' : '' }}">
+                class="{{ request()->is('manage-warehouse') || request()->is('add-warehouse-quantity') || request()->is('edit-warehouse-quantity') ? 'active' : '' }}">
                 <a class="waves-effect waves-dark" href="/manage-warehouse">
                     <i class="icofont icofont-building"></i><span> Manage Warehouse</span>
                 </a>
             </li>
             <li
-                class="{{ request()->is('manage-purchasing') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/manage-purchasing">
+                class="{{ request()->is('manage-purchase') || request()->is('add-purchase-quantity') || request()->is('edit-purchase-quantity') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-purchase">
                     <i class="icofont icofont-cart"></i><span> Manage Purchasing</span>
                 </a>
             </li>
-            <li class="">
-                <a class="waves-effect waves-dark" href="order-delivery.html">
+            <li class="{{ request()->is('manage-delivery') || request()->is('edit-delivery') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-delivery">
                     <i class="icofont icofont-truck"></i><span> Order & Delivery</span>
                 </a>
             </li>
