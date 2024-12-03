@@ -66,7 +66,11 @@
                     <div class="col-sm-12 p-0">
                         <div class="main-header">
                             <h4>@yield('page-title')</h4>
-                            @unless (request()->is('dashboard') || request()->is('manage-user') || request()->is('manage-role'))
+                            @unless (request()->is('dashboard') ||
+                                    request()->is('manage-user') ||
+                                    request()->is('manage-role') ||
+                                    request()->is('manage-catalog') ||
+                                    request()->is('manage-stock'))
                                 @include('layouts.partials.breadcrumb')
                             @endunless
                         </div>

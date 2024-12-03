@@ -1,9 +1,9 @@
 @extends('layouts.dashboard')
 
-@section('page-title', 'Manage User')
+@section('page-title', 'Manage Catalog')
 
 @section('content')
-    <!-- Filter User start -->
+    <!-- Filter Catalog start -->
     <div class="row">
         <div class="col-lg-12">
             <!-- Form Control starts -->
@@ -18,20 +18,8 @@
                     <form>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleRole" class="form-control-label">Role</label>
-                                <select class="form-control" id="exampleRole" name="">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleStatus" class="form-control-label">Status</label>
-                                <select class="form-control" id="exampleStatus" name="">
+                                <label for="exampleProductVariant" class="form-control-label">Product Variant</label>
+                                <select class="form-control" id="exampleProductVariant" name="">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -46,13 +34,13 @@
             <!-- Form Control ends -->
         </div>
     </div>
-    <!-- Filter User end -->
-    <!-- User table starts -->
+    <!-- Filter Catalog end -->
+    <!-- Catalog table starts -->
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title=""
-                href="/add-user" role="button" data-original-title="Add User">
-                <i class="ti-plus"></i> Add User
+                href="/add-product" role="button" data-original-title="Add User">
+                <i class="ti-plus"></i> Add Product
             </a>
         </div>
         <div class="card-block">
@@ -62,25 +50,19 @@
                         <thead>
                             <tr>
                                 <th style="width: 1%;">#</th>
-                                <th style="width: 20%;">Fullname</th>
-                                <th style="width: 20%;">Email</th>
-                                <th style="width: 12%;">Role</th>
-                                <th style="width: 20%;">Registration Date</th>
-                                <th style="width: 7%;">Status</th>
+                                <th style="width: 40%;">Product Name</th>
+                                <th style="width: 39%;">Product Variant</th>
                                 <th class="text-center" style="width: 20%; ">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Prisalindut</td>
-                                <td>prisandut@gmail.com</td>
-                                <td>Admin</td>
-                                <td>3 Des 2024</td>
-                                <td>Active</td>
+                                <td>Naruto</td>
+                                <td>Comic</td>
                                 <td class="text-center">
                                     <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="/edit-user" role="button"
+                                        data-placement="top" title="" href="/edit-product" role="button"
                                         data-original-title="edit ">
                                         <i class="ti-pencil"></i>
                                     </a>
@@ -97,5 +79,5 @@
             </div>
         </div>
     </div>
-    <!-- User table ends -->
+    <!-- Catalog table ends -->
 @endsection

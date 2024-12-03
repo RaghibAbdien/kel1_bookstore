@@ -50,3 +50,25 @@ Route::get('/add-role', function () {
 Route::get('/edit-role', function () {
     return view('roles.edit-role');
 });
+
+// Route Manage Catalog
+Route::get('/manage-catalog', function () {
+    return view('catalog.index');
+});
+Route::get('/add-product', function () {
+    return view('catalog.add-product');
+});
+Route::get('/edit-product', function () {
+    return view('catalog.edit-product');
+});
+
+// Route Manage Stock
+Route::get('/manage-stock', function () {
+    return view('stock.index');
+});
+Route::get('/add-quantity', function () {
+    return view('stock.add-quantity');
+});
+Route::get('/edit-quantity', function () {
+    return view('stock.edit-quantity');
+});

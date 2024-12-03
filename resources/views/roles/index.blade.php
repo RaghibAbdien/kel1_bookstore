@@ -3,7 +3,7 @@
 @section('page-title', 'Manage Role & Access')
 
 @section('content')
-    <!-- Hover effect table starts -->
+    <!-- Role table starts -->
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title=""
@@ -47,5 +47,5 @@
             </div>
         </div>
     </div>
-    <!-- Hover effect table ends -->
+    <!-- Role table ends -->
 @endsection

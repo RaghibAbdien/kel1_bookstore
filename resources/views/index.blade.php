@@ -27,7 +27,7 @@
         </div>
         <div class="col-lg-3 col-md-6">
             <div class="card dashboard-product">
-                <span>Variant Product</span>
+                <span>Product Variant</span>
                 <h2 class="dashboard-total-products">$<span>30,780</span></h2>
                 <span class="label label-danger">Views</span><a href="">More Info</a>
                 <div class="side-box">

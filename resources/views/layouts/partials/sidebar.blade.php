@@ -15,24 +15,38 @@
                 </a>
             </li>
             <li
-                class="{{ request()->is('manage-role') || request()->is('manage-role') || request()->is('edit-role') ? 'active' : '' }}">
+                class="{{ request()->is('manage-role') || request()->is('add-role') || request()->is('edit-role') ? 'active' : '' }}">
                 <a class="waves-effect waves-dark" href="/manage-role">
                     <i class="icofont icofont-lock"></i><span> Manage Role & Access</span>
                 </a>
             </li>
-            <li class="">
-                <a class="waves-effect waves-dark" href="catalog-management.html">
+            <li
+                class="{{ request()->is('manage-catalog') || request()->is('add-product') || request()->is('edit-product') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-catalog">
                     <i class="icofont icofont-tag"></i><span> Manage Catalog</span>
                 </a>
             </li>
-            <li class="">
-                <a class="waves-effect waves-dark" href="stock-management.html">
+            <li
+                class="{{ request()->is('manage-stock') || request()->is('add-quantity') || request()->is('edit-quantity') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-stock">
                     <i class="icofont icofont-box"></i><span> Manage Stock</span>
+                </a>
+            </li>
+            <li
+                class="{{ request()->is('manage-warehouse') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-warehouse">
+                    <i class="icofont icofont-building"></i><span> Manage Warehouse</span>
+                </a>
+            </li>
+            <li
+                class="{{ request()->is('manage-purchasing') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-purchasing">
+                    <i class="icofont icofont-cart"></i><span> Manage Purchasing</span>
                 </a>
             </li>
             <li class="">
                 <a class="waves-effect waves-dark" href="order-delivery.html">
-                    <i class="icofont icofont-cart"></i><span> Order & Delivery</span>
+                    <i class="icofont icofont-truck"></i><span> Order & Delivery</span>
                 </a>
             </li>
             <li class="">
