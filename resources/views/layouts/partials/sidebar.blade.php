@@ -54,8 +54,9 @@
                     <i class="icofont icofont-wallet"></i><span> Sales & Transactions</span>
                 </a>
             </li>
-            <li class="">
-                <a class="waves-effect waves-dark" href="reports-analytics.html">
+            <li
+                class="{{ request()->is('manage-report') || request()->is('detail-report') || request()->is('edit-report') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-report">
                     <i class="icofont icofont-pie-chart"></i><span> Reports & Analytics</span>
                 </a>
             </li>

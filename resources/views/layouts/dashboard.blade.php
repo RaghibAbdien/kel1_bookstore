@@ -73,7 +73,8 @@
                                     request()->is('manage-stock') ||
                                     request()->is('manage-warehouse') ||
                                     request()->is('manage-purchase') ||
-                                    request()->is('manage-delivery'))
+                                    request()->is('manage-delivery') ||
+                                    request()->is('manage-report'))
                                 @include('layouts.partials.breadcrumb')
                             @endunless
                         </div>

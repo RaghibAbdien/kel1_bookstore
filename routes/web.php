@@ -102,3 +102,14 @@ Route::get('/manage-delivery', function () {
 Route::get('/edit-delivery', function () {
     return view('delivery.edit-delivery');
 });
+
+// Route Reports & Analytics
+Route::get('/manage-report', function () {
+    return view('report.index');
+});
+Route::get('/detail-report', function () {
+    return view('report.detail-report');
+});
+Route::get('/edit-report', function () {
+    return view('report.edit-report');
+});

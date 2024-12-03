@@ -45,8 +45,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row dashboard-header">
         <div class="col-lg-3 col-md-6">
             <div class="card dashboard-product">
                 <span>Sales</span>
@@ -88,5 +86,4 @@
             </div>
         </div>
     </div>
-    <!-- end statistics -->
 @endsection
