@@ -72,7 +72,7 @@
                             <div class="row">
                                 <div class="col-xs-12 m-t-25 text-center">
 
-                                    <a href="login1.html" class="f-w-600 p-l-5"> Sign In Here</a>
+                                    <a href="/" class="f-w-600 p-l-5"> Sign In Here</a>
 
                                 </div>
                             </div>

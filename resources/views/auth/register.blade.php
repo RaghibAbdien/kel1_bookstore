@@ -89,7 +89,7 @@
                             <div class="row">
                                 <div class="col-xs-12 text-center">
                                     <span class="text-muted">Already have an account?</span>
-                                    <a href="login1.html" class="f-w-600 p-l-5"> Sign In Here</a>
+                                    <a href="/" class="f-w-600 p-l-5"> Sign In Here</a>
 
                                 </div>
                             </div>

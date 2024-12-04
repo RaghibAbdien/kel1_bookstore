@@ -58,7 +58,8 @@
 
                 <div class="col-sm-12">
                     <div class="login-card card-block">
-                        <form class="md-float-material">
+                        <form class="md-float-material" id="login" action="{{ route('login') }}" method="post">
+                            @csrf
                             <div class="text-center">
                                 <img src="assets/images/logo-black.png" alt="logo">
                             </div>
@@ -68,13 +69,15 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="md-input-wrapper">
-                                        <input type="email" class="md-form-control" required="required" />
+                                        <input type="email" class="md-form-control" name="email"
+                                            required="required" />
                                         <label>Email</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-input-wrapper">
-                                        <input type="password" class="md-form-control" required="required" />
+                                        <input type="password" class="md-form-control" name="password"
+                                            required="required" />
                                         <label>Password</label>
                                     </div>
                                 </div>
@@ -89,19 +92,19 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-xs-12 forgot-phone text-right">
-                                    <a href="forgot-password.html" class="f-w-600 text-right"> Forget Password?</a>
+                                    <a href="/forgot-password" class="f-w-600 text-right"> Forget Password?</a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-10 offset-xs-1">
-                                    <button type="button"
+                                    <button type="submit"
                                         class="btn btn-primary btn-md btn-block waves-effect m-b-20 text-center">LOGIN</button>
                                 </div>
                             </div>
                             <!-- <div class="card-footer"> -->
                             <div class="col-sm-12 col-xs-12 text-center">
                                 <span class="text-muted">Don't have an account?</span>
-                                <a href="register2.html" class="f-w-600 p-l-5">Sign up Now</a>
+                                <a href="/register" class="f-w-600 p-l-5">Sign up Now</a>
                             </div>
 
                             <!-- </div> -->
@@ -117,50 +120,6 @@
         <!-- end of container-fluid -->
     </section>
 
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 9]>
-<div class="ie-warning">
- <h1>Warning!!</h1>
- <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
- <div class="iew-container">
-  <ul class="iew-download">
-   <li>
-    <a href="http://www.google.com/chrome/">
-     <img src="assets/images/browser/chrome.png" alt="Chrome">
-     <div>Chrome</div>
-    </a>
-   </li>
-   <li>
-    <a href="https://www.mozilla.org/en-US/firefox/new/">
-     <img src="assets/images/browser/firefox.png" alt="Firefox">
-     <div>Firefox</div>
-    </a>
-   </li>
-   <li>
-    <a href="http://www.opera.com">
-     <img src="assets/images/browser/opera.png" alt="Opera">
-     <div>Opera</div>
-    </a>
-   </li>
-   <li>
-    <a href="https://www.apple.com/safari/">
-     <img src="assets/images/browser/safari.png" alt="Safari">
-     <div>Safari</div>
-    </a>
-   </li>
-   <li>
-    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-     <img src="assets/images/browser/ie.png" alt="">
-     <div>IE (9 & above)</div>
-    </a>
-   </li>
-  </ul>
- </div>
- <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-    <!-- Warning Section Ends -->
     <!-- Required Jqurey -->
     <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
     <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -174,7 +133,79 @@
     <!-- Custom js -->
     <script type="text/javascript" src="assets/pages/elements.js"></script>
 
+    {{-- sweet alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $('#login').on('submit', function(event) {
+                event.preventDefault();
+                var form = $(this);
+                // Menonaktifkan tombol submit
+                form.find('button[type="submit"]').prop('disabled', true);
 
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize(),
+                    success: function(response) {
+                        // Jika validasi berhasil, redirect atau lakukan tindakan lain
+                        Swal.fire({
+                            title: 'Success',
+                            text: response.success,
+                            icon: 'success',
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then((result) => {
+                            window.location.href = response.redirect;
+                        });
+                    },
+                    error: function(xhr) {
+                        // Dapatkan objek errors dari response JSON Laravel
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = '';
+                        $.each(errors, function(field, messages) {
+                            messages.forEach(function(message) {
+                                errorMessage += message + '<br>';
+                            });
+                        });
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: errorMessage
+                        });
+
+                        // Aktifkan kembali tombol submit
+                        form.find('button[type="submit"]').prop('disabled', false);
+                    }
+                });
+            });
+        });
+    </script>
+    @if (session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Success',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    timer: 2500,
+                    showConfirmButton: false
+                });
+            });
+        </script>
+    @endif
+    @if (session('failed'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: '{{ session('failed') }}',
+                });
+            });
+        </script>
+    @endif
 
 </body>
 
