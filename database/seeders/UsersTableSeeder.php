@@ -20,11 +20,11 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'role_id' => $adminRoleId,
             'name' => 'Admin User',
-            'email' => 'admin@example.com',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('password'), // Gunakan hash untuk keamanan
             'address' => 'Jl. Contoh No. 1',
             'phone' => '081234567890',
-            'status' => 'active',
+            'status' => true,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

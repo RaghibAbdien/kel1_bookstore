@@ -138,41 +138,52 @@
     <script>
         $(document).ready(function() {
             $('#login').on('submit', function(event) {
-                event.preventDefault();
+                event.preventDefault(); // Cegah form submit langsung
                 var form = $(this);
-                // Menonaktifkan tombol submit
+
+                // Menonaktifkan tombol submit untuk mencegah multiple click
                 form.find('button[type="submit"]').prop('disabled', true);
 
                 $.ajax({
-                    url: form.attr('action'),
-                    method: form.attr('method'),
-                    data: form.serialize(),
+                    url: form.attr('action'), // Ambil URL dari atribut action form
+                    method: form.attr('method'), // Ambil metode dari atribut method form
+                    data: form.serialize(), // Kirim semua data form yang telah di-serialize
                     success: function(response) {
-                        // Jika validasi berhasil, redirect atau lakukan tindakan lain
+                        // Jika login berhasil
                         Swal.fire({
                             title: 'Success',
                             text: response.success,
                             icon: 'success',
                             timer: 1500,
                             showConfirmButton: false
-                        }).then((result) => {
-                            window.location.href = response.redirect;
+                        }).then(() => {
+                            window.location.href = response
+                            .redirect; // Redirect setelah success
                         });
                     },
                     error: function(xhr) {
-                        // Dapatkan objek errors dari response JSON Laravel
-                        var errors = xhr.responseJSON.errors;
+                        // Tangani error dari response JSON Laravel
+                        var errors = xhr.responseJSON?.errors || ['Unknown error occurred.'];
                         var errorMessage = '';
-                        $.each(errors, function(field, messages) {
-                            messages.forEach(function(message) {
+
+                        if (Array.isArray(errors)) {
+                            // Jika errors berupa array
+                            errors.forEach(function(message) {
                                 errorMessage += message + '<br>';
                             });
-                        });
+                        } else {
+                            // Jika errors berupa objek
+                            $.each(errors, function(field, messages) {
+                                messages.forEach(function(message) {
+                                    errorMessage += message + '<br>';
+                                });
+                            });
+                        }
 
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            html: errorMessage
+                            html: errorMessage // Menampilkan semua pesan error
                         });
 
                         // Aktifkan kembali tombol submit
@@ -182,6 +193,7 @@
             });
         });
     </script>
+
     @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -195,6 +207,7 @@
             });
         </script>
     @endif
+
     @if (session('failed'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -206,6 +219,7 @@
             });
         </script>
     @endif
+
 
 </body>
 

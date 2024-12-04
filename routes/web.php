@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -37,15 +38,12 @@ Route::middleware(['preventback'])->group(function () {
         });
 
         // Route Manage Users
-        Route::get('/manage-user', function () {
-            return view('users.index');
-        });
-        Route::get('/add-user', function () {
-            return view('users.add-user');
-        });
-        Route::get('/edit-user', function () {
-            return view('users.edit-user');
-        });
+        Route::get('/manage-user', [UserController::class, 'index'])->name('manage-user');
+        Route::get('/add-user', [UserController::class, 'addUser'])->name('add-user');
+        Route::post('/add-user', [UserController::class, 'store'])->name('store-user');
+        Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('edit-user');
+        Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('update-user');
+        Route::delete('/delete-user/{id}', [UserController::class, 'delete'])->name('delete-user');
 
         // Route Manage Role & Access
         Route::get('/manage-role', [RoleController::class, 'index'])->name('manage-role');

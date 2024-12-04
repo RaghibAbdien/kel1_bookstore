@@ -28,7 +28,7 @@
             </li>
             <li
                 class="treeview {{ request()->is('manage-user') || request()->is('add-user') || request()->is('edit-user') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/manage-user">
+                <a class="waves-effect waves-dark" href="{{ route('manage-user') }}">
                     <i class="icofont icofont-user"></i><span> Manage User</span>
                 </a>
             </li>

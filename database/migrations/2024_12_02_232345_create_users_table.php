@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-            $table->enum('status', ['active', 'non active'])->default('active');
+            $table->boolean('status')->default(true);
             $table->rememberToken();
             $table->timestamps();
 

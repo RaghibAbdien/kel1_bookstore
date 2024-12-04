@@ -121,7 +121,7 @@
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title=""
-                href="/add-user" role="button" data-original-title="Add User">
+                href="{{ route('add-user') }}" role="button" data-original-title="Add User">
                 <i class="ti-plus"></i> Add User
             </a>
         </div>
@@ -136,31 +136,49 @@
                                 <th style="width: 20%;">Email</th>
                                 <th style="width: 12%;">Role</th>
                                 <th style="width: 20%;">Registration Date</th>
-                                <th style="width: 7%;">Status</th>
+                                <th class="text-center" style="width: 7%;">Status</th>
                                 <th class="text-center" style="width: 20%; ">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Prisalindut</td>
-                                <td>prisandut@gmail.com</td>
-                                <td>Admin</td>
-                                <td>3 Des 2024</td>
-                                <td>Active</td>
-                                <td class="text-center">
-                                    <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="/edit-user" role="button"
-                                        data-original-title="edit ">
-                                        <i class="ti-pencil"></i>
-                                    </a>
-                                    <a class="btn btn-danger waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="#" role="button"
-                                        data-original-title="delete ">
-                                        <i class="ti-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @forelse ($users as $user)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role->role_name }}</td>
+                                    <td>{{ $user->created_at }}</td>
+                                    <td>
+                                        <div class="label-main m-l-2">
+                                            @if ($user->status)
+                                                <label class="label label-lg label-success">Active</label>
+                                            @else
+                                                <label class="label label-lg label-default">Non Active</label>
+                                            @endif
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title="" href="{{ route('edit-user', $user->id) }}"
+                                            role="button" data-original-title="edit ">
+                                            <i class="ti-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-danger waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title="Delete" href="#"
+                                            onclick="event.preventDefault(); document.getElementById('deleteUserForm{{ $user->id }}').submit();">
+                                            <i class="ti-trash"></i>
+                                        </a>
+
+                                        <form action="{{ route('delete-role', $user->id) }}"
+                                            id="deleteUserForm{{ $user->id }}" method="POST" style="display:none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

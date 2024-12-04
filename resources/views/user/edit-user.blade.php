@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
-@section('root-page', 'Manage Role')
-@section('page-title', 'Edit Role')
+@section('root-page', 'Manage User')
+@section('page-title', 'Edit User')
 
 @section('content')
 
@@ -12,32 +12,64 @@
             <div class="card">
                 <div class="card-header">
                     <div class="col-lg-12">
-                        <h5 class="card-header-text">Form Edit Role</h5>
+                        <h5 class="card-header-text">Form Edit User</h5>
                     </div>
                 </div>
 
                 <div class="card-block">
-                    <form id="formEditRole" action="{{ route('update-role', $roles->id) }}" method="post">
+                    <form id="formEditUser" action="{{ route('update-user', $users->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputRolename" class="form-control-label">Role Name</label>
-                                    <input type="text" class="form-control" id="exampleInputRolename" name="role_name"
-                                        aria-describedby="Rolename" placeholder="Enter Rolename" value="{{ $roles->role_name }}">
+                                    <label for="exampleInputFullname" class="form-control-label">Fullname</label>
+                                    <input type="text" class="form-control" id="exampleInputFullname" name="name"
+                                        aria-describedby="Fullname" placeholder="Enter fullname"
+                                        value="{{ $users->name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail" class="form-control-label">Email</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail" name="email"
+                                        aria-describedby="emailHelp" placeholder="Enter email" value="{{ $users->email }}">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleRole" class="form-control-label">Role</label>
+                                    <select class="form-control" id="exampleRole" name="role_id">
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}"
+                                                {{ $role->id == $users->role_id ? 'selected' : '' }}>
+                                                {{ $role->role_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleAccessLevel" class="form-control-label">Access Level</label>
-                                    <select class="form-control" id="exampleAccessLevel" name="">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <label for="exampleInputPhone" class="form-control-label">Phone</label>
+                                    <input type="text" class="form-control" id="exampleInputPhone" name="phone"
+                                        aria-describedby="Phone" placeholder="Enter phone" value="{{ $users->phone }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword" class="form-control-label">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword" name="password"
+                                        placeholder="Password" value="{{ $users->password }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleStatus" class="form-control-label">Status</label>
+                                    <select class="form-control" id="exampleStatus" name="status">
+                                        <option value="1" {{ $users->status == '1' ? 'selected' : '' }}>Aktif</option>
+                                        <option value="0" {{ $users->status == '0' ? 'selected' : '' }}>Tidak Aktif
+                                        </option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="exampleAddress" class="form-control-label">Address</label>
+                                    <textarea class="form-control" id="exampleAddress" rows="4" name="address">{{ $users->address }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -52,11 +84,10 @@
         </div>
     </div>
     <!-- Row end -->
-
     @push('js')
         <script>
             $(document).ready(function() {
-                $('#formEditRole').on('submit', function(event) {
+                $('#formEditUser').on('submit', function(event) {
                     event.preventDefault();
                     var form = $(this);
                     // Menonaktifkan tombol submit
