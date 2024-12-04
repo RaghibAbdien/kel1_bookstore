@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('root-page', 'Manage Role')
+@section('root-page', 'Role & Menu Access')
 @section('page-title', 'Add Role')
 
 @section('content')

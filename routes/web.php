@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
@@ -45,13 +46,21 @@ Route::middleware(['preventback'])->group(function () {
         Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('update-user');
         Route::delete('/delete-user/{id}', [UserController::class, 'delete'])->name('delete-user');
 
-        // Route Manage Role & Access
+        // Route Manage Role
         Route::get('/manage-role', [RoleController::class, 'index'])->name('manage-role');
         Route::get('/add-role', [RoleController::class, 'addRole'])->name('add-role');
         Route::post('/add-role', [RoleController::class, 'store'])->name('store-role');
         Route::get('/edit-role/{id}', [RoleController::class, 'editRole'])->name('edit-role');
         Route::put('/edit-role/{id}', [RoleController::class, 'update'])->name('update-role');
         Route::delete('/delete-role/{id}', [RoleController::class, 'delete'])->name('delete-role');
+
+        // Route Manage Menu
+        // Route::get('/manage-menu', [MenuController::class, 'index'])->name('manage-menu');
+        Route::get('/add-menu', [MenuController::class, 'addMenu'])->name('add-menu');
+        Route::post('/add-menu', [MenuController::class, 'store'])->name('store-menu');
+        Route::get('/edit-menu/{id}', [MenuController::class, 'editMenu'])->name('edit-menu');
+        Route::put('/edit-menu/{id}', [MenuController::class, 'update'])->name('update-menu');
+        Route::delete('/delete-menu/{id}', [MenuController::class, 'delete'])->name('delete-menu');
 
         // Route Manage Catalog
         Route::get('/manage-catalog', function () {

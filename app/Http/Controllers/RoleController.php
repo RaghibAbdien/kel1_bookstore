@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -11,12 +12,13 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('roles.index', compact('roles'));
+        $menus = Menu::all();
+        return view('access.index', compact('roles','menus'));
     }
 
     public function addRole()
     {
-        return view('roles.add-role');
+        return view('access.add-role');
     }
 
     public function store(Request $request)
@@ -49,7 +51,7 @@ class RoleController extends Controller
     public function editRole($id)
     {
         $roles = Role::findOrFail($id);
-        return view('roles.edit-role', compact('roles'));
+        return view('access.edit-role', compact('roles'));
     }
 
     public function update(Request $request, $id)

@@ -27,15 +27,15 @@
                 </a>
             </li>
             <li
-                class="treeview {{ request()->is('manage-user') || request()->is('add-user') || request()->is('edit-user') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="{{ route('manage-user') }}">
-                    <i class="icofont icofont-user"></i><span> Manage User</span>
+                class="{{ request()->is('manage-role') || request()->is('add-role') || request()->is('edit-role') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="{{ route('manage-role') }}">
+                    <i class="icofont icofont-lock"></i><span> Role & Menu Access</span>
                 </a>
             </li>
             <li
-                class="{{ request()->is('manage-role') || request()->is('add-role') || request()->is('edit-role') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="{{ route('manage-role') }}">
-                    <i class="icofont icofont-lock"></i><span> Manage Role & Access</span>
+                class="treeview {{ request()->is('manage-user') || request()->is('add-user') || request()->is('edit-user') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="{{ route('manage-user') }}">
+                    <i class="icofont icofont-user"></i><span> Manage User</span>
                 </a>
             </li>
             <li
