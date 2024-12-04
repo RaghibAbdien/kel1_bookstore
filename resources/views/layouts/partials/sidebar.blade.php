@@ -34,7 +34,7 @@
             </li>
             <li
                 class="{{ request()->is('manage-role') || request()->is('add-role') || request()->is('edit-role') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/manage-role">
+                <a class="waves-effect waves-dark" href="{{ route('manage-role') }}">
                     <i class="icofont icofont-lock"></i><span> Manage Role & Access</span>
                 </a>
             </li>

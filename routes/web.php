@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -47,15 +48,12 @@ Route::middleware(['preventback'])->group(function () {
         });
 
         // Route Manage Role & Access
-        Route::get('/manage-role', function () {
-            return view('roles.index');
-        });
-        Route::get('/add-role', function () {
-            return view('roles.add-role');
-        });
-        Route::get('/edit-role', function () {
-            return view('roles.edit-role');
-        });
+        Route::get('/manage-role', [RoleController::class, 'index'])->name('manage-role');
+        Route::get('/add-role', [RoleController::class, 'addRole'])->name('add-role');
+        Route::post('/add-role', [RoleController::class, 'store'])->name('store-role');
+        Route::get('/edit-role/{id}', [RoleController::class, 'editRole'])->name('edit-role');
+        Route::put('/edit-role/{id}', [RoleController::class, 'update'])->name('update-role');
+        Route::delete('/delete-role/{id}', [RoleController::class, 'delete'])->name('delete-role');
 
         // Route Manage Catalog
         Route::get('/manage-catalog', function () {
