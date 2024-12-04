@@ -64,7 +64,9 @@
                 <div class="row">
                     <div class="col-sm-12 p-0">
                         <div class="main-header">
-                            <h4>@yield('page-title')</h4>
+                            @unless (request()->is('landing-page'))
+                                <h4>@yield('page-title')</h4>
+                            @endunless
                             @unless (request()->is('dashboard') ||
                                     request()->is('manage-user') ||
                                     request()->is('manage-role') ||
@@ -74,7 +76,8 @@
                                     request()->is('manage-purchase') ||
                                     request()->is('manage-delivery') ||
                                     request()->is('manage-pos') ||
-                                    request()->is('manage-report'))
+                                    request()->is('manage-report') ||
+                                    request()->is('landing-page'))
                                 @include('layouts.partials.breadcrumb')
                             @endunless
                         </div>

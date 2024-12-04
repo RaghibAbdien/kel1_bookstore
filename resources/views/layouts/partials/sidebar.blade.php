@@ -1,5 +1,23 @@
 <aside class="main-sidebar hidden-print">
     <section class="sidebar" id="sidebar-scroll">
+        <ul class="sidebar-menu">
+            <li class="nav-level">--- Customer</li>
+            <li class="treeview {{ request()->is('landing-page') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/landing-page">
+                    <i class="icofont icofont-book"></i><span> Landing Page</span>
+                </a>
+            </li>
+            <li class="treeview {{ request()->is('bookstore') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/bookstore">
+                    <i class="icofont icofont-book"></i><span> Bookstore</span>
+                </a>
+            </li>
+            <li class="treeview {{ request()->is('order-history') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/order-history">
+                    <i class="icofont icofont-book"></i><span> Order History</span>
+                </a>
+            </li>
+        </ul>
         <!-- Sidebar Menu-->
         <ul class="sidebar-menu">
             <li class="nav-level">--- Admin</li>

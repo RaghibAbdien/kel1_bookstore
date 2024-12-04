@@ -118,3 +118,14 @@ Route::get('/detail-report', function () {
 Route::get('/edit-report', function () {
     return view('report.edit-report');
 });
+
+// Route Bookstore
+Route::get('/landing-page', function () {
+    return view('bookstore.index');
+});
+Route::get('/bookstore', function () {
+    return view('bookstore.bookstore');
+});
+Route::get('/order-history', function () {
+    return view('bookstore.order-history');
+});
