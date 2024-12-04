@@ -103,6 +103,11 @@ Route::get('/edit-delivery', function () {
     return view('delivery.edit-delivery');
 });
 
+// Route Sales & Transactions
+Route::get('/manage-pos', function () {
+    return view('pos.index');
+});
+
 // Route Reports & Analytics
 Route::get('/manage-report', function () {
     return view('report.index');

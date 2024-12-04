@@ -49,8 +49,8 @@
                     <i class="icofont icofont-truck"></i><span> Order & Delivery</span>
                 </a>
             </li>
-            <li class="">
-                <a class="waves-effect waves-dark" href="sales-transactions.html">
+            <li class="{{ request()->is('manage-pos') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="/manage-pos">
                     <i class="icofont icofont-wallet"></i><span> Sales & Transactions</span>
                 </a>
             </li>

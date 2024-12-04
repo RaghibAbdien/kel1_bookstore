@@ -38,7 +38,6 @@
     <!-- Weather css -->
     <link href="assets/css/svg-weather.css" rel="stylesheet">
 
-
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
@@ -74,6 +73,7 @@
                                     request()->is('manage-warehouse') ||
                                     request()->is('manage-purchase') ||
                                     request()->is('manage-delivery') ||
+                                    request()->is('manage-pos') ||
                                     request()->is('manage-report'))
                                 @include('layouts.partials.breadcrumb')
                             @endunless
