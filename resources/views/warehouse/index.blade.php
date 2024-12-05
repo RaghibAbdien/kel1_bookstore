@@ -57,9 +57,10 @@
                             <tr>
                                 <th style="width: 1%;">#</th>
                                 <th style="width: 20%;">Product Name</th>
-                                <th style="width: 20%;">Warehouse Stock</th>
-                                <th style="width: 20%;">Restock Threshold</th>
-                                <th style="width: 19%;">Status</th>
+                                <th style="width: 19%;">Warehouse</th>
+                                <th style="width: 10%;">Stock</th>
+                                <th style="width: 15%;">Restock Threshold</th>
+                                <th style="width: 15%;">Status</th>
                                 <th class="text-center" style="width: 20%; ">Action</th>
                             </tr>
                         </thead>
@@ -67,6 +68,7 @@
                             <tr>
                                 <td>1</td>
                                 <td>Comic-Naruto</td>
+                                <td>Warehouse Satu</td>
                                 <td>10</td>
                                 <td>20</td>
                                 <td>Need Restock</td>
