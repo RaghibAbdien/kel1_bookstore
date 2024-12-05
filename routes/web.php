@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseProductController;
 
@@ -72,21 +73,15 @@ Route::middleware(['preventback'])->group(function () {
         Route::put('/edit-product/{id}', [ProductController::class, 'update'])->name('update-product');
         Route::delete('/delete-product/{id}', [ProductController::class, 'delete'])->name('delete-product');
 
-        // Route Manage Stock
-        Route::get('/manage-stock', function () {
-            return view('stock.index');
-        });
-        Route::get('/add-quantity', function () {
-            return view('stock.add-quantity');
-        });
-        Route::get('/edit-quantity', function () {
-            return view('stock.edit-quantity');
-        });
-
         // Route Manage Warehouse
         Route::get('/manage-warehouse', [WarehouseProductController::class, 'index'])->name('manage-warehouse');
         Route::get('/edit-warehouse-product/{id}', [WarehouseProductController::class, 'editWarehouse'])->name('edit-warehouse-product');
         Route::put('/edit-warehouse-product/{id}', [WarehouseProductController::class, 'update'])->name('edit-warehouse-product');
+        
+        // Route Manage Stock
+        Route::get('/manage-stock', [StockController::class, 'index'])->name('manage-stock');
+        Route::get('/edit-stock/{id}', [StockController::class, 'editStock'])->name('edit-stock');
+        Route::put('/edit-stock/{id}', [StockController::class, 'update'])->name('update-stock');
 
         // Route Manage Purchase
         Route::get('/manage-purchase', function () {

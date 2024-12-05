@@ -44,15 +44,14 @@
                     <i class="icofont icofont-tag"></i><span> Manage Catalog</span>
                 </a>
             </li>
-            <li
-                class="{{ request()->is('manage-stock') || request()->is('add-quantity') || request()->is('edit-quantity') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/manage-stock">
+            <li class="{{ request()->is('manage-stock') || request()->is('edit-stock') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="{{ route('manage-stock') }}">
                     <i class="icofont icofont-box"></i><span> Manage Stock</span>
                 </a>
             </li>
             <li
                 class="{{ request()->is('manage-warehouse') || request()->is('edit-warehouse-product') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="{{ 'manage-warehouse' }}">
+                <a class="waves-effect waves-dark" href="{{ route('manage-warehouse') }}">
                     <i class="icofont icofont-building"></i><span> Manage Warehouse</span>
                 </a>
             </li>

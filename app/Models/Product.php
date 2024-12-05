@@ -30,11 +30,24 @@ class Product extends Model
                 'restock_threshold' => 0,
                 'status' => 'Out of Stock',
             ]);
+
+            Stock::create([
+                'product_id' => $product->id,
+                'warehouse_id' => 1,
+                'quantity' => 0,
+                'restock_threshold' => 0,
+                'status' => 'Out of Stock',
+            ]);
         });
     }
 
     public function warehouseproduct()
     {
         return $this->hasMany(WarehouseProduct::class, 'product_id');
+    }
+
+    public function stock()
+    {
+        return $this->hasMany(Product::class, 'product_id');
     }
 }

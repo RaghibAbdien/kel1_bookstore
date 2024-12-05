@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stock;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
-use App\Models\WarehouseProduct;
 use Illuminate\Routing\Controller;
 
-class WarehouseProductController extends Controller
+class StockController extends Controller
 {
     public function index()
     {
-        $data = WarehouseProduct::all();
+        $stocks = Stock::all();
 
-        return view('warehouse.index', compact('data'));
+        return view('stock.index', compact('stocks'));
     }
 
-    public function editWarehouse($id)
+    public function editStock($id)
     {
-        $data = WarehouseProduct::findOrFail($id);
+        $stocks = Stock::findOrFail($id);
         $warehouses = Warehouse::all();
         $statuses = ['In Stock', 'Out of Stock', 'Need Restock'];
 
-        return view('warehouse.edit-warehouse-product', compact('data', 'warehouses', 'statuses'));
+        return view('stock.edit-stock', compact('stocks', 'warehouses', 'statuses'));
     }
 
     public function update(Request $request, $id)
@@ -47,10 +47,10 @@ class WarehouseProductController extends Controller
 
         try {
             // Cari data WarehouseProduct berdasarkan ID
-            $warehouseProduct = WarehouseProduct::findOrFail($id);
+            $stock = Stock::findOrFail($id);
 
             // Update data berdasarkan input dari form
-            $warehouseProduct->update([
+            $stock->update([
                 'product_name' => $validatedData['product_name'], // Asumsi: Ada kolom terkait produk di tabel.
                 'quantity' => $validatedData['quantity'],
                 'restock_threshold' => $validatedData['restock_threshold'],
@@ -59,8 +59,8 @@ class WarehouseProductController extends Controller
             ]);
 
             return response()->json([
-                'success' => 'Warehouse product updated successfully! Redirecting...',
-                'redirect' => '/manage-warehouse',
+                'success' => 'Stock product updated successfully! Redirecting...',
+                'redirect' => '/manage-stock',
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -68,6 +68,4 @@ class WarehouseProductController extends Controller
             ], 500);
         }
     }
-
-    
 }
