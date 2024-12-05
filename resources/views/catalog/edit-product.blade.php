@@ -42,6 +42,14 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputProductPrice" class="form-control-label">Product Price</label>
+                                    <input type="number" class="form-control" id="exampleInputProductPrice"
+                                        name="product_price" aria-describedby="ProductPrice"
+                                        placeholder="Enter Product Price" value="{{ $products->product_price }}">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <button type="submit"

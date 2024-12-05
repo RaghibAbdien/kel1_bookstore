@@ -24,33 +24,39 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $variants = Variant::pluck('id')->toArray(); 
+{
+    $infoRole = $request->validate([
+        'product_name' => 'required|string|max:255',
+        'variant_id' => 'required|exists:variants,id',
+        'product_price' => 'required|numeric',
+    ], [
+        'product_name.required' => 'Name tidak boleh kosong',
+        'variant_id.required' => 'Variant tidak boleh kosong',
+        'variant_id.exists' => 'Variant yang dipilih tidak valid',
+        'product_price.required' => 'Price tidak boleh kosong',
+        'product_price.numeric' => 'Price harus berupa angka',
+    ]);
 
-        $infoRole = $request->validate([
-            'product_name' => 'required|string|max:255',
-            'variant_id' => 'required|in:' . implode(',', $variants),
-        ], [
-            'product_name.required' => 'Name tidak boleh kosong',
-            'variant_id.required' => 'Variant tidak boleh kosong',
+    try {
+        $product = Product::create([
+            'product_name' => $infoRole['product_name'],
+            'variant_id' => $infoRole['variant_id'],
+            'product_price' => $infoRole['product_price'],
         ]);
 
-        try {
-            $product = Product::create([
-                'product_name' => $infoRole['product_name'],
-                'variant_id' => $infoRole['variant_id'],
-            ]);
+        return response()->json([
+            'success' => 'Product added successfully! Redirecting to dashboard...',
+            'redirect' => '/manage-catalog'
+        ]);
+    } catch (\Exception $e) {
+        \Log::error('Error adding product: ' . $e->getMessage());
 
-            return response()->json([
-                'success' => 'Product added successfully! Redirecting to dashboard...',
-                'redirect' => '/manage-catalog'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Something went wrong: ' . $e->getMessage()
-            ], 500);
-        }
+        return response()->json([
+            'error' => 'Something went wrong. Please try again later.'
+        ], 500);
     }
+}
+
 
     public function editProduct($id)
     {
@@ -62,26 +68,28 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
 {
-    // Ambil semua id variant yang ada
-    $variants = Variant::pluck('id')->toArray(); 
-    
     // Cari produk berdasarkan id
-    $products = Product::findOrFail($id); 
+    $product = Product::findOrFail($id);
 
     // Validasi input dari form
     $infoRole = $request->validate([
         'product_name' => 'required|string|max:255',
-        'variant_id' => 'required|in:' . implode(',', $variants),
+        'variant_id' => 'required|exists:variants,id',
+        'product_price' => 'required|numeric',
     ], [
         'product_name.required' => 'Product Name tidak boleh kosong',
         'variant_id.required' => 'Variant tidak boleh kosong',
+        'variant_id.exists' => 'Variant yang dipilih tidak valid',
+        'product_price.required' => 'Price tidak boleh kosong',
+        'product_price.numeric' => 'Price harus berupa angka',
     ]);
 
     try {
         // Update data produk
-        $products->update([
+        $product->update([
             'product_name' => $infoRole['product_name'],
             'variant_id' => $infoRole['variant_id'],
+            'product_price' => $infoRole['product_price'],
         ]);
 
         // Mengembalikan response sukses
@@ -90,12 +98,16 @@ class ProductController extends Controller
             'redirect' => '/manage-catalog'
         ]);
     } catch (\Exception $e) {
+        // Logging error untuk debugging
+        \Log::error('Error updating product: ' . $e->getMessage());
+
         // Mengembalikan error jika ada kesalahan
         return response()->json([
-            'error' => 'Something went wrong: ' . $e->getMessage()
+            'error' => 'Something went wrong. Please try again later.'
         ], 500);
     }
 }
+
 
 
     public function delete($id)

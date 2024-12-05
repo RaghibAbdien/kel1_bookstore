@@ -143,7 +143,8 @@
                             <tr>
                                 <th style="width: 1%;">#</th>
                                 <th style="width: 24%;">Product Variant</th>
-                                <th style="width: 55%;">Product Name</th>
+                                <th style="width: 40%;">Product Name</th>
+                                <th style="width: 15%;">Product Price</th>
                                 <th class="text-center" style="width: 20%; ">Action</th>
                             </tr>
                         </thead>
@@ -153,6 +154,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $product->variant->variant_name }}</td>
                                     <td>{{ $product->product_name }}</td>
+                                    <td>{{ $product->product_price }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
                                             data-placement="top" title=""
