@@ -65,26 +65,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Comic-Naruto</td>
-                                <td>Warehouse Satu</td>
-                                <td>10</td>
-                                <td>20</td>
-                                <td>Need Restock</td>
-                                <td class="text-center">
-                                    <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="/add-warehouse-quantity" role="button"
-                                        data-original-title="add ">
-                                        <i class="ti-plus"></i>
-                                    </a>
-                                    <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="/edit-warehouse-quantity" role="button"
-                                        data-original-title="edit ">
-                                        <i class="ti-pencil"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @forelse ($data as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->product->product_name }}</td>
+                                    <td>{{ $item->warehouse->warehouse_name }}</td>
+                                    <td>{{ $item->quantity }}</td>
+                                    <td>{{ $item->restock_threshold }}</td>
+                                    <td>{{ $item->status }}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title="" href="/add-warehouse-quantity"
+                                            role="button" data-original-title="add ">
+                                            <i class="ti-plus"></i>
+                                        </a>
+                                        <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title="" href="/edit-warehouse-quantity"
+                                            role="button" data-original-title="edit ">
+                                            <i class="ti-pencil"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -11,6 +11,8 @@ class WarehouseProduct extends Model
 
     protected $guarded = ['id'];
 
+    protected $table = 'warehouseproduct';
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');

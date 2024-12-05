@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WarehouseProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,15 +84,7 @@ Route::middleware(['preventback'])->group(function () {
         });
 
         // Route Manage Warehouse
-        Route::get('/manage-warehouse', function () {
-            return view('warehouse.index');
-        });
-        Route::get('/add-warehouse-quantity', function () {
-            return view('warehouse.add-warehouse-quantity');
-        });
-        Route::get('/edit-warehouse-quantity', function () {
-            return view('warehouse.edit-warehouse-quantity');
-        });
+        Route::get('/manage-warehouse', [WarehouseProductController::class, 'index'])->name('manage-warehouse');
 
         // Route Manage Purchase
         Route::get('/manage-purchase', function () {
