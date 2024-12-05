@@ -17,6 +17,22 @@ class Product extends Model
         return $this->belongsTo(Variant::class, 'variant_id');
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Otomatis Create record pada table WarehouseProduct setelah Create Product
+        static::created(function ($product) {
+            WarehouseProduct::create([
+                'product_id' => $product->id,
+                'warehouse_id' => 1,
+                'quantity' => 0,
+                'restock_threshold' => 0,
+                'status' => 'Out of Stock',
+            ]);
+        });
+    }
+
     public function warehouseproduct()
     {
         return $this->hasMany(WarehouseProduct::class, 'product_id');
