@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             VariantsSeeder::class,
             WarehouseSeeder::class,
+            SuppliersSeeder::class,
         ]);
     }
 }
