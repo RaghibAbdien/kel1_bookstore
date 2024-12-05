@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,15 +64,12 @@ Route::middleware(['preventback'])->group(function () {
         Route::delete('/delete-menu/{id}', [MenuController::class, 'delete'])->name('delete-menu');
 
         // Route Manage Catalog
-        Route::get('/manage-catalog', function () {
-            return view('catalog.index');
-        });
-        Route::get('/add-product', function () {
-            return view('catalog.add-product');
-        });
-        Route::get('/edit-product', function () {
-            return view('catalog.edit-product');
-        });
+        Route::get('/manage-catalog', [ProductController::class, 'index'])->name('manage-catalog');
+        Route::get('/add-product', [ProductController::class, 'addProduct'])->name('add-product');
+        Route::post('/add-product', [ProductController::class, 'store'])->name('store-product');
+        Route::get('/edit-product/{id}', [ProductController::class, 'editProduct'])->name('edit-product');
+        Route::put('/edit-product/{id}', [ProductController::class, 'update'])->name('update-product');
+        Route::delete('/delete-product/{id}', [ProductController::class, 'delete'])->name('delete-product');
 
         // Route Manage Stock
         Route::get('/manage-stock', function () {

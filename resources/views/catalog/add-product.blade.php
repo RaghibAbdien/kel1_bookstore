@@ -17,7 +17,8 @@
                 </div>
 
                 <div class="card-block">
-                    <form>
+                    <form id="formAddProduct" action="{{ route('store-product') }}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -29,12 +30,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleProductVariant" class="form-control-label">Product Variant</label>
-                                    <select class="form-control" id="exampleProductVariant" name="product_variant">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select class="form-control" id="exampleProductVariant" name="variant_id">
+                                        <option value="" selected disabled>Pilih Variant</option>
+                                        @foreach ($variants as $variant)
+                                            <option value="{{ $variant->id }}">{{ $variant->variant_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -50,4 +50,77 @@
         </div>
     </div>
     <!-- Row end -->
+    @push('js')
+        <script>
+            $(document).ready(function() {
+                $('#formAddProduct').on('submit', function(event) {
+                    event.preventDefault();
+                    var form = $(this);
+                    // Menonaktifkan tombol submit
+                    form.find('button[type="submit"]').prop('disabled', true);
+
+                    $.ajax({
+                        url: form.attr('action'),
+                        method: form.attr('method'),
+                        data: form.serialize(),
+                        success: function(response) {
+                            // Jika validasi berhasil, redirect atau lakukan tindakan lain
+                            Swal.fire({
+                                title: 'Success',
+                                text: response.success,
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then((result) => {
+                                window.location.href = response.redirect;
+                            });
+                        },
+                        error: function(xhr) {
+                            // Dapatkan objek errors dari response JSON Laravel
+                            var errors = xhr.responseJSON.errors;
+                            var errorMessage = '';
+                            $.each(errors, function(field, messages) {
+                                messages.forEach(function(message) {
+                                    errorMessage += message + '<br>';
+                                });
+                            });
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: errorMessage
+                            });
+
+                            // Aktifkan kembali tombol submit
+                            form.find('button[type="submit"]').prop('disabled', false);
+                        }
+                    });
+                });
+            });
+        </script>
+        @if (session('success'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Success',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        timer: 2500,
+                        showConfirmButton: false
+                    });
+                });
+            </script>
+        @endif
+        @if (session('failed'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: '{{ session('failed') }}',
+                    });
+                });
+            </script>
+        @endif
+    @endpush
 @endsection

@@ -40,7 +40,7 @@
             </li>
             <li
                 class="{{ request()->is('manage-catalog') || request()->is('add-product') || request()->is('edit-product') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/manage-catalog">
+                <a class="waves-effect waves-dark" href="{{ route('manage-catalog') }}">
                     <i class="icofont icofont-tag"></i><span> Manage Catalog</span>
                 </a>
             </li>

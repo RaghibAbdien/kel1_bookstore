@@ -131,7 +131,7 @@
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title=""
-                href="/add-product" role="button" data-original-title="Add User">
+                href="{{ route('add-product') }}" role="button" data-original-title="Add User">
                 <i class="ti-plus"></i> Add Product
             </a>
         </div>
@@ -142,29 +142,41 @@
                         <thead>
                             <tr>
                                 <th style="width: 1%;">#</th>
-                                <th style="width: 40%;">Product Name</th>
-                                <th style="width: 39%;">Product Variant</th>
+                                <th style="width: 24%;">Product Variant</th>
+                                <th style="width: 55%;">Product Name</th>
                                 <th class="text-center" style="width: 20%; ">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Naruto</td>
-                                <td>Comic</td>
-                                <td class="text-center">
-                                    <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="/edit-product" role="button"
-                                        data-original-title="edit ">
-                                        <i class="ti-pencil"></i>
-                                    </a>
-                                    <a class="btn btn-danger waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="#" role="button"
-                                        data-original-title="delete ">
-                                        <i class="ti-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @forelse ($products as $product)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $product->variant->variant_name }}</td>
+                                    <td>{{ $product->product_name }}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title=""
+                                            href="{{ route('edit-product', $product->id) }}" role="button"
+                                            data-original-title="edit ">
+                                            <i class="ti-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-danger waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title="Delete" href="#"
+                                            onclick="event.preventDefault(); document.getElementById('deleteProductForm{{ $product->id }}').submit();">
+                                            <i class="ti-trash"></i>
+                                        </a>
+
+                                        <form action="{{ route('delete-product', $product->id) }}"
+                                            id="deleteProductForm{{ $product->id }}" method="POST"
+                                            style="display:none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                            @endforelse
+
                         </tbody>
                     </table>
                 </div>
