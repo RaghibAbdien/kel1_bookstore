@@ -85,6 +85,8 @@ Route::middleware(['preventback'])->group(function () {
 
         // Route Manage Warehouse
         Route::get('/manage-warehouse', [WarehouseProductController::class, 'index'])->name('manage-warehouse');
+        Route::get('/edit-warehouse-product/{id}', [WarehouseProductController::class, 'editWarehouse'])->name('edit-warehouse-product');
+        Route::put('/edit-warehouse-product/{id}', [WarehouseProductController::class, 'update'])->name('edit-warehouse-product');
 
         // Route Manage Purchase
         Route::get('/manage-purchase', function () {

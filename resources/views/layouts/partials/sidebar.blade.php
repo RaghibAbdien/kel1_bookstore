@@ -51,7 +51,7 @@
                 </a>
             </li>
             <li
-                class="{{ request()->is('manage-warehouse') || request()->is('add-warehouse-quantity') || request()->is('edit-warehouse-quantity') ? 'active' : '' }}">
+                class="{{ request()->is('manage-warehouse') || request()->is('edit-warehouse-product') ? 'active' : '' }}">
                 <a class="waves-effect waves-dark" href="{{ 'manage-warehouse' }}">
                     <i class="icofont icofont-building"></i><span> Manage Warehouse</span>
                 </a>

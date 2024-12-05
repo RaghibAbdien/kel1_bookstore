@@ -74,14 +74,10 @@
                                     <td>{{ $item->restock_threshold }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
-                                            data-placement="top" title="" href="/add-warehouse-quantity"
-                                            role="button" data-original-title="add ">
-                                            <i class="ti-plus"></i>
-                                        </a>
                                         <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
-                                            data-placement="top" title="" href="/edit-warehouse-quantity"
-                                            role="button" data-original-title="edit ">
+                                            data-placement="top" title=""
+                                            href="{{ route('edit-warehouse-product', $item->id) }}" role="button"
+                                            data-original-title="edit ">
                                             <i class="ti-pencil"></i>
                                         </a>
                                     </td>
