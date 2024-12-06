@@ -28,11 +28,14 @@ class ProductController extends Controller
         $infoRole = $request->validate([
             'product_name' => 'required|string|max:255',
             'variant_id' => 'required|exists:variants,id',
+            'supplier_price' => 'required|numeric',
             'product_price' => 'required|numeric',
         ], [
             'product_name.required' => 'Name tidak boleh kosong',
             'variant_id.required' => 'Variant tidak boleh kosong',
             'variant_id.exists' => 'Variant yang dipilih tidak valid',
+            'supplier_price.required' => 'Supplier Price tidak boleh kosong',
+            'supplier_price.numeric' => 'Supplier Price harus berupa angka',
             'product_price.required' => 'Price tidak boleh kosong',
             'product_price.numeric' => 'Price harus berupa angka',
         ]);
@@ -41,6 +44,7 @@ class ProductController extends Controller
             $product = Product::create([
                 'product_name' => $infoRole['product_name'],
                 'variant_id' => $infoRole['variant_id'],
+                'supplier_price' => $infoRole['supplier_price'],
                 'product_price' => $infoRole['product_price'],
             ]);
 

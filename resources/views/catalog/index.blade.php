@@ -142,10 +142,11 @@
                         <thead>
                             <tr>
                                 <th style="width: 1%;">#</th>
-                                <th style="width: 24%;">Product Variant</th>
-                                <th style="width: 40%;">Product Name</th>
+                                <th style="width: 19%;">Product Variant</th>
+                                <th style="width: 35%;">Product Name</th>
+                                <th style="width: 15%;">Supplier Price</th>
                                 <th style="width: 15%;">Product Price</th>
-                                <th class="text-center" style="width: 20%; ">Action</th>
+                                <th class="text-center" style="width: 15%; ">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -154,6 +155,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $product->variant->variant_name }}</td>
                                     <td>{{ $product->product_name }}</td>
+                                    <td>{{ $product->supplier_price }}</td>
                                     <td>{{ $product->product_price }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"

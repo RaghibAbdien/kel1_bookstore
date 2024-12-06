@@ -20,14 +20,14 @@
                     <form id="formAddProduct" action="{{ route('store-product') }}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputProductname" class="form-control-label">Product Name</label>
                                     <input type="text" class="form-control" id="exampleInputProductname"
                                         name="product_name" aria-describedby="Productname" placeholder="Enter Productname">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleProductVariant" class="form-control-label">Product Variant</label>
                                     <select class="form-control" id="exampleProductVariant" name="variant_id">
@@ -38,11 +38,20 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputSupplierPrice" class="form-control-label">Supplier Price</label>
+                                    <input type="number" class="form-control" id="exampleInputSupplierPrice"
+                                        name="supplier_price" aria-describedby="SupplierPrice"
+                                        placeholder="Enter Supplier Price">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputProductPrice" class="form-control-label">Product Price</label>
                                     <input type="number" class="form-control" id="exampleInputProductPrice"
-                                        name="product_price" aria-describedby="ProductPrice" placeholder="Enter Product Price">
+                                        name="product_price" aria-describedby="ProductPrice"
+                                        placeholder="Enter Product Price">
                                 </div>
                             </div>
                         </div>
