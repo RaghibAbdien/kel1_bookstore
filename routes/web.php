@@ -106,6 +106,9 @@ Route::middleware(['preventback'])->group(function () {
 
         // Route Manage Tax And Discount
         Route::get('/manage-global-pricing', [TaxAndDiscountController::class, 'index'])->name('manage-global-pricing');
+        Route::put('/edit-tax/{id}', [TaxAndDiscountController::class, 'updateTax'])->name('update-tax');
+        Route::put('/edit-shiping/{id}', [TaxAndDiscountController::class, 'updateShiping'])->name('update-shiping');
+        Route::put('/edit-discount/{id}', [TaxAndDiscountController::class, 'updateDiscount'])->name('update-discount');
 
         // Route Manage Direct Sale
         Route::get('/manage-direct-sale', [DirectSaleController::class, 'index'])->name('manage-direct-sale');

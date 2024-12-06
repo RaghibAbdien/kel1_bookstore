@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="card-block">
-                    <form id="formEditTax" action="" method="post">
+                    <form id="formEditTax" action="{{ route('update-tax', $global_pricing->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="card-block">
-                    <form id="formEditShiping" action="" method="post">
+                    <form id="formEditShiping" action="{{ route('update-shiping', $global_pricing->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="card-block">
-                    <form id="formEditDiscount" action="" method="post">
+                    <form id="formEditDiscount" action="{{ route('update-discount', $global_pricing->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -93,4 +93,165 @@
         </div>
         <!-- Form Discount ends -->
     </div>
+
+    @push('js')
+        <script>
+            $(document).ready(function() {
+                $('#formEditTax').on('submit', function(event) {
+                    event.preventDefault();
+                    var form = $(this);
+                    var formData = form.serialize();
+
+                    // Menonaktifkan tombol submit
+                    form.find('button[type="submit"]').prop('disabled', true);
+
+                    $.ajax({
+                        url: form.attr('action'),
+                        method: form.attr('method'),
+                        data: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // Tampilkan pesan sukses
+                            Swal.fire({
+                                title: 'Success',
+                                text: response.success,
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then(() => {
+                                // Refresh halaman untuk memperbarui data
+                                window.location.reload();
+                            });
+                        },
+                        error: function(xhr) {
+                            // Tangani error validasi
+                            var errors = xhr.responseJSON.errors;
+                            var errorMessage = '';
+                            $.each(errors, function(field, messages) {
+                                messages.forEach(function(message) {
+                                    errorMessage += message + '<br>';
+                                });
+                            });
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: errorMessage
+                            });
+
+                            // Aktifkan kembali tombol submit
+                            form.find('button[type="submit"]').prop('disabled', false);
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function() {
+                $('#formEditShiping').on('submit', function(event) {
+                    event.preventDefault();
+                    var form = $(this);
+                    var formData = form.serialize();
+
+                    // Menonaktifkan tombol submit
+                    form.find('button[type="submit"]').prop('disabled', true);
+
+                    $.ajax({
+                        url: form.attr('action'),
+                        method: form.attr('method'),
+                        data: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // Tampilkan pesan sukses
+                            Swal.fire({
+                                title: 'Success',
+                                text: response.success,
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then(() => {
+                                // Refresh halaman untuk memperbarui data
+                                window.location.reload();
+                            });
+                        },
+                        error: function(xhr) {
+                            // Tangani error validasi
+                            var errors = xhr.responseJSON.errors;
+                            var errorMessage = '';
+                            $.each(errors, function(field, messages) {
+                                messages.forEach(function(message) {
+                                    errorMessage += message + '<br>';
+                                });
+                            });
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: errorMessage
+                            });
+
+                            // Aktifkan kembali tombol submit
+                            form.find('button[type="submit"]').prop('disabled', false);
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function() {
+                $('#formEditDiscount').on('submit', function(event) {
+                    event.preventDefault();
+                    var form = $(this);
+                    var formData = form.serialize();
+
+                    // Menonaktifkan tombol submit
+                    form.find('button[type="submit"]').prop('disabled', true);
+
+                    $.ajax({
+                        url: form.attr('action'),
+                        method: form.attr('method'),
+                        data: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // Tampilkan pesan sukses
+                            Swal.fire({
+                                title: 'Success',
+                                text: response.success,
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then(() => {
+                                // Refresh halaman untuk memperbarui data
+                                window.location.reload();
+                            });
+                        },
+                        error: function(xhr) {
+                            // Tangani error validasi
+                            var errors = xhr.responseJSON.errors;
+                            var errorMessage = '';
+                            $.each(errors, function(field, messages) {
+                                messages.forEach(function(message) {
+                                    errorMessage += message + '<br>';
+                                });
+                            });
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: errorMessage
+                            });
+
+                            // Aktifkan kembali tombol submit
+                            form.find('button[type="submit"]').prop('disabled', false);
+                        }
+                    });
+                });
+            });
+        </script>
+    @endpush
+
 @endsection
