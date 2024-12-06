@@ -81,6 +81,8 @@ Route::middleware(['preventback'])->group(function () {
         
         // Route Manage Stock
         Route::get('/manage-stock', [StockController::class, 'index'])->name('manage-stock');
+        Route::get('/add-stock/{id}', [StockController::class, 'addStock'])->name('add-stock');
+        Route::post('/add-stock/{id}', [StockController::class, 'store'])->name('store-stock');
         Route::get('/edit-stock/{id}', [StockController::class, 'editStock'])->name('edit-stock');
         Route::put('/edit-stock/{id}', [StockController::class, 'update'])->name('update-stock');
 

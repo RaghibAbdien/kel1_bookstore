@@ -22,19 +22,26 @@ class WarehouseProduct extends Model
     {
         // Cari atau buat entri WarehouseProduct berdasarkan product_id
         $warehouseProduct = self::firstOrNew(['product_id' => $productId]);
-    
-        if ($operation === 'add') {
-            // Tambahkan stok
-            $warehouseProduct->quantity += $quantity;
+
+        if ($operation === 'subtract') {
+            // Validasi apakah cukup stok di WarehouseProduct sebelum pengurangan
+            if ($warehouseProduct->exists && $warehouseProduct->quantity >= $quantity) {
+                $warehouseProduct->quantity -= $quantity; // Mengurangi stok
+            } else {
+                throw new \Exception("Insufficient stock in WarehouseProduct for product ID: $productId");
+            }
+        } elseif ($operation === 'add') {
+            // Penambahan stok untuk proses purchase
+            // Anda bisa menambahkan logika lebih spesifik di sini jika diperlukan, misalnya log pembelian
+            $warehouseProduct->quantity += $quantity; // Menambah stok
         } else {
-            throw new \InvalidArgumentException("Invalid operation: Only 'add' is allowed in this context");
+            throw new \InvalidArgumentException("Invalid operation: Only 'add' or 'subtract' are allowed.");
         }
-    
+
         // Simpan perubahan
         $warehouseProduct->save();
     }
     
-
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Stock;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use App\Models\WarehouseProduct;
 use Illuminate\Routing\Controller;
 
 class StockController extends Controller
@@ -14,6 +15,58 @@ class StockController extends Controller
         $stocks = Stock::all();
 
         return view('stock.index', compact('stocks'));
+    }
+
+    public function addStock($id)
+    {
+        $stocks = Stock::findOrFail($id);
+
+        return view('stock.add-stock', compact('stocks'));
+    }
+
+    public function store(Request $request, $id)
+    {
+        // Validasi input form hanya untuk 'quantity'
+        $validatedData = $request->validate([
+            'quantity' => 'required|integer|min:1', // Minimal 1 untuk memastikan hanya penambahan
+        ], [
+            'quantity.required' => 'Quantity tidak boleh kosong',
+            'quantity.integer' => 'Quantity harus berupa angka',
+            'quantity.min' => 'Quantity harus lebih besar dari 0',
+        ]);
+
+        try {
+            // Cari data Stock berdasarkan ID
+            $stock = Stock::findOrFail($id);
+
+            // Hitung jumlah yang akan ditambahkan ke Stock
+            $quantityToAdd = $validatedData['quantity'];
+
+            // Cari WarehouseProduct terkait berdasarkan product_id
+            $warehouseProduct = WarehouseProduct::where('product_id', $stock->product_id)->first();
+
+            // Validasi: Pastikan stok di gudang cukup
+            if (!$warehouseProduct || $warehouseProduct->quantity < $quantityToAdd) {
+                return response()->json([
+                    'error' => 'Stok di gudang tidak mencukupi untuk menambahkan jumlah ini ke stok toko.',
+                ], 400); // Status kode 400 untuk validasi gagal
+            }
+
+            // Tambahkan quantity di tabel Stock
+            $stock->increment('quantity', $quantityToAdd);
+
+            // Kurangi quantity yang sama pada WarehouseProduct
+            WarehouseProduct::updateOrCreateProduct($stock->product_id, $quantityToAdd, 'subtract');
+
+            return response()->json([
+                'success' => 'Stock quantity updated successfully! Redirecting to dashboard...',
+                'redirect' => route('manage-stock'), // Gunakan route helper
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Something went wrong: ' . $e->getMessage(),
+            ], 500); // Status kode 500 untuk error server
+        }
     }
 
     public function editStock($id)

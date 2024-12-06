@@ -78,11 +78,11 @@
                                     <td>{{ $stock->restock_threshold }}</td>
                                     <td>{{ $stock->status }}</td>
                                     <td class="text-center">
-                                        {{-- <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
-                                            data-placement="top" title="" href="/add-quantity" role="button"
+                                        <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title="" href="{{ route('add-stock', $stock->id) }}" role="button"
                                             data-original-title="add ">
                                             <i class="ti-plus"></i>
-                                        </a> --}}
+                                        </a>
                                         <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
                                             data-placement="top" title="" href="{{ route('edit-stock', $stock->id) }}"
                                             role="button" data-original-title="edit ">

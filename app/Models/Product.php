@@ -26,32 +26,38 @@ class Product extends Model
         parent::boot();
 
         static::created(function ($product) {
-            // Otomatis Create record pada table warehouseproduct setelah Create Product
-            WarehouseProduct::create([
-                'product_id' => $product->id,
-                'warehouse_id' => 1,
-                'quantity' => 0,
-                'restock_threshold' => 0,
-                'status' => 'Out of Stock',
-            ]);
+            // Cek dan buat entri WarehouseProduct jika belum ada
+            WarehouseProduct::firstOrCreate(
+                ['product_id' => $product->id],
+                [
+                    'warehouse_id' => 1,
+                    'quantity' => 0,
+                    'restock_threshold' => 0,
+                    'status' => 'Out of Stock',
+                ]
+            );
 
-            // Otomatis Create record pada table stocks setelah Create Product
-            Stock::create([
-                'product_id' => $product->id,
-                'warehouse_id' => 1,
-                'quantity' => 0,
-                'restock_threshold' => 0,
-                'status' => 'Out of Stock',
-            ]);
+            // Cek dan buat entri Stock jika belum ada
+            Stock::firstOrCreate(
+                ['product_id' => $product->id],
+                [
+                    'warehouse_id' => 1,
+                    'quantity' => 0,
+                    'restock_threshold' => 0,
+                    'status' => 'Out of Stock',
+                ]
+            );
 
-            // Otomatis Create record pada table purchasings setelah Create Product
-            Purchasing::create([
-                'product_id' => $product->id,
-                'supplier_id' => 1,
-                'warehouse_id' => 1,
-                'balance' => 0,
-                'status' => 'Need Restock',
-            ]);
+            // Cek dan buat entri Purchasing jika belum ada
+            Purchasing::firstOrCreate(
+                ['product_id' => $product->id],
+                [
+                    'supplier_id' => 1,
+                    'warehouse_id' => 1,
+                    'balance' => 0,
+                    'status' => 'Need Restock',
+                ]
+            );
         });
     }
 
