@@ -109,9 +109,9 @@
                                     <tr>
                                         <th style="width: 1%;">#</th>
                                         <th style="width: 25%;">Product Name</th>
-                                        <th style="width: 15%;">Stock</th>
-                                        <th style="width: 15%;">Price</th>
-                                        <th class="text-center" style="width: 20%; ">Action</th>
+                                        <th style="width: 10%;">Stock</th>
+                                        <th style="width: 10%;">Price</th>
+                                        <th class="text-center" style="width: 30%; ">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -122,9 +122,12 @@
                                             <td>{{ $product->quantity }}</td>
                                             <td>{{ $product->product->product_price }}</td>
                                             <td class="text-center">
-                                                <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
-                                                    data-placement="top" title="" href="#" role="button"
-                                                    data-original-title="add ">
+                                                <a class="btn btn-primary waves-effect waves-light add-product-btn"
+                                                    data-toggle="tooltip" data-placement="top" title="Add Product"
+                                                    href="#" data-product-id="{{ $product->id }}"
+                                                    data-product-name="{{ $product->product->product_name }}"
+                                                    data-product-price="{{ $product->product->product_price }}"
+                                                    data-product-stock="{{ $product->quantity }}">
                                                     <i class="ti-plus"></i>
                                                 </a>
                                             </td>
@@ -155,38 +158,21 @@
                                 <div class="form-group">
                                     <label for="exampleCustomerName" class="form-control-label">Customer
                                         Name</label>
-                                    <select class="form-control" id="exampleCustomerName" name="">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select class="form-control" id="exampleCustomerName" name="customer_id">
+                                        <option selected disabled>Pilih Customer</option>
+                                        @forelse ($customers as $customer)
+                                            <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                        @empty
+                                            <option disabled>Tidak ada pelanggan tersedia</option>
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="exampleInputProductname" class="form-control-label">Product
-                                        Name</label>
-                                    <input type="text" class="form-control" id="exampleInputProductname"
-                                        name="product_name" aria-describedby="Productname" placeholder="Enter Productname">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="exampleInputQuantity" class="form-control-label">Product
-                                        Quantity</label>
-                                    <input type="number" class="form-control" id="exampleInputQuantity" name="quantity"
-                                        aria-describedby="Quantity" placeholder="Enter Quantity">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="exampleInputQuantity" class="form-control-label">Amount</label>
-                                    <input type="number" class="form-control" id="exampleInputQuantity" name="quantity"
-                                        aria-describedby="Quantity" placeholder="Enter Quantity">
+                            <div class="col-md-12">
+                                <div id="product-list">
+                                    {{-- Form product, quantity, price otomatis trigger by add button table product --}}
                                 </div>
                             </div>
                         </div>
@@ -273,6 +259,93 @@
             </div>
         </div>
         {{-- POS End --}}
-
     </div>
+    @push('js')
+        <script>
+            $(document).ready(function() {
+                // Event listener untuk tombol Add
+                $('.add-product-btn').on('click', function(event) {
+                    event.preventDefault();
+
+                    // Ambil data produk dari tombol
+                    const productId = $(this).data('product-id');
+                    const productName = $(this).data('product-name');
+                    const productPrice = parseFloat($(this).data('product-price'));
+                    const productStock = parseInt($(this).data('product-stock')); // Stok tersedia
+
+                    // Periksa apakah produk sudah ada dalam form
+                    const existingRow = $(`#product-row-${productId}`);
+                    if (existingRow.length > 0) {
+                        // Jika produk sudah ada, tambahkan quantity dan update price
+                        const quantityInput = existingRow.find('.product-quantity');
+                        const priceInput = existingRow.find('.product-price');
+
+                        let currentQuantity = parseInt(quantityInput.val()) || 0;
+
+                        if (currentQuantity < productStock) {
+                            currentQuantity += 1;
+
+                            quantityInput.val(currentQuantity);
+                            priceInput.val((productPrice * currentQuantity).toFixed(2));
+                        } else {
+                            alert(`Stock for ${productName} is limited to ${productStock}.`);
+                        }
+                    } else {
+                        // Jika produk belum ada, tambahkan row baru (dengan validasi stok)
+                        if (productStock > 0) {
+                            const newRow = `
+                    <div class="product-row" id="product-row-${productId}">
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control product-name" value="${productName}" readonly>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" class="form-control product-quantity" value="1" readonly>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control product-price" value="${productPrice.toFixed(2)}" readonly>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-danger btn-sm delete-product-btn" data-product-id="${productId}" data-product-price="${productPrice}">
+                                    <i class="ti-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                            $('#product-list').append(newRow);
+                        } else {
+                            alert(`Stock for ${productName} is out of stock.`);
+                        }
+                    }
+                });
+
+                // Event listener untuk tombol Delete
+                $('#product-list').on('click', '.delete-product-btn', function(event) {
+                    event.preventDefault();
+
+                    // Ambil data produk dari tombol
+                    const productId = $(this).data('product-id');
+                    const productPrice = parseFloat($(this).data('product-price'));
+
+                    // Cari elemen row terkait
+                    const row = $(`#product-row-${productId}`);
+                    const quantityInput = row.find('.product-quantity');
+                    const priceInput = row.find('.product-price');
+
+                    // Kurangi quantity dan update price
+                    let currentQuantity = parseInt(quantityInput.val()) || 0;
+
+                    if (currentQuantity > 1) {
+                        currentQuantity -= 1;
+                        quantityInput.val(currentQuantity);
+                        priceInput.val((productPrice * currentQuantity).toFixed(2));
+                    } else {
+                        // Jika quantity mencapai 0, hapus row
+                        row.remove();
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection
