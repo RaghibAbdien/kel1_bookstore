@@ -15,8 +15,25 @@ class WarehouseProduct extends Model
 
     public function getBalanceAttribute()
     {
-        return $this->quantity - $this->restock_threshold;
+        return intval($this->quantity - $this->restock_threshold);
     }
+
+    public static function updateOrCreateProduct($productId, $quantity, $operation = 'add')
+    {
+        // Cari atau buat entri WarehouseProduct berdasarkan product_id
+        $warehouseProduct = self::firstOrNew(['product_id' => $productId]);
+    
+        if ($operation === 'add') {
+            // Tambahkan stok
+            $warehouseProduct->quantity += $quantity;
+        } else {
+            throw new \InvalidArgumentException("Invalid operation: Only 'add' is allowed in this context");
+        }
+    
+        // Simpan perubahan
+        $warehouseProduct->save();
+    }
+    
 
     public function product()
     {

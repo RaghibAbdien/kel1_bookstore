@@ -24,38 +24,38 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-{
-    $infoRole = $request->validate([
-        'product_name' => 'required|string|max:255',
-        'variant_id' => 'required|exists:variants,id',
-        'product_price' => 'required|numeric',
-    ], [
-        'product_name.required' => 'Name tidak boleh kosong',
-        'variant_id.required' => 'Variant tidak boleh kosong',
-        'variant_id.exists' => 'Variant yang dipilih tidak valid',
-        'product_price.required' => 'Price tidak boleh kosong',
-        'product_price.numeric' => 'Price harus berupa angka',
-    ]);
-
-    try {
-        $product = Product::create([
-            'product_name' => $infoRole['product_name'],
-            'variant_id' => $infoRole['variant_id'],
-            'product_price' => $infoRole['product_price'],
+    {
+        $infoRole = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'variant_id' => 'required|exists:variants,id',
+            'product_price' => 'required|numeric',
+        ], [
+            'product_name.required' => 'Name tidak boleh kosong',
+            'variant_id.required' => 'Variant tidak boleh kosong',
+            'variant_id.exists' => 'Variant yang dipilih tidak valid',
+            'product_price.required' => 'Price tidak boleh kosong',
+            'product_price.numeric' => 'Price harus berupa angka',
         ]);
 
-        return response()->json([
-            'success' => 'Product added successfully! Redirecting to dashboard...',
-            'redirect' => '/manage-catalog'
-        ]);
-    } catch (\Exception $e) {
-        \Log::error('Error adding product: ' . $e->getMessage());
+        try {
+            $product = Product::create([
+                'product_name' => $infoRole['product_name'],
+                'variant_id' => $infoRole['variant_id'],
+                'product_price' => $infoRole['product_price'],
+            ]);
 
-        return response()->json([
-            'error' => 'Something went wrong. Please try again later.'
-        ], 500);
+            return response()->json([
+                'success' => 'Product added successfully! Redirecting to dashboard...',
+                'redirect' => '/manage-catalog'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error adding product: ' . $e->getMessage());
+
+            return response()->json([
+                'error' => 'Something went wrong. Please try again later.'
+            ], 500);
+        }
     }
-}
 
 
     public function editProduct($id)

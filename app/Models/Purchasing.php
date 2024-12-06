@@ -15,6 +15,22 @@ class Purchasing extends Model
 
     protected $guarded = ['id'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($product) {
+            // Otomatis Create record pada table warehouseproduct setelah Create Product
+            WarehouseProduct::create([
+                'product_id' => $product->id,
+                'warehouse_id' => 1,
+                'quantity' => 0,
+                'restock_threshold' => 0,
+                'status' => 'Out of Stock',
+            ]);
+        });
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
