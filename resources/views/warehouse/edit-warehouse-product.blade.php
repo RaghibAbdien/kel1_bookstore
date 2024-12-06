@@ -29,12 +29,6 @@
                                         value="{{ $data->product->product_name }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputQuantity" class="form-control-label">Warehouse Quantity</label>
-                                    <input type="number" class="form-control" id="exampleInputQuantity" name="quantity"
-                                        aria-describedby="Quantity" placeholder="Enter Quantity"
-                                        value="{{ $data->quantity }}">
-                                </div>
-                                <div class="form-group">
                                     <label for="status" class="form-control-label">Status</label>
                                     <select class="form-control select2" id="status" name="status">
                                         @foreach ($statuses as $status)
