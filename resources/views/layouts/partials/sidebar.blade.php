@@ -55,9 +55,8 @@
                     <i class="icofont icofont-building"></i><span> Manage Warehouse</span>
                 </a>
             </li>
-            <li
-                class="{{ request()->is('manage-purchase') || request()->is('add-purchase-quantity') || request()->is('edit-purchase-quantity') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/manage-purchase">
+            <li class="{{ request()->is('manage-purchase') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="{{ route('manage-purchase') }}">
                     <i class="icofont icofont-cart"></i><span> Manage Purchasing</span>
                 </a>
             </li>

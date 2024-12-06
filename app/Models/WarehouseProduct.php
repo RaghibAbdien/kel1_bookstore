@@ -13,6 +13,11 @@ class WarehouseProduct extends Model
 
     protected $table = 'warehouseproduct';
 
+    public function getBalanceAttribute()
+    {
+        return $this->quantity - $this->restock_threshold;
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');

@@ -61,33 +61,41 @@
                         <thead>
                             <tr>
                                 <th style="width: 1%;">#</th>
-                                <th style="width: 20%;">Product Name</th>
-                                <th style="width: 20%;">Supplier</th>
-                                <th style="width: 20%;">Balance</th>
-                                <th style="width: 19%;">Status</th>
-                                <th class="text-center" style="width: 20%; ">Action</th>
+                                <th style="width: 25%;">Product Name</th>
+                                <th style="width: 15%;">Supplier</th>
+                                <th style="width: 20%;">Warehouse</th>
+                                <th style="width: 5%;">Purchase</th>
+                                <th style="width: 5%;">Balance</th>
+                                <th style="width: 14%;">Status</th>
+                                <th class="text-center" style="width: 15%; ">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Comic-Naruto</td>
-                                <td>Supplier Satu</td>
-                                <td>+200</td>
-                                <td>Need Restock</td>
-                                <td class="text-center">
-                                    <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="/add-purchase-quantity" role="button"
-                                        data-original-title="add ">
-                                        <i class="ti-plus"></i>
-                                    </a>
-                                    <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
-                                        data-placement="top" title="" href="/edit-purchase-quantity" role="button"
-                                        data-original-title="edit ">
-                                        <i class="ti-pencil"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @forelse ($purchasings as $purchase)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $purchase->product->product_name }}</td>
+                                    <td>{{ $purchase->supplier->supplier_name }}</td>
+                                    <td>{{ $purchase->warehouse->warehouse_name }}</td>
+                                    <td>{{ $purchase->quantity }}</td>
+                                    <td>{{ $balances }}</td>
+                                    <td>{{ $purchase->status }}</td>
+                                    <td class="text-center">
+                                        {{-- <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title="" href="/add-purchase-quantity" role="button"
+                                            data-original-title="add ">
+                                            <i class="ti-plus"></i>
+                                        </a> --}}
+                                        <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title=""
+                                            href="{{ route('edit-purchase', $purchase->id) }}" role="button"
+                                            data-original-title="edit ">
+                                            <i class="ti-pencil"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

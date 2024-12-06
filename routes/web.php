@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchasingController;
 use App\Http\Controllers\WarehouseProductController;
 
 /*
@@ -84,15 +85,8 @@ Route::middleware(['preventback'])->group(function () {
         Route::put('/edit-stock/{id}', [StockController::class, 'update'])->name('update-stock');
 
         // Route Manage Purchase
-        Route::get('/manage-purchase', function () {
-            return view('purchase.index');
-        });
-        Route::get('/add-purchase-quantity', function () {
-            return view('purchase.add-purchase-quantity');
-        });
-        Route::get('/edit-purchase-quantity', function () {
-            return view('purchase.edit-purchase-quantity');
-        });
+        Route::get('/manage-purchase', [PurchasingController::class, 'index'])->name('manage-purchase');
+        Route::get('/edit-purchase/{id}', [PurchasingController::class, 'editPurchase'])->name('edit-purchase');
 
         // Route Manage Delivery
         Route::get('/manage-delivery', function () {

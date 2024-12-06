@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Stock;
+use App\Models\Purchasing;
+use App\Models\WarehouseProduct;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Warehouse extends Model
 {
@@ -19,5 +22,10 @@ class Warehouse extends Model
     public function stock()
     {
         return $this->hasMany(Stock::class, 'warehouse_id');
+    }
+
+    public function purchasing()
+    {
+        return $this->hasMany(Purchasing::class, 'warehouse_id');
     }
 }
