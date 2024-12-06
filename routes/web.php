@@ -87,6 +87,7 @@ Route::middleware(['preventback'])->group(function () {
         // Route Manage Purchase
         Route::get('/manage-purchase', [PurchasingController::class, 'index'])->name('manage-purchase');
         Route::get('/edit-purchase/{id}', [PurchasingController::class, 'editPurchase'])->name('edit-purchase');
+        Route::put('/edit-purchase/{id}', [PurchasingController::class, 'update'])->name('update-purchase');
 
         // Route Manage Delivery
         Route::get('/manage-delivery', function () {

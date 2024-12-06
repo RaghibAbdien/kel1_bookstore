@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="card-block">
-                    <form id="formEditStock" action="{{ route('edit-stock', $stocks->id) }}" method="post">
+                    <form id="formEditStock" action="{{ route('update-stock', $stocks->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
