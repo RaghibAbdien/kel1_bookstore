@@ -14,8 +14,9 @@ class TaxAndDiscountSeeder extends Seeder
     public function run(): void
     {
         DB::table('tax_and_discounts')->insert([
-            'tax' => 10.00, // Pajak default 10%
-            'discount' => 5.00, // Diskon default 5%
+            'tax' => 0.00, // Pajak default 0%
+            'shiping' => 0.00, // Pengiriman default 0%
+            'discount' => 0.00, // Diskon default 0%
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

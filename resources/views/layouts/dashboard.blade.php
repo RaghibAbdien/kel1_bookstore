@@ -77,6 +77,7 @@
                                     request()->is('manage-warehouse') ||
                                     request()->is('manage-purchase') ||
                                     request()->is('manage-delivery') ||
+                                    request()->is('manage-global-pricing') ||
                                     request()->is('manage-direct-sale') ||
                                     request()->is('manage-virtual-sale') ||
                                     request()->is('manage-report') ||

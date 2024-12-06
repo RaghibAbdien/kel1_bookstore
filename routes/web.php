@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\TaxAndDiscount;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DirectSaleController;
 use App\Http\Controllers\PurchasingController;
+use App\Http\Controllers\TaxAndDiscountController;
 use App\Http\Controllers\WarehouseProductController;
 
 /*
@@ -101,6 +103,9 @@ Route::middleware(['preventback'])->group(function () {
         Route::get('/edit-delivery', function () {
             return view('delivery.edit-delivery');
         });
+
+        // Route Manage Tax And Discount
+        Route::get('/manage-global-pricing', [TaxAndDiscountController::class, 'index'])->name('manage-global-pricing');
 
         // Route Manage Direct Sale
         Route::get('/manage-direct-sale', [DirectSaleController::class, 'index'])->name('manage-direct-sale');

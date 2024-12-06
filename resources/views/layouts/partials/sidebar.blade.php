@@ -65,6 +65,11 @@
                     <i class="icofont icofont-truck"></i><span> Order & Delivery</span>
                 </a>
             </li>
+            <li class="{{ request()->is('manage-global-pricing') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="{{ route('manage-global-pricing') }}">
+                    <i class="icofont icofont-price"></i><span> Tax And Discount</span>
+                </a>
+            </li>
             <li class="{{ request()->is('manage-direct-sale') ? 'active' : '' }}">
                 <a class="waves-effect waves-dark" href="{{ route('manage-direct-sale') }}">
                     <i class="icofont icofont-money"></i><span> Direct Sale Terminal</span>

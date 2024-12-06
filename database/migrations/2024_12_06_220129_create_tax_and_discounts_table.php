@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tax_and_discounts', function (Blueprint $table) {
             $table->id();
             $table->decimal('tax', 5, 2)->default(0.00);
+            $table->decimal('shiping', 5, 2)->default(0.00);
             $table->decimal('discount', 5, 2)->default(0.00);
             $table->timestamps();
         });
