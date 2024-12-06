@@ -40,27 +40,44 @@ class ProductController extends Controller
             'product_price.numeric' => 'Price harus berupa angka',
         ]);
 
-        try {
-            $product = Product::create([
-                'product_name' => $infoRole['product_name'],
-                'variant_id' => $infoRole['variant_id'],
-                'supplier_price' => $infoRole['supplier_price'],
-                'product_price' => $infoRole['product_price'],
-            ]);
+        // Validasi hanya jika kombinasi product_name dan variant_id sudah ada
+        $exists = Product::where('product_name', $infoRole['product_name'])
+                ->where('variant_id', $infoRole['variant_id'])
+                ->exists();
 
+        if ($exists) {
             return response()->json([
-                'success' => 'Product added successfully! Redirecting to dashboard...',
-                'redirect' => '/manage-catalog'
-            ]);
-        } catch (\Exception $e) {
-            \Log::error('Error adding product: ' . $e->getMessage());
+                'error' => 'Product dengan nama dan variant yang sama sudah ada.'
+            ], 400); // 400 untuk error validasi
+        }
 
+        if (!$exists) {
+            try {
+                $product = Product::create([
+                    'product_name' => $infoRole['product_name'],
+                    'variant_id' => $infoRole['variant_id'],
+                    'supplier_price' => $infoRole['supplier_price'],
+                    'product_price' => $infoRole['product_price'],
+                ]);
+        
+                return response()->json([
+                    'success' => 'Product added successfully! Redirecting to dashboard...',
+                    'redirect' => '/manage-catalog'
+                ]);
+            } catch (\Exception $e) {
+                \Log::error('Error adding product: ' . $e->getMessage());
+        
+                return response()->json([
+                    'error' => 'Something went wrong. Please try again later.'
+                ], 500);
+            }
+        } else {
+            // Exists, block creation
             return response()->json([
-                'error' => 'Something went wrong. Please try again later.'
-            ], 500);
+                'error' => 'Product dengan nama dan variant yang sama sudah ada.'
+            ], 422);
         }
     }
-
 
     public function editProduct($id)
     {

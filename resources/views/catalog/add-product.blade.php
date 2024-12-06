@@ -72,13 +72,14 @@
                 $('#formAddProduct').on('submit', function(event) {
                     event.preventDefault();
                     var form = $(this);
+
                     // Menonaktifkan tombol submit
                     form.find('button[type="submit"]').prop('disabled', true);
 
                     $.ajax({
-                        url: form.attr('action'),
-                        method: form.attr('method'),
-                        data: form.serialize(),
+                        url: form.attr('action'), // URL dari form action
+                        method: form.attr('method'), // Metode HTTP dari form method
+                        data: form.serialize(), // Serialisasi data form
                         success: function(response) {
                             // Jika validasi berhasil, redirect atau lakukan tindakan lain
                             Swal.fire({
@@ -87,19 +88,28 @@
                                 icon: 'success',
                                 timer: 1500,
                                 showConfirmButton: false
-                            }).then((result) => {
+                            }).then(() => {
                                 window.location.href = response.redirect;
                             });
                         },
                         error: function(xhr) {
-                            // Dapatkan objek errors dari response JSON Laravel
-                            var errors = xhr.responseJSON.errors;
+                            // Tangani error dari response server
+                            var errors = xhr.responseJSON?.errors; // Validasi dari Laravel
                             var errorMessage = '';
-                            $.each(errors, function(field, messages) {
-                                messages.forEach(function(message) {
-                                    errorMessage += message + '<br>';
+
+                            // Jika ada error validasi, tampilkan pesan
+                            if (errors) {
+                                $.each(errors, function(field, messages) {
+                                    messages.forEach(function(message) {
+                                        errorMessage += message + '<br>';
+                                    });
                                 });
-                            });
+                            } else if (xhr.responseJSON?.error) {
+                                // Tampilkan pesan error umum
+                                errorMessage = xhr.responseJSON.error;
+                            } else {
+                                errorMessage = 'Something went wrong. Please try again.';
+                            }
 
                             Swal.fire({
                                 icon: 'error',
@@ -114,29 +124,6 @@
                 });
             });
         </script>
-        @if (session('success'))
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        title: 'Success',
-                        text: '{{ session('success') }}',
-                        icon: 'success',
-                        timer: 2500,
-                        showConfirmButton: false
-                    });
-                });
-            </script>
-        @endif
-        @if (session('failed'))
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: '{{ session('failed') }}',
-                    });
-                });
-            </script>
-        @endif
     @endpush
+
 @endsection
