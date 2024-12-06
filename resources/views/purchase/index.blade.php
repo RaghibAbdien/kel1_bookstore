@@ -81,11 +81,12 @@
                                     <td>{{ $balances }}</td>
                                     <td>{{ $purchase->status }}</td>
                                     <td class="text-center">
-                                        {{-- <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
-                                            data-placement="top" title="" href="/add-purchase-quantity" role="button"
+                                        <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
+                                            data-placement="top" title=""
+                                            href="{{ route('add-purchase', $purchase->id) }}" role="button"
                                             data-original-title="add ">
                                             <i class="ti-plus"></i>
-                                        </a> --}}
+                                        </a>
                                         <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
                                             data-placement="top" title=""
                                             href="{{ route('edit-purchase', $purchase->id) }}" role="button"

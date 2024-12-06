@@ -23,6 +23,43 @@ class PurchasingController extends Controller
         return view('purchase.index', compact('purchasings', 'balances'));
     }
 
+    public function addPurchase($id)
+    {
+        $purchasings = Purchasing::findOrFail($id);
+
+        return view('purchase.add-purchase', compact('purchasings'));
+    }
+
+    public function store(Request $request, $id)
+    {
+        // Validasi input form hanya untuk 'quantity'
+        $validatedData = $request->validate([
+            'quantity' => 'required|integer|min:0', // Validasi quantity
+        ], [
+            'quantity.required' => 'Quantity tidak boleh kosong',
+            'quantity.integer' => 'Quantity harus berupa angka',
+        ]);
+
+        try {
+            // Cari data Purchasing berdasarkan ID
+            $purchasing = Purchasing::findOrFail($id);
+
+            // Update hanya kolom quantity
+            $purchasing->update([
+                'quantity' => $validatedData['quantity'],
+            ]);
+
+            return response()->json([
+                'success' => 'Purchase quantity updated successfully! Redirecting to dashboard...',
+                'redirect' => '/manage-purchase'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Something went wrong: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function editPurchase($id)
     {
         $purchasings = Purchasing::findOrFail($id);
