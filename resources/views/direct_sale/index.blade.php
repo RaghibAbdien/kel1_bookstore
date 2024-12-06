@@ -118,11 +118,9 @@
                                     @forelse ($products as $product)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $product->product_name }}</td>
-                                            <td>
-                                                {{ $product->warehouseproduct->sum('quantity') }}
-                                            </td>
-                                            <td>{{ $product->product_price }}</td>
+                                            <td>{{ $product->product->product_name }}</td>
+                                            <td>{{ $product->quantity }}</td>
+                                            <td>{{ $product->product->product_price }}</td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
                                                     data-placement="top" title="" href="#" role="button"
