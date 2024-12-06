@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('page-title', 'Sales & Transactions')
+@section('page-title', 'Manage Direct Sale')
 
 @section('content')
     {{-- Product Variant start --}}
@@ -115,19 +115,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Comic-Naruto</td>
-                                        <td>10</td>
-                                        <td>$10.00</td>
-                                        <td class="text-center">
-                                            <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
-                                                data-placement="top" title="" href="#" role="button"
-                                                data-original-title="add ">
-                                                <i class="ti-plus"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @forelse ($products as $product)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $product->product_name }}</td>
+                                            <td>
+                                                {{ $product->warehouseproduct->sum('quantity') }}
+                                            </td>
+                                            <td>{{ $product->product_price }}</td>
+                                            <td class="text-center">
+                                                <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
+                                                    data-placement="top" title="" href="#" role="button"
+                                                    data-original-title="add ">
+                                                    <i class="ti-plus"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -168,23 +173,22 @@
                                     <label for="exampleInputProductname" class="form-control-label">Product
                                         Name</label>
                                     <input type="text" class="form-control" id="exampleInputProductname"
-                                        name="product_name" aria-describedby="Productname"
-                                        placeholder="Enter Productname">
+                                        name="product_name" aria-describedby="Productname" placeholder="Enter Productname">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputQuantity" class="form-control-label">Product
                                         Quantity</label>
-                                    <input type="number" class="form-control" id="exampleInputQuantity"
-                                        name="quantity" aria-describedby="Quantity" placeholder="Enter Quantity">
+                                    <input type="number" class="form-control" id="exampleInputQuantity" name="quantity"
+                                        aria-describedby="Quantity" placeholder="Enter Quantity">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputQuantity" class="form-control-label">Amount</label>
-                                    <input type="number" class="form-control" id="exampleInputQuantity"
-                                        name="quantity" aria-describedby="Quantity" placeholder="Enter Quantity">
+                                    <input type="number" class="form-control" id="exampleInputQuantity" name="quantity"
+                                        aria-describedby="Quantity" placeholder="Enter Quantity">
                                 </div>
                             </div>
                         </div>

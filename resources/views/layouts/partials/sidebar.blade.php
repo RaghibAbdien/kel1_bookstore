@@ -66,7 +66,7 @@
                 </a>
             </li>
             <li class="{{ request()->is('manage-direct-sale') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/manage-direct-sale">
+                <a class="waves-effect waves-dark" href="{{ route('manage-direct-sale') }}">
                     <i class="icofont icofont-money"></i><span> Direct Sale Terminal</span>
                 </a>
             </li>

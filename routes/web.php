@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DirectSaleController;
 use App\Http\Controllers\PurchasingController;
 use App\Http\Controllers\WarehouseProductController;
 
@@ -102,9 +103,7 @@ Route::middleware(['preventback'])->group(function () {
         });
 
         // Route Manage Direct Sale
-        Route::get('/manage-direct-sale', function () {
-            return view('direct_sale.index');
-        });
+        Route::get('/manage-direct-sale', [DirectSaleController::class, 'index'])->name('manage-direct-sale');
 
         // Route Manage Virtual Sale
         Route::get('/manage-virtual-sale', function () {
