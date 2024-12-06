@@ -15,7 +15,7 @@ class WarehouseProduct extends Model
 
     public function getBalanceAttribute()
     {
-        return intval($this->quantity - $this->restock_threshold);
+        return $this->quantity - $this->restock_threshold;
     }
 
     public static function updateOrCreateProduct($productId, $quantity, $operation = 'add')

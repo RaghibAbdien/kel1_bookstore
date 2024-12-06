@@ -11,13 +11,14 @@ use Illuminate\Routing\Controller;
 
 class PurchasingController extends Controller
 {
+
     public function index()
     {
         $purchasings = Purchasing::all();
-        $warehouseProducts = WarehouseProduct::all();
-        $balances = $warehouseProducts->map(function ($item) {
-            
-            return intval($item->balance);
+
+        // Membuat array balances berdasarkan product_id
+        $balances = WarehouseProduct::all()->mapWithKeys(function ($item) {
+            return [$item->product_id => $item->balance];
         });
 
         return view('purchase.index', compact('purchasings', 'balances'));

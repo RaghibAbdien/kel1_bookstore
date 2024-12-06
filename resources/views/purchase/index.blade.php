@@ -78,7 +78,7 @@
                                     <td>{{ $purchase->supplier->supplier_name }}</td>
                                     <td>{{ $purchase->warehouse->warehouse_name }}</td>
                                     <td>{{ $purchase->quantity }}</td>
-                                    <td>{{ $balances }}</td>
+                                    <td>{{ $balances[$purchase->product_id] ?? 0 }}</td>
                                     <td>{{ $purchase->status }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-primary waves-effect waves-light" data-toggle="tooltip"
