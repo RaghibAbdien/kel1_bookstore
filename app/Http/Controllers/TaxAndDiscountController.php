@@ -12,6 +12,10 @@ class TaxAndDiscountController extends Controller
     {
         $global_pricing = TaxAndDiscount::first();
 
-        return view('global_pricing.index', compact('global_pricing'));
+        $tax = $global_pricing->tax ?? 0;
+        $shiping = $global_pricing->shiping ?? 0;
+        $discount = $global_pricing->discount ?? 0;
+
+        return view('global_pricing.index', compact('tax', 'shiping', 'discount'));
     }
 }
