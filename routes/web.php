@@ -101,9 +101,14 @@ Route::middleware(['preventback'])->group(function () {
             return view('delivery.edit-delivery');
         });
 
-        // Route Sales & Transactions
-        Route::get('/manage-pos', function () {
-            return view('pos.index');
+        // Route Manage Direct Sale
+        Route::get('/manage-direct-sale', function () {
+            return view('direct_sale.index');
+        });
+
+        // Route Manage Virtual Sale
+        Route::get('/manage-virtual-sale', function () {
+            return view('virtual_sale.index');
         });
 
         // Route Reports & Analytics

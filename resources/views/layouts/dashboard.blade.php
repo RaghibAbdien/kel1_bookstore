@@ -77,7 +77,8 @@
                                     request()->is('manage-warehouse') ||
                                     request()->is('manage-purchase') ||
                                     request()->is('manage-delivery') ||
-                                    request()->is('manage-pos') ||
+                                    request()->is('manage-direct-sale') ||
+                                    request()->is('manage-virtual-sale') ||
                                     request()->is('manage-report') ||
                                     request()->is('landing-page'))
                                 @include('layouts.partials.breadcrumb')
