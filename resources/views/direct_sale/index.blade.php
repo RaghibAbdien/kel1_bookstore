@@ -177,40 +177,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleTax" class="form-control-label">Tax</label>
-                                    <select class="form-control" id="exampleTax" name="">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
+                                    <label for="exampleInputTax" class="form-control-label">Tax</label>
+                                    <input type="number" class="form-control" id="exampleInputTax" name="tax"
+                                        aria-describedby="Tax" placeholder="Enter Tax">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleShipping" class="form-control-label">Shipping</label>
-                                    <select class="form-control" id="exampleShipping" name="">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="exampleDiscount" class="form-control-label">Discount</label>
-                                    <select class="form-control" id="exampleDiscount" name="">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
+                                    <label for="exampleInputDiscount" class="form-control-label">Discount</label>
+                                    <input type="number" class="form-control" id="exampleInputDiscount" name="discount"
+                                        aria-describedby="Discount" placeholder="Enter Discount">
                                 </div>
                             </div>
                         </div>

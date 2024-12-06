@@ -5,8 +5,11 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\VariantsSeeder;
+use Database\Seeders\SuppliersSeeder;
+use Database\Seeders\WarehouseSeeder;
 use Database\Seeders\RolesTableSeeder;
 use Database\Seeders\UsersTableSeeder;
+use Database\Seeders\TaxAndDiscountSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +24,7 @@ class DatabaseSeeder extends Seeder
             VariantsSeeder::class,
             WarehouseSeeder::class,
             SuppliersSeeder::class,
+            TaxAndDiscountSeeder::class,
         ]);
     }
 }
