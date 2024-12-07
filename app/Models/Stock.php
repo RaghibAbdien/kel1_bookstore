@@ -23,9 +23,4 @@ class Stock extends Model
     {
         return $this->belongsTo(Warehouse::class, 'warehouse_id');
     }
-
-    public function payment_product()
-    {
-        return $this->hasMany(PaymentProduct::class, 'stock_id');
-    }
 }

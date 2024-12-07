@@ -19,11 +19,6 @@ class PaymentProduct extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function stock()
-    {
-        return $this->belongsTo(Stock::class, 'stock_id');
-    }
-
     public function payment()
     {
         return $this->belongsTo(Payment::class, 'payment_id');

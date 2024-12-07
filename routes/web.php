@@ -114,7 +114,6 @@ Route::middleware(['preventback'])->group(function () {
         // Route Manage Direct Sale
         Route::get('/manage-direct-sale', [DirectSaleController::class, 'index'])->name('manage-direct-sale');
         
-        
         // Route Manage Virtual Sale
         Route::get('/manage-virtual-sale', function () {
             return view('virtual_sale.index');
@@ -122,6 +121,7 @@ Route::middleware(['preventback'])->group(function () {
 
         // Route Payment
         Route::post('/add-payment', [PaymentController::class, 'store'])->name('store-payment');
+        Route::get('/show-invoice/{id}', [PaymentController::class, 'showInvoice'])->name('show-invoice');
         
         // Route Reports & Analytics
         Route::get('/manage-report', function () {
