@@ -112,6 +112,7 @@ Route::middleware(['preventback'])->group(function () {
 
         // Route Manage Direct Sale
         Route::get('/manage-direct-sale', [DirectSaleController::class, 'index'])->name('manage-direct-sale');
+        Route::get('/manage-direct-sale', [DirectSaleController::class, 'index'])->name('manage-direct-sale');
 
         // Route Manage Virtual Sale
         Route::get('/manage-virtual-sale', function () {

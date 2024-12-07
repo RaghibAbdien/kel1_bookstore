@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Stock;
+use App\Models\Payment;
 use App\Models\Product;
-use App\Models\Warehouse;
-use App\Models\PaymentProduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Stock extends Model
+class PaymentProduct extends Model
 {
     use HasFactory;
 
@@ -19,13 +19,13 @@ class Stock extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function warehouse()
+    public function stock()
     {
-        return $this->belongsTo(Warehouse::class, 'warehouse_id');
+        return $this->belongsTo(Stock::class, 'stock_id');
     }
 
-    public function payment_product()
+    public function payment()
     {
-        return $this->hasMany(PaymentProduct::class, 'stock_id');
+        return $this->belongsTo(Payment::class, 'payment_id');
     }
 }
