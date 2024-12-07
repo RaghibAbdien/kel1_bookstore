@@ -232,7 +232,7 @@
                         <div class="row">
                             <button type="submit"
                                 class="btn btn-primary waves-effect waves-light m-r-30 f-right">Payment</button>
-                            <button type="reset"
+                            <button type="reset" id="void-button"
                                 class="btn btn-danger waves-effect waves-light m-r-30 f-right">Void</button>
                         </div>
                     </form>
@@ -244,6 +244,29 @@
     @push('js')
         <script>
             $(document).ready(function() {
+                // Event listener untuk tombol Void
+                $('#void-button').on('click', function(event) {
+                    event.preventDefault(); // Mencegah form reset default
+
+                    // Menghapus semua produk dari #product-list
+                    $('#product-list').empty();
+
+                    // Menghapus elemen Customer Name dan Payment Method
+                    $('#exampleCustomerName').val(''); // Menghapus nilai customer
+                    $('#examplePaymentMethod').val(''); // Menghapus nilai payment method
+
+                    // Menghapus elemen customer select dan payment method select
+                    $('#exampleCustomerName').prop('disabled', false); // Mengaktifkan kembali dropdown customer
+                    $('#examplePaymentMethod').prop('disabled',
+                    false); // Mengaktifkan kembali dropdown payment method
+
+                    // Reset total dan harga
+                    $('.sub-total').text(': $0.00');
+                    $('.discount-total').text(': $0.00');
+                    $('.tax-total').text(': $0.00');
+                    $('.grand-total').text(': $0.00');
+                });
+
                 // Event listener untuk tombol Add
                 $('.add-product-btn').on('click', function(event) {
                     event.preventDefault();
