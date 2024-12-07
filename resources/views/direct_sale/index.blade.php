@@ -152,13 +152,13 @@
                     </div>
                 </div>
                 <div class="card-block">
-                    <form>
+                    <form id="formAddPayment" action="{{ route('store-payment') }}">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="exampleCustomerName" class="form-control-label">Customer
                                         Name</label>
-                                    <select class="form-control" id="exampleCustomerName" name="customer_id">
+                                    <select class="form-control" id="exampleCustomerName" name="user_id">
                                         <option selected disabled>Pilih Customer</option>
                                         @forelse ($customers as $customer)
                                             <option value="{{ $customer->id }}">{{ $customer->name }}</option>
@@ -180,7 +180,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputTax" class="form-control-label">Tax</label>
-                                    <input type="number" class="form-control" id="exampleInputTax" name="tax"
+                                    <input type="number" class="form-control" id="exampleInputTax"
                                         aria-describedby="Tax" placeholder="Enter Tax" value="{{ $tax }}"
                                         readonly>
                                 </div>
@@ -188,7 +188,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputDiscount" class="form-control-label">Discount</label>
-                                    <input type="number" class="form-control" id="exampleInputDiscount" name="discount"
+                                    <input type="number" class="form-control" id="exampleInputDiscount"
                                         aria-describedby="Discount" placeholder="Enter Discount"
                                         value="{{ $discount }}" readonly>
                                 </div>
@@ -198,17 +198,23 @@
                             <div class="card">
                                 <div class="card-block">
                                     <dl class="dl-horizontal row">
-                                        <dt class="col-sm-9 font-weight-normal">Sub Total</dt>
+                                        <dt class="col-sm-9 font-weight-normal">Total Amount</dt>
                                         <dd class="col-sm-3 sub-total">: $0.00</dd>
+                                        <input type="hidden" name="total_amount" id="total-amount" value="0.00">
+                    
                                         <dt class="col-sm-9 font-weight-normal">Discount</dt>
                                         <dd class="col-sm-3 discount-total">: $0.00</dd>
+                                        <input type="hidden" name="discount" id="discount" value="0.00">
+                    
                                         <dt class="col-sm-9 font-weight-normal">Estimated Tax</dt>
                                         <dd class="col-sm-3 tax-total">: $0.00</dd>
+                                        <input type="hidden" name="estimated_tax" id="estimated-tax" value="0.00">
                                     </dl>
                                     <hr>
                                     <dl class="dl-horizontal row">
                                         <dt class="col-sm-9">Grand Amount</dt>
                                         <dd class="col-sm-3 font-weight-bold grand-total">: $0.00</dd>
+                                        <input type="hidden" name="grand_amount" id="grand-amount" value="0.00">
                                     </dl>
                                 </div>
                             </div>
@@ -304,13 +310,13 @@
                     <div class="product-row" id="product-row-${productId}">
                         <div class="row mb-2">
                             <div class="col-md-4">
-                                <input type="text" class="form-control product-name" value="${productName}" readonly>
+                                <input type="text" class="form-control product-name" name="product_id" value="${productName}" readonly>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" class="form-control product-quantity" value="1" readonly>
+                                <input type="number" class="form-control product-quantity" name="quantity" value="1" readonly>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control product-price" value="${productPrice.toFixed(2)}" readonly>
+                                <input type="text" class="form-control product-price" name="sub_total" value="${productPrice.toFixed(2)}" readonly>
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-danger btn-sm delete-product-btn" data-product-id="${productId}" data-product-price="${productPrice}">

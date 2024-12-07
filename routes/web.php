@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DirectSaleController;
 use App\Http\Controllers\PurchasingController;
@@ -112,13 +113,16 @@ Route::middleware(['preventback'])->group(function () {
 
         // Route Manage Direct Sale
         Route::get('/manage-direct-sale', [DirectSaleController::class, 'index'])->name('manage-direct-sale');
-        Route::get('/manage-direct-sale', [DirectSaleController::class, 'index'])->name('manage-direct-sale');
-
+        
+        
         // Route Manage Virtual Sale
         Route::get('/manage-virtual-sale', function () {
             return view('virtual_sale.index');
         });
 
+        // Route Payment
+        Route::post('/add-payment', [PaymentController::class, 'store'])->name('store-payment');
+        
         // Route Reports & Analytics
         Route::get('/manage-report', function () {
             return view('report.index');

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('payment_method_id');
             $table->decimal('total_amount', 10, 2);  
             $table->decimal('discount', 10, 2)->default(0); 
-            $table->decimal('tax', 10, 2)->default(0);  
+            $table->decimal('estimated_tax', 10, 2)->default(0);  
             $table->decimal('grand_total', 10, 2);  
             $table->timestamp('payment_date')->useCurrent(); 
             $table->timestamps();
