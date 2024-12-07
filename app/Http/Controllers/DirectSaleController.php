@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use App\Models\TaxAndDiscount;
 use Illuminate\Routing\Controller;
 
 class DirectSaleController extends Controller
@@ -16,6 +17,11 @@ class DirectSaleController extends Controller
             $query->where('role_name', 'customer');
         })->get();
 
-        return view('direct_sale.index', compact('products', 'customers'));
+        $global_pricing = TaxAndDiscount::first();
+        $tax = $global_pricing->tax ?? 0;
+        $shiping = $global_pricing->shiping ?? 0;
+        $discount = $global_pricing->discount ?? 0;
+
+        return view('direct_sale.index', compact('products', 'customers', 'tax', 'shiping', 'discount'));
     }
 }

@@ -181,14 +181,16 @@
                                 <div class="form-group">
                                     <label for="exampleInputTax" class="form-control-label">Tax</label>
                                     <input type="number" class="form-control" id="exampleInputTax" name="tax"
-                                        aria-describedby="Tax" placeholder="Enter Tax">
+                                        aria-describedby="Tax" placeholder="Enter Tax" value="{{ $tax }}"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputDiscount" class="form-control-label">Discount</label>
                                     <input type="number" class="form-control" id="exampleInputDiscount" name="discount"
-                                        aria-describedby="Discount" placeholder="Enter Discount">
+                                        aria-describedby="Discount" placeholder="Enter Discount"
+                                        value="{{ $discount }}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -197,16 +199,16 @@
                                 <div class="card-block">
                                     <dl class="dl-horizontal row">
                                         <dt class="col-sm-9 font-weight-normal">Sub Total</dt>
-                                        <dd class="col-sm-3">: $737.00</dd>
+                                        <dd class="col-sm-3 sub-total">: $0.00</dd>
                                         <dt class="col-sm-9 font-weight-normal">Discount</dt>
-                                        <dd class="col-sm-3">: $737.00</dd>
+                                        <dd class="col-sm-3 discount-total">: $0.00</dd>
                                         <dt class="col-sm-9 font-weight-normal">Estimated Tax</dt>
-                                        <dd class="col-sm-3">: $737.00</dd>
+                                        <dd class="col-sm-3 tax-total">: $0.00</dd>
                                     </dl>
                                     <hr>
                                     <dl class="dl-horizontal row">
                                         <dt class="col-sm-9">Grand Amount</dt>
-                                        <dd class="col-sm-3 font-weight-bold">: $737.00</dd>
+                                        <dd class="col-sm-3 font-weight-bold grand-total">: $0.00</dd>
                                     </dl>
                                 </div>
                             </div>
@@ -265,6 +267,9 @@
 
                             quantityInput.val(currentQuantity);
                             priceInput.val((productPrice * currentQuantity).toFixed(2));
+
+                            // Trigger calculation
+                            calculateTotals();
                         } else {
                             alert(`Stock for ${productName} is limited to ${productStock}.`);
                         }
@@ -290,8 +295,11 @@
                             </div>
                         </div>
                     </div>
-                `;
+                    `;
                             $('#product-list').append(newRow);
+
+                            // Trigger calculation
+                            calculateTotals();
                         } else {
                             alert(`Stock for ${productName} is out of stock.`);
                         }
@@ -318,11 +326,48 @@
                         currentQuantity -= 1;
                         quantityInput.val(currentQuantity);
                         priceInput.val((productPrice * currentQuantity).toFixed(2));
+
+                        // Trigger calculation
+                        calculateTotals();
                     } else {
                         // Jika quantity mencapai 0, hapus row
                         row.remove();
+
+                        // Trigger calculation
+                        calculateTotals();
                     }
                 });
+
+                function calculateTotals() {
+                    let subTotal = 0;
+                    let discountRate = parseFloat($('#exampleInputDiscount').val()) || 0;
+                    let taxRate = parseFloat($('#exampleInputTax').val()) || 0;
+
+                    // Hitung subtotal
+                    $('#product-list .product-row').each(function() {
+                        const productPrice = parseFloat($(this).find('.product-price').val()) || 0;
+                        subTotal += productPrice;
+                    });
+
+                    // Hitung discount dan tax
+                    const discount = (subTotal * discountRate) / 100;
+                    const tax = (subTotal * taxRate) / 100;
+
+                    // Hitung grand total
+                    const grandTotal = subTotal + tax - discount;
+
+                    // Update UI
+                    $('.sub-total').text(`: $${subTotal.toFixed(2)}`);
+                    $('.discount-total').text(`: $${discount.toFixed(2)}`);
+                    $('.tax-total').text(`: $${tax.toFixed(2)}`);
+                    $('.grand-total').text(`: $${grandTotal.toFixed(2)}`);
+                }
+
+                // Trigger calculateTotals saat form tax atau discount diubah
+                $('#exampleInputTax, #exampleInputDiscount').on('input', calculateTotals);
+
+                // Inisialisasi pertama kali
+                calculateTotals();
             });
         </script>
     @endpush

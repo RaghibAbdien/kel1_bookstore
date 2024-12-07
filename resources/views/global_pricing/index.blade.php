@@ -67,7 +67,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="col-lg-12">
-                        <h5 class="card-header-text">Form Edit SDiscount</h5>
+                        <h5 class="card-header-text">Form Edit Discount</h5>
                     </div>
                 </div>
                 <div class="card-block">
