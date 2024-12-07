@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use App\Models\PaymentMethod;
 use App\Models\TaxAndDiscount;
 use Illuminate\Routing\Controller;
 
@@ -22,6 +23,8 @@ class DirectSaleController extends Controller
         $shiping = $global_pricing->shiping ?? 0;
         $discount = $global_pricing->discount ?? 0;
 
-        return view('direct_sale.index', compact('products', 'customers', 'tax', 'shiping', 'discount'));
+        $payment_methods = PaymentMethod::all();
+
+        return view('direct_sale.index', compact('products', 'customers', 'tax', 'shiping', 'discount', 'payment_methods'));
     }
 }

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             WarehouseSeeder::class,
             SuppliersSeeder::class,
             TaxAndDiscountSeeder::class,
+            PaymentMethodsTableSeeder::class,
         ]);
     }
 }

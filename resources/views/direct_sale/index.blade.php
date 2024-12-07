@@ -216,14 +216,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="exampleCustomerName" class="form-control-label">Payment
-                                        Method</label>
-                                    <select class="form-control" id="exampleCustomerName" name="">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <label for="examplePaymentMethod" class="form-control-label">Payment Method</label>
+                                    <select class="form-control" id="examplePaymentMethod" name="payment_method_id">
+                                        <option selected disabled>Pilih Payment Method</option>
+                                        @forelse ($payment_methods as $payment_method)
+                                            <option value="{{ $payment_method->id }}">
+                                                {{ $payment_method->payment_method_name }}</option>
+                                        @empty
+                                            <option disabled>Tidak ada payment method tersedia</option>
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
