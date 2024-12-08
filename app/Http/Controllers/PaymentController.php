@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Stock;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use App\Models\PaymentMethod;
 use App\Models\PaymentProduct;
 use App\Models\TaxAndDiscount;
 use Illuminate\Routing\Controller;
@@ -33,6 +34,15 @@ class PaymentController extends Controller
         DB::beginTransaction();
 
         try {
+            // Cek payment_method_name berdasarkan payment_method_id
+            $paymentMethod = PaymentMethod::find($request->payment_method_id);
+            if (!$paymentMethod) {
+                throw new \Exception('Payment method not found');
+            }
+
+            // Tentukan status
+            $status = $paymentMethod->payment_method_name === 'COD' ? false : true;
+
             // Simpan data ke tabel payments
             $payment = Payment::create([
                 'user_id' => $request->user_id,
@@ -41,16 +51,15 @@ class PaymentController extends Controller
                 'estimated_tax' => $request->estimated_tax,
                 'grand_amount' => $request->grand_amount,
                 'payment_method_id' => $request->payment_method_id,
+                'status' => $status,
             ]);
 
             // Simpan data ke tabel payment_products dan update stok
             foreach ($request->product_id as $index => $productId) {
-                // Pastikan index tersedia di semua array
                 if (!isset($request->quantity[$index]) || !isset($request->sub_total[$index])) {
                     throw new \Exception('Invalid product data');
                 }
 
-                // Simpan produk pembayaran
                 PaymentProduct::create([
                     'payment_id' => $payment->id,
                     'product_id' => $productId,
@@ -58,7 +67,6 @@ class PaymentController extends Controller
                     'sub_total' => $request->sub_total[$index],
                 ]);
 
-                // Update stok
                 $stock = Stock::where('product_id', $productId)->first();
                 if (!$stock) {
                     throw new \Exception('Stock not found for product ID ' . $productId);
@@ -74,15 +82,13 @@ class PaymentController extends Controller
 
             DB::commit();
 
-            // Return JSON response for AJAX
             return response()->json([
                 'success' => 'Payment and products saved successfully.',
-                'redirect' => route('show-invoice',['id' => $payment->id])
+                'redirect' => route('show-invoice', ['id' => $payment->id])
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
 
-            // Return JSON error response for AJAX
             return response()->json([
                 'errors' => ['message' => $e->getMessage()]
             ], 422);
@@ -99,7 +105,7 @@ class PaymentController extends Controller
 
         $tax = intval(TaxAndDiscount::where('id', 1)->value('tax'));
         $discount = intval(TaxAndDiscount::where('id', 1)->value('discount'));
-    
+
         return view('direct_sale.invoice', compact('payment', 'payment_products', 'variant_product', 'tax', 'discount'));
     }    
 

@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); 
             $table->unsignedBigInteger('payment_method_id');
+            $table->timestamp('payment_date')->useCurrent(); 
             $table->decimal('total_amount', 10, 2);  
             $table->decimal('discount', 10, 2)->default(0); 
             $table->decimal('estimated_tax', 10, 2)->default(0);  
             $table->decimal('grand_amount', 10, 2);  
-            $table->timestamp('payment_date')->useCurrent(); 
+            $table->boolean('status')->default(true);  
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

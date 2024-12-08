@@ -53,8 +53,13 @@
                                     <dd class="col-sm-6">: ${{ $payment->grand_amount }}</dd>
 
                                     <dt class="col-sm-6 m-b-10">Status</dt>
-                                    <dd class="col-sm-6 d-flex">: <div class="label-main m-l-2"><label
-                                                class="label label-lg label-success">PAID</label></div>
+                                    <dd class="col-sm-6 d-flex">:
+                                        <div class="label-main m-l-2">
+                                            <label
+                                                class="label label-lg {{ $payment->status ? 'label-success' : 'label-danger' }}">
+                                                {{ $payment->status ? 'PAID' : 'UNPAID' }}
+                                            </label>
+                                        </div>
                                     </dd>
                                 </dl>
                                 <hr>
