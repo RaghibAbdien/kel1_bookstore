@@ -76,7 +76,7 @@
                 </a>
             </li>
             <li class="{{ request()->is('manage-virtual-sale') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/manage-virtual-sale">
+                <a class="waves-effect waves-dark" href="{{ route('manage-virtual-sale') }}">
                     <i class="icofont icofont-wallet"></i><span> Virtual Sale Terminal</span>
                 </a>
             </li>

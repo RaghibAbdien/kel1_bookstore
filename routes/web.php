@@ -114,14 +114,16 @@ Route::middleware(['preventback'])->group(function () {
         // Route Manage Direct Sale
         Route::get('/manage-direct-sale', [DirectSaleController::class, 'index'])->name('manage-direct-sale');
         
-        // Route Manage Virtual Sale
-        Route::get('/manage-virtual-sale', function () {
-            return view('virtual_sale.index');
-        });
-
-        // Route Payment
+        // Route Direct Payment
         Route::post('/add-payment', [PaymentController::class, 'store'])->name('store-payment');
-        Route::get('/show-invoice/{id}', [PaymentController::class, 'showInvoice'])->name('show-invoice');
+        Route::get('/show-direct-invoice/{id}', [PaymentController::class, 'showInvoice'])->name('show-direct-invoice');
+        
+        // Route Manage Virtual Sale
+        Route::get('/manage-virtual-sale', [DirectSaleController::class, 'virtualIndex'])->name('manage-virtual-sale');
+        
+        // Route Virtual Payment
+        Route::post('/add-virtual-payment', [PaymentController::class, 'virtualStore'])->name('virtual-store-payment');
+        Route::get('/show-virtual-invoice/{id}', [PaymentController::class, 'showVirtualInvoice'])->name('show-virtual-invoice');
         
         // Route Reports & Analytics
         Route::get('/manage-report', function () {

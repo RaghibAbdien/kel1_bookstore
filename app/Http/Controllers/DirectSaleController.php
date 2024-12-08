@@ -23,8 +23,25 @@ class DirectSaleController extends Controller
         $shiping = $global_pricing->shiping ?? 0;
         $discount = $global_pricing->discount ?? 0;
 
-        $payment_methods = PaymentMethod::all();
+        $payment_methods = PaymentMethod::whereIn('payment_method_name', ['Cash', 'Debit Card', 'Scan'])->get();
 
         return view('direct_sale.index', compact('products', 'customers', 'tax', 'shiping', 'discount', 'payment_methods'));
+    }
+
+    public function virtualIndex()
+    {
+        $products = Stock::all();
+        $customers = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'customer');
+        })->get();
+
+        $global_pricing = TaxAndDiscount::first();
+        $tax = $global_pricing->tax ?? 0;
+        $shiping = $global_pricing->shiping ?? 0;
+        $discount = $global_pricing->discount ?? 0;
+
+        $payment_methods = PaymentMethod::whereIn('payment_method_name', ['Pay Later', 'Debit Card', 'COD'])->get();
+
+        return view('virtual_sale.index', compact('products', 'customers', 'tax', 'shiping', 'discount', 'payment_methods'));
     }
 }
