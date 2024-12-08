@@ -2,17 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Stock;
 use App\Models\Payment;
+use App\Models\Bookstore;
 use Illuminate\Http\Request;
+use App\Models\CustomerOrder;
 use App\Models\PaymentMethod;
 use App\Models\PaymentProduct;
 use App\Models\TaxAndDiscount;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 
-class PaymentController extends Controller
+class BookstoreController extends Controller
 {
+    public function bookstore()
+    {
+        $products = Stock::all();
+        $customers = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'customer');
+        })->get();
+
+        $global_pricing = TaxAndDiscount::first();
+        $tax = $global_pricing->tax ?? 0;
+        $shiping = $global_pricing->shiping ?? 0;
+        $discount = $global_pricing->discount ?? 0;
+
+        $payment_methods = PaymentMethod::whereIn('payment_method_name', ['Pay Later', 'Debit Card', 'COD'])->get();
+
+        return view('bookstore.bookstore', compact('products', 'customers', 'tax', 'shiping', 'discount', 'payment_methods'));
+    }
+
     public function store(Request $request)
     {
         // Validasi input
@@ -44,7 +64,7 @@ class PaymentController extends Controller
             $status = $paymentMethod->payment_method_name === 'COD' ? false : true;
 
             // Simpan data ke tabel payments
-            $payment = Payment::create([
+            $payment = Bookstore::create([
                 'user_id' => $request->user_id,
                 'total_amount' => $request->total_amount,
                 'discount' => $request->discount,
@@ -60,7 +80,7 @@ class PaymentController extends Controller
                     throw new \Exception('Invalid product data');
                 }
 
-                PaymentProduct::create([
+                CustomerOrder::create([
                     'payment_id' => $payment->id,
                     'product_id' => $productId,
                     'quantity' => $request->quantity[$index],
@@ -84,7 +104,7 @@ class PaymentController extends Controller
 
             return response()->json([
                 'success' => 'Payment and products saved successfully.',
-                'redirect' => route('show-direct-invoice', ['id' => $payment->id])
+                'redirect' => route('show-bookstore-invoice', ['id' => $payment->id])
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -95,7 +115,7 @@ class PaymentController extends Controller
         }
     }
 
-    public function showInvoice($id)
+    public function showBookstoreInvoice($id)
     {
         $payment = Payment::findOrFail($id);
         $payment_products = PaymentProduct::where('payment_id', $id)->get();
@@ -106,7 +126,6 @@ class PaymentController extends Controller
         $tax = intval(TaxAndDiscount::where('id', 1)->value('tax'));
         $discount = intval(TaxAndDiscount::where('id', 1)->value('discount'));
 
-        return view('direct_sale.invoice', compact('payment', 'payment_products', 'variant_product', 'tax', 'discount'));
-    }
-
+        return view('bookstore.invoice', compact('payment', 'payment_products', 'variant_product', 'tax', 'discount'));
+    }  
 }

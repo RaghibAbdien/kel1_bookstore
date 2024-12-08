@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BookstoreController;
 use App\Http\Controllers\DirectSaleController;
 use App\Http\Controllers\PurchasingController;
 use App\Http\Controllers\TaxAndDiscountController;
@@ -118,12 +119,10 @@ Route::middleware(['preventback'])->group(function () {
         Route::post('/add-payment', [PaymentController::class, 'store'])->name('store-payment');
         Route::get('/show-direct-invoice/{id}', [PaymentController::class, 'showInvoice'])->name('show-direct-invoice');
         
-        // Route Manage Virtual Sale
-        Route::get('/manage-virtual-sale', [DirectSaleController::class, 'virtualIndex'])->name('manage-virtual-sale');
-        
         // Route Virtual Payment
-        Route::post('/add-virtual-payment', [PaymentController::class, 'virtualStore'])->name('virtual-store-payment');
-        Route::get('/show-virtual-invoice/{id}', [PaymentController::class, 'showVirtualInvoice'])->name('show-virtual-invoice');
+        // Route::get('/bookstore', function () {
+        //     return view('bookstore.bookstore');
+        // });
         
         // Route Reports & Analytics
         Route::get('/manage-report', function () {
@@ -140,9 +139,11 @@ Route::middleware(['preventback'])->group(function () {
         Route::get('/landing-page', function () {
             return view('bookstore.index');
         });
-        Route::get('/bookstore', function () {
-            return view('bookstore.bookstore');
-        });
+        Route::get('/bookstore', [BookstoreController::class, 'bookstore'])->name('show-bookstore');
+        // Route Bookstore Payment
+        Route::post('/add-bookstore-payment', [BookstoreController::class, 'store'])->name('bookstore-store-payment');
+        Route::get('/show-bookstore-invoice/{id}', [BookstoreController::class, 'showBookstoreInvoice'])->name('show-bookstore-invoice');
+        
         Route::get('/order-history', function () {
             return view('bookstore.order-history');
         });

@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Role;
 use App\Models\Payment;
+use App\Models\Bookstore;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,5 +49,10 @@ class User extends Authenticatable
     public function payment()
     {
         return $this->hasMany(Payment::class, 'user_id');
+    }
+
+    public function bookstore()
+    {
+        return $this->hasMany(Bookstore::class, 'user_id');
     }
 }

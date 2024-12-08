@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="treeview {{ request()->is('bookstore') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/bookstore">
+                <a class="waves-effect waves-dark" href="{{ route('show-bookstore') }}">
                     <i class="icofont icofont-book"></i><span> Bookstore</span>
                 </a>
             </li>
@@ -75,8 +75,8 @@
                     <i class="icofont icofont-money"></i><span> Direct Sale Terminal</span>
                 </a>
             </li>
-            <li class="{{ request()->is('manage-virtual-sale') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="{{ route('manage-virtual-sale') }}">
+            <li class="#">
+                <a class="waves-effect waves-dark" href="#">
                     <i class="icofont icofont-wallet"></i><span> Virtual Sale Terminal</span>
                 </a>
             </li>
