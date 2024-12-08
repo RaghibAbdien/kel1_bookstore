@@ -21,4 +21,9 @@ class Bookstore extends Model
     public function payment_method(){
         return $this->belongsTo(PaymentMethod::class, 'payment_method_id');
     }
+
+    public function customer_order()
+    {
+        return $this->belongsTo(CustomerOrder::class, 'bookstore_id');
+    }
 }

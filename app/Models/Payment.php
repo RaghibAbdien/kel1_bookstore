@@ -29,9 +29,4 @@ class Payment extends Model
     {
         return $this->belongsTo(PaymentProduct::class, 'payment_id');
     }
-
-    public function customer_order()
-    {
-        return $this->belongsTo(CustomerOrder::class, 'payment_id');
-    }
 }

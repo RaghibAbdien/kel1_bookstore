@@ -64,7 +64,7 @@ class BookstoreController extends Controller
             $status = $paymentMethod->payment_method_name === 'COD' ? false : true;
 
             // Simpan data ke tabel payments
-            $payment = Bookstore::create([
+            $bookstore = Bookstore::create([
                 'user_id' => $request->user_id,
                 'total_amount' => $request->total_amount,
                 'discount' => $request->discount,
@@ -81,7 +81,7 @@ class BookstoreController extends Controller
                 }
 
                 CustomerOrder::create([
-                    'payment_id' => $payment->id,
+                    'bookstore_id' => $bookstore->id,
                     'product_id' => $productId,
                     'quantity' => $request->quantity[$index],
                     'sub_total' => $request->sub_total[$index],
@@ -104,7 +104,7 @@ class BookstoreController extends Controller
 
             return response()->json([
                 'success' => 'Payment and products saved successfully.',
-                'redirect' => route('show-bookstore-invoice', ['id' => $payment->id])
+                'redirect' => route('show-bookstore-invoice', ['id' => $bookstore->id])
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -117,15 +117,15 @@ class BookstoreController extends Controller
 
     public function showBookstoreInvoice($id)
     {
-        $payment = Payment::findOrFail($id);
-        $payment_products = PaymentProduct::where('payment_id', $id)->get();
+        $bookstore = Bookstore::findOrFail($id);
+        $customer_orders = CustomerOrder::where('bookstore_id', $id)->get();
     
         // Menghitung jumlah total produk
-        $variant_product = $payment_products->count();
+        $variant_product = $customer_orders->count();
 
         $tax = intval(TaxAndDiscount::where('id', 1)->value('tax'));
         $discount = intval(TaxAndDiscount::where('id', 1)->value('discount'));
 
-        return view('bookstore.invoice', compact('payment', 'payment_products', 'variant_product', 'tax', 'discount'));
+        return view('bookstore.invoice', compact('bookstore', 'customer_orders', 'variant_product', 'tax', 'discount'));
     }  
 }

@@ -18,8 +18,8 @@ class CustomerOrder extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function payment()
+    public function bookstore()
     {
-        return $this->belongsTo(Payment::class, 'payment_id');
+        return $this->belongsTo(Bookstore::class, 'bookstore_id');
     }
 }
