@@ -24,6 +24,6 @@ class Bookstore extends Model
 
     public function customer_order()
     {
-        return $this->belongsTo(CustomerOrder::class, 'bookstore_id');
+        return $this->hasMany(CustomerOrder::class, 'bookstore_id');
     }
 }

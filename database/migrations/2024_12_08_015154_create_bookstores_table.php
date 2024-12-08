@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('estimated_tax', 10, 2)->default(0);  
             $table->decimal('grand_amount', 10, 2);  
             $table->boolean('status')->default(true);  
+            $table->boolean('status_order')->default(false);  
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

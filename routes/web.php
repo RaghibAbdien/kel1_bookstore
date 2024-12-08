@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookstoreController;
 use App\Http\Controllers\DirectSaleController;
 use App\Http\Controllers\PurchasingController;
+use App\Http\Controllers\VirtualSaleController;
 use App\Http\Controllers\TaxAndDiscountController;
 use App\Http\Controllers\WarehouseProductController;
 
@@ -119,10 +120,9 @@ Route::middleware(['preventback'])->group(function () {
         Route::post('/add-payment', [PaymentController::class, 'store'])->name('store-payment');
         Route::get('/show-direct-invoice/{id}', [PaymentController::class, 'showInvoice'])->name('show-direct-invoice');
         
-        // Route Virtual Payment
-        // Route::get('/bookstore', function () {
-        //     return view('bookstore.bookstore');
-        // });
+        // Route Manage Virtual Sale
+        Route::get('/manage-virtual-sale', [VirtualSaleController::class, 'index'])->name('manage-virtual-sale');
+        Route::get('/show-virtual-invoice/{id}', [VirtualSaleController::class, 'showInvoice'])->name('show-virtual-invoice');
         
         // Route Reports & Analytics
         Route::get('/manage-report', function () {
@@ -140,12 +140,12 @@ Route::middleware(['preventback'])->group(function () {
             return view('bookstore.index');
         });
         Route::get('/bookstore', [BookstoreController::class, 'bookstore'])->name('show-bookstore');
+        Route::get('/order-history', function () {
+            return view('bookstore.order-history');
+        });
         // Route Bookstore Payment
         Route::post('/add-bookstore-payment', [BookstoreController::class, 'store'])->name('bookstore-store-payment');
         Route::get('/show-bookstore-invoice/{id}', [BookstoreController::class, 'showBookstoreInvoice'])->name('show-bookstore-invoice');
         
-        Route::get('/order-history', function () {
-            return view('bookstore.order-history');
-        });
     });
 });

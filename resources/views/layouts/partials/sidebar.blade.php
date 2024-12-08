@@ -75,8 +75,8 @@
                     <i class="icofont icofont-money"></i><span> Direct Sale Terminal</span>
                 </a>
             </li>
-            <li class="#">
-                <a class="waves-effect waves-dark" href="#">
+            <li class="{{ request()->is('manage-virtual-sale') ? 'active' : '' }}">
+                <a class="waves-effect waves-dark" href="{{ route('manage-virtual-sale') }}">
                     <i class="icofont icofont-wallet"></i><span> Virtual Sale Terminal</span>
                 </a>
             </li>
