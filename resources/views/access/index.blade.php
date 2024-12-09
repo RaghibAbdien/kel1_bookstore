@@ -78,7 +78,7 @@
                                     <tr>
                                         <th style="width: 1%;">#</th>
                                         <th style="width: 20%;">Role Name</th>
-                                        <th style="width: 40%;">Access Level</th>
+                                        <th style="width: 40%;">Access Menu</th>
                                         <th class="text-center" style="width: 20%; ">Action</th>
                                     </tr>
                                 </thead>
@@ -87,7 +87,11 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $role->role_name }}</td>
-                                            <td>create, read, update, delete</td>
+                                            <td>
+                                                @foreach ($role->menus as $menu)
+                                                    <span>{{ $menu->menu_name }}</span><br>
+                                                @endforeach
+                                            </td>
                                             <td class="text-center">
                                                 <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
                                                     data-placement="top" title=""
@@ -110,8 +114,9 @@
                                             </td>
                                         </tr>
                                     @empty
-                                        <span></span>
+                                        <span>Belum ada role</span>
                                     @endforelse
+
                                 </tbody>
                             </table>
                         </div>

@@ -25,18 +25,21 @@
                                 <div class="form-group">
                                     <label for="exampleInputRolename" class="form-control-label">Role Name</label>
                                     <input type="text" class="form-control" id="exampleInputRolename" name="role_name"
-                                        aria-describedby="Rolename" placeholder="Enter Rolename" value="{{ $roles->role_name }}">
+                                        aria-describedby="Rolename" placeholder="Enter Rolename"
+                                        value="{{ $roles->role_name }}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleAccessLevel" class="form-control-label">Access Level</label>
-                                    <select class="form-control" id="exampleAccessLevel" name="">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                            <div class="col-md-6" data-select2-id="45">
+                                <div class="form-group" data-select2-id="44">
+                                    <label for="exampleAccessLevel" class="form-control-label">Access Menu</label>
+                                    <select name="menu_id[]" class="select2 select2-hidden-accessible" multiple=""
+                                        data-placeholder="Select Menu" style="width: 100%" data-select2-id="7"
+                                        tabindex="-1" aria-hidden="true">
+                                        @forelse ($menus as $menu)
+                                            <option value="{{ $menu->id }}">{{ $menu->menu_name }}</option>
+                                        @empty
+                                            <option value="" disabled>Belum ada menu</option>
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>

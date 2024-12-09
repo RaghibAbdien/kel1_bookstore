@@ -27,15 +27,17 @@
                                         aria-describedby="Rolename" placeholder="Enter Rolename">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleAccessLevel" class="form-control-label">Access Level</label>
-                                    <select class="form-control" id="exampleAccessLevel" name="">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                            <div class="col-md-6" data-select2-id="45">
+                                <div class="form-group" data-select2-id="44">
+                                    <label for="exampleAccessLevel" class="form-control-label">Access Menu</label>
+                                    <select name="menu_id[]" class="select2 select2-hidden-accessible" multiple=""
+                                        data-placeholder="Select Menu" style="width: 100%" data-select2-id="7"
+                                        tabindex="-1" aria-hidden="true">
+                                        @forelse ($menus as $menu)
+                                            <option value="{{ $menu->id }}">{{ $menu->menu_name }}</option>
+                                        @empty
+                                            <option value="" disabled>Belum ada menu</option>
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -57,8 +59,8 @@
             $(document).ready(function() {
                 $('#formAddRole').on('submit', function(event) {
                     event.preventDefault();
+
                     var form = $(this);
-                    // Menonaktifkan tombol submit
                     form.find('button[type="submit"]').prop('disabled', true);
 
                     $.ajax({
@@ -66,26 +68,29 @@
                         method: form.attr('method'),
                         data: form.serialize(),
                         success: function(response) {
-                            // Jika validasi berhasil, redirect atau lakukan tindakan lain
                             Swal.fire({
                                 title: 'Success',
                                 text: response.success,
                                 icon: 'success',
                                 timer: 1500,
                                 showConfirmButton: false
-                            }).then((result) => {
+                            }).then(() => {
                                 window.location.href = response.redirect;
                             });
                         },
                         error: function(xhr) {
-                            // Dapatkan objek errors dari response JSON Laravel
                             var errors = xhr.responseJSON.errors;
                             var errorMessage = '';
-                            $.each(errors, function(field, messages) {
-                                messages.forEach(function(message) {
-                                    errorMessage += message + '<br>';
+
+                            if (errors) {
+                                $.each(errors, function(field, messages) {
+                                    messages.forEach(function(message) {
+                                        errorMessage += message + '<br>';
+                                    });
                                 });
-                            });
+                            } else {
+                                errorMessage = 'An unknown error occurred.';
+                            }
 
                             Swal.fire({
                                 icon: 'error',
@@ -93,7 +98,6 @@
                                 html: errorMessage
                             });
 
-                            // Aktifkan kembali tombol submit
                             form.find('button[type="submit"]').prop('disabled', false);
                         }
                     });

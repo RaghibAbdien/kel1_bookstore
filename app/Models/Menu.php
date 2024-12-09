@@ -12,8 +12,8 @@ class Menu extends Model
 
     protected $guarded = ['id'];
 
-    public function role_menu()
+    public function roles()
     {
-        return $this->hasMany(RoleMenu::class, 'menu_id');
+        return $this->belongsToMany(Role::class, 'role_menus', 'menu_id', 'role_id');
     }
 }

@@ -46,6 +46,10 @@
     <!-- Responsive.css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('multipleselect/plugins/select2/css/select2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('multipleselect/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}" />
+
 </head>
 
 <body class="sidebar-mini fixed">
@@ -144,6 +148,17 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('js')
 
+    <!-- Select2 -->
+    <script src="{{ asset('multipleselect/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script>
+        //Initialize Select2 Elements
+        $(".select2").select2();
+
+        //Initialize Select2 Elements
+        $(".select2bs4").select2({
+            theme: "bootstrap4",
+        });
+    </script>
 </body>
 
 </html>
