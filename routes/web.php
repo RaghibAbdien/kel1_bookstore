@@ -11,6 +11,7 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookstoreController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DirectSaleController;
 use App\Http\Controllers\PurchasingController;
 use App\Http\Controllers\VirtualSaleController;
@@ -45,9 +46,7 @@ Route::middleware(['preventback'])->group(function () {
         });
 
         // Route Dashboard
-        Route::get('/dashboard', function () {
-            return view('index');
-        });
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Route Manage Users
         Route::get('/manage-user', [UserController::class, 'index'])->name('manage-user');

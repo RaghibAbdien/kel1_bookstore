@@ -22,15 +22,16 @@ class CheckRoleAccess
         $menu = Menu::where('slug', $menuSlug)->first();
 
         if (!$menu) {
-            return redirect('/dashboard')->with('error', 'Menu tidak ditemukan.');
+            return redirect()->route('dashboard')->with('error', 'Menu tidak ditemukan.');
         }
-        
+
         // Cek apakah menu_id ada dalam relasi role_menus untuk role saat ini
         $hasAccess = $role->menus->contains($menu->id);
-        
+
         if (!$hasAccess) {
-            return redirect('/dashboard')->with('error', 'Anda tidak memiliki akses ke menu ini.');
+            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses ke menu ini.');
         }
+
 
         return $next($request);
     }
