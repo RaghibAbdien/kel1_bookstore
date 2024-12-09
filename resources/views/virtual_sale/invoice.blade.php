@@ -101,11 +101,12 @@
                     <div class="col-md-6">
                         <div class="card-block">
                             <dl class="dl-horizontal row">
-                                <dt class="col-sm-8 font-weight-normal">Sub Total</dt>
+                                <dt class="col-sm-8 font-weight-normal">Total Amount</dt>
                                 <dd class="col-sm-4">: ${{ $bookstore->total_amount }}</dd>
-                                <dt class="col-sm-8 font-weight-normal">Estimated Tax ({{ $tax }}%)</dt>
+                                <dt class="col-sm-8 font-weight-normal">Estimated Tax ({{ $bookstore->estimated_tax }}%)
+                                </dt>
                                 <dd class="col-sm-4">: ${{ $bookstore->estimated_tax }}</dd>
-                                <dt class="col-sm-8 font-weight-normal">Discount ({{ $discount }}%)</dt>
+                                <dt class="col-sm-8 font-weight-normal">Discount ({{ $bookstore->discount }}%)</dt>
                                 <dd class="col-sm-4">: ${{ $bookstore->discount }}</dd>
                             </dl>
                             <hr>
@@ -114,12 +115,12 @@
                                 <dd class="col-sm-4 font-weight-bold">: ${{ $bookstore->grand_amount }}</dd>
                             </dl>
                             <div class="row">
-                                <a href="{{ route('manage-direct-sale') }}"
-                                    class="btn btn-primary waves-effect waves-light"><i
-                                        class="ti-shopping-cart m-r-1"></i>Direct Sale</a>
-                                <button type="submit" class="btn btn-warning waves-effect waves-light"><i
-                                        class="ti-check m-r-1"></i>Confirmed</button>
-                                <div class="col-md-3"></div>
+                                <div class="col-md-2"></div>
+                                <a href="" class="btn btn-primary waves-effect waves-light"><i
+                                        class="ti-shopping-cart m-r-1"></i>Virtual Sale</a>
+                                <a href="#" id="confirmButton" class="btn btn-warning waves-effect waves-light">
+                                    <i class="ti-check m-r-1"></i> Confirmed
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -127,7 +128,46 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-1"></div>
-    </div>
     {{-- Invoice end --}}
+    @push('js')
+        <script>
+            $(document).ready(function() {
+                $('#confirmButton').on('click', function() {
+                    // Ambil ID invoice yang akan dikonfirmasi
+                    var invoiceId = '{{ $bookstore->id }}'; // Sesuaikan dengan data yang ada
+
+                    // Kirim permintaan Ajax
+                    $.ajax({
+                        url: '/confirm-virtual-invoice/' + invoiceId, // Ganti dengan URL route Anda
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}', // Token CSRF untuk keamanan
+                        },
+                        success: function(response) {
+                            // Tampilkan pesan sukses menggunakan Swal atau alert
+                            Swal.fire({
+                                title: 'Success',
+                                text: response.success,
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then((result) => {
+                                // Redirect setelah sukses
+                                window.location.href = response.redirect;
+                            });
+                        },
+                        error: function(xhr) {
+                            // Tampilkan pesan error jika terjadi kesalahan
+                            var errorMessage = xhr.responseJSON.error || 'Something went wrong!';
+                            Swal.fire({
+                                title: 'Error',
+                                text: errorMessage,
+                                icon: 'error'
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    @endpush
 @endsection

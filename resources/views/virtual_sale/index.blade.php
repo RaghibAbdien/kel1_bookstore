@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('page-title', 'Manage Customer Orders')
+@section('page-title', 'Manage Virtual Sale')
 
 @section('content')
     {{-- Delivery Analytics --}}
@@ -47,8 +47,8 @@
                             <tr>
                                 <th style="width: 1%;">#</th>
                                 <th style="width: 20%;">Customer Name</th>
-                                <th style="width: 30%;">Address</th>
-                                <th style="width: 15%;">Phone</th>
+                                <th style="width: 30%;">Customer Address</th>
+                                <th style="width: 15%;">Customer Phone</th>
                                 <th style="width: 15%;">Order Date</th>
                                 <th style="width: 14%;">Status</th>
                                 <th class="text-center" style="width: 5%; ">Action</th>
@@ -64,7 +64,7 @@
                                     <td>{{ $bookstore->created_at }}</td>
                                     <td>
                                         <label
-                                            class="label label-lg {{ $bookstore->status_order ? 'label-success' : 'label-danger' }}">
+                                            class="label label-lg {{ $bookstore->status_delivery ? 'label-success' : 'label-danger' }}">
                                             {{ $bookstore->status ? 'CONFIRMED' : 'UNCONFIRMED' }}
                                         </label>
                                     </td>

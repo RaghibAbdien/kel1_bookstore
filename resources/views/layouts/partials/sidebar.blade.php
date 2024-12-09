@@ -60,11 +60,6 @@
                     <i class="icofont icofont-cart"></i><span> Manage Purchasing</span>
                 </a>
             </li>
-            <li class="{{ request()->is('manage-delivery') || request()->is('edit-delivery') ? 'active' : '' }}">
-                <a class="waves-effect waves-dark" href="/manage-delivery">
-                    <i class="icofont icofont-truck"></i><span> Order & Delivery</span>
-                </a>
-            </li>
             <li class="{{ request()->is('manage-global-pricing') ? 'active' : '' }}">
                 <a class="waves-effect waves-dark" href="{{ route('manage-global-pricing') }}">
                     <i class="icofont icofont-price"></i><span> Tax And Discount</span>

@@ -14,6 +14,7 @@ use App\Http\Controllers\BookstoreController;
 use App\Http\Controllers\DirectSaleController;
 use App\Http\Controllers\PurchasingController;
 use App\Http\Controllers\VirtualSaleController;
+use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\TaxAndDiscountController;
 use App\Http\Controllers\WarehouseProductController;
 
@@ -100,9 +101,7 @@ Route::middleware(['preventback'])->group(function () {
         Route::put('/edit-purchase/{id}', [PurchasingController::class, 'update'])->name('update-purchase');
 
         // Route Manage Delivery
-        Route::get('/manage-delivery', function () {
-            return view('delivery.index');
-        });
+        Route::get('/manage-delivery', [DeliveryOrderController::class, 'index'])->name('manage-delivery');
         Route::get('/edit-delivery', function () {
             return view('delivery.edit-delivery');
         });
@@ -123,6 +122,7 @@ Route::middleware(['preventback'])->group(function () {
         // Route Manage Virtual Sale
         Route::get('/manage-virtual-sale', [VirtualSaleController::class, 'index'])->name('manage-virtual-sale');
         Route::get('/show-virtual-invoice/{id}', [VirtualSaleController::class, 'showInvoice'])->name('show-virtual-invoice');
+        Route::post('/confirm-virtual-invoice/{id}', [VirtualSaleController::class, 'confirmInvoice'])->name('confirm-virtual-invoice');
         
         // Route Reports & Analytics
         Route::get('/manage-report', function () {

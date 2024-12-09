@@ -25,9 +25,31 @@ class VirtualSaleController extends Controller
         // Menghitung jumlah total produk
         $variant_product = $customer_orders->count();
 
-        $tax = intval(TaxAndDiscount::where('id', 1)->value('tax'));
-        $discount = intval(TaxAndDiscount::where('id', 1)->value('discount'));
-
-        return view('virtual_sale.invoice', compact('bookstore', 'customer_orders', 'variant_product', 'tax', 'discount'));
+        return view('virtual_sale.invoice', compact('bookstore', 'customer_orders', 'variant_product'));
     }
+
+    public function confirmInvoice($id)
+    {
+        // Cari data Bookstore berdasarkan ID
+        $bookstore = Bookstore::find($id);
+
+        // Periksa apakah Bookstore ditemukan
+        if (!$bookstore) {
+            return redirect()->back()->with('failed', 'Invoice not found!');
+        }
+
+        // Update status dan status_delivery menjadi true
+        $bookstore->status = true;
+        $bookstore->status_delivery = true;
+
+        // Simpan perubahan
+        $bookstore->save();
+
+        // Redirect atau beri response sesuai kebutuhan
+        return response()->json([
+            'success' => 'Invoice confirmed successfully!',
+            'redirect' => route('manage-virtual-sale'),
+        ]);
+    }
+
 }
