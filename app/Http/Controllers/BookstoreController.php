@@ -125,6 +125,9 @@ class BookstoreController extends Controller
     {
         $bookstore = Bookstore::findOrFail($id);
         $customer_orders = CustomerOrder::where('bookstore_id', $id)->get();
+        $employeeNames = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Customer Service');
+        })->pluck('name')->implode(', ');
     
         // Menghitung jumlah total produk
         $variant_product = $customer_orders->count();
@@ -132,7 +135,7 @@ class BookstoreController extends Controller
         $tax = intval(TaxAndDiscount::where('id', 1)->value('tax'));
         $discount = intval(TaxAndDiscount::where('id', 1)->value('discount'));
 
-        return view('bookstore.invoice', compact('bookstore', 'customer_orders', 'variant_product', 'tax', 'discount'));
+        return view('bookstore.invoice', compact('bookstore', 'customer_orders', 'variant_product', 'tax', 'discount', 'employeeNames'));
     }  
 
     public function orderHistory()

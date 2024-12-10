@@ -20,11 +20,11 @@
                                     </dt>
 
                                     <dt class="col-sm-12">
-                                        <h4 class="m-t-15">{{ auth()->user()->name }}</h4>
+                                        <h4 class="m-t-15">{{ $employeeNames }}</h4>
                                     </dt>
 
                                     <dt class="col-sm-12 font-weight-normal">
-                                        <span>{{ auth()->user()->role->role_name }}</span>
+                                        <span> Customer Service </span>
                                     </dt>
 
                                     <dt class="col-sm-12 font-weight-normal">
