@@ -153,13 +153,13 @@
                                             <i class="ti-pencil"></i>
                                         </a>
                                         <a class="btn btn-danger waves-effect waves-light" data-toggle="tooltip"
-                                            data-placement="top" title="Delete" href="#"
-                                            onclick="event.preventDefault(); document.getElementById('deleteProductForm{{ $product->id }}').submit();">
+                                            data-placement="top" title="Delete" href="{{ route('delete-product', $product->id) }}"
+                                            id="deleteProductForm{{ $product->id }}">
                                             <i class="ti-trash"></i>
                                         </a>
 
                                         <form action="{{ route('delete-product', $product->id) }}"
-                                            id="deleteProductForm{{ $product->id }}" method="POST"
+                                            id="delete-product-form{{ $product->id }}" method="POST"
                                             style="display:none;">
                                             @csrf
                                             @method('DELETE')
@@ -176,4 +176,39 @@
         </div>
     </div>
     <!-- Catalog table ends -->
+    @push('js')
+        @foreach ($products as $product)
+            <script>
+                document.getElementById('deleteProductForm{{ $product->id }}').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Are you sure delete this product?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, do it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('delete-product-form{{ $product->id }}').submit();
+                        }
+                    })
+                });
+            </script>
+        @endforeach
+        @if (session('success'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Success',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                });
+            </script>
+        @endif
+    @endpush
 @endsection
