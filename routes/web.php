@@ -46,7 +46,7 @@ Route::middleware(['preventback'])->group(function () {
         });
 
         // Route Dashboard
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('role.access:dashboard');
 
         // Route Manage Users
         Route::get('/manage-user', [UserController::class, 'index'])->name('manage-user');
@@ -57,7 +57,7 @@ Route::middleware(['preventback'])->group(function () {
         Route::delete('/delete-user/{id}', [UserController::class, 'delete'])->name('delete-user');
 
         // Route Manage Role
-        Route::get('/manage-role', [RoleController::class, 'index'])->name('manage-role');
+        Route::get('/manage-role', [RoleController::class, 'index'])->name('manage-role')->middleware('role.access:dashboard');
         Route::get('/add-role', [RoleController::class, 'addRole'])->name('add-role');
         Route::post('/add-role', [RoleController::class, 'store'])->name('store-role');
         Route::get('/edit-role/{id}', [RoleController::class, 'editRole'])->name('edit-role');
@@ -65,7 +65,7 @@ Route::middleware(['preventback'])->group(function () {
         Route::delete('/delete-role/{id}', [RoleController::class, 'delete'])->name('delete-role');
 
         // Route Manage Menu
-        // Route::get('/manage-menu', [MenuController::class, 'index'])->name('manage-menu');
+        Route::get('/manage-menu', [MenuController::class, 'index'])->name('manage-menu');
         Route::get('/add-menu', [MenuController::class, 'addMenu'])->name('add-menu');
         Route::post('/add-menu', [MenuController::class, 'store'])->name('store-menu');
         Route::get('/edit-menu/{id}', [MenuController::class, 'editMenu'])->name('edit-menu');

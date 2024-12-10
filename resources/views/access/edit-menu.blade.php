@@ -29,6 +29,13 @@
                                         value="{{ $menus->menu_name }}">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputSlug" class="form-control-label">Slug</label>
+                                    <input type="text" class="form-control" id="exampleInputSlug" name="slug"
+                                        aria-describedby="Slug" placeholder="Enter Slug" value="{{ $menus->slug }}">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <button type="submit"

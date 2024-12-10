@@ -27,6 +27,13 @@
                                         aria-describedby="Rolename" placeholder="Enter Rolename">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputSlug" class="form-control-label">Slug</label>
+                                    <input type="text" class="form-control" id="exampleInputSlug" name="slug"
+                                        aria-describedby="Slug" placeholder="Enter Slug">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <button type="submit"

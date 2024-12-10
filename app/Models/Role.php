@@ -11,6 +11,17 @@ class Role extends Model
 
     protected $guarded = ['id'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($role) {
+            if ($role->role_name === 'Admin') {
+                throw new \Exception('Role "Admin" cannot be deleted.');
+            }
+        });
+    }
+
     public function menus()
     {
         return $this->belongsToMany(Menu::class, 'role_menus', 'role_id', 'menu_id');
