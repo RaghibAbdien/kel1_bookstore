@@ -32,24 +32,21 @@ use App\Http\Controllers\WarehouseProductController;
 
 Route::middleware(['preventback'])->group(function () {
 // Route Authentication
-    Route::get('/', [LoginController::class, 'showLogin'])->middleware('guest');
-    Route::post('/', [LoginController::class, 'login'])->name('login')->middleware('guest');
+    Route::middleware(['guest'])->group(function () {
+        Route::get('/', [LoginController::class, 'showLogin']);
+        Route::post('/', [LoginController::class, 'login'])->name('login');
+        Route::get('/register', [LoginController::class, 'showRegister'])->name('show-register');
+        Route::post('/register', [LoginController::class, 'register'])->name('register');
+        Route::get('/forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot-password');
+    });
 
     Route::middleware(['auth'])->group(function () {
-        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-        Route::get('/register', function () {
-            return view('auth.register');
-        });
-        Route::get('/forgot-password', function () {
-            return view('auth.forgot-password');
-        });
-
         // Route Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('role.access:dashboard');
+        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
         // Route Manage Users
-        Route::middleware(['role.access:dashboard', 'headManager'])->group(function () {
+        Route::middleware(['role.access:dashboard', 'admin'])->group(function () {
             Route::get('/manage-user', [UserController::class, 'index'])->name('manage-user');
             Route::get('/add-user', [UserController::class, 'addUser'])->name('add-user');
             Route::post('/add-user', [UserController::class, 'store'])->name('store-user');
@@ -147,7 +144,7 @@ Route::middleware(['preventback'])->group(function () {
         });
 
         // Route Bookstore
-        Route::middleware(['role.access:landing-page', 'customer'])->group(function () {
+        Route::middleware(['customer'])->group(function () {
             Route::get('/landing-page', [BookstoreController::class, 'index'])->name('landing-page');
             Route::get('/bookstore', [BookstoreController::class, 'bookstore'])->name('show-bookstore');
             Route::get('/order-history', [BookstoreController::class, 'orderHistory'])->name('show-order-history');
