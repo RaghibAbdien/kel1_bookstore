@@ -18,7 +18,7 @@
                     'manage-report' => 'icofont icofont-pie-chart',
                     'landing-page' => 'icofont icofont-book',
                     'show-bookstore' => 'icofont icofont-tag',
-                    'show-order-history' => 'icofont icofont-cart'
+                    'show-order-history' => 'icofont icofont-cart',
                 ];
             @endphp
             @foreach ($menus as $menu)
@@ -54,9 +54,10 @@
                     @if ($userRole->role_name == 'Cashier')
                         <li class="treeview {{ request()->routeIs($menu->slug) ? 'active' : '' }}">
                     @endif
-                    <a class="waves-effect waves-dark" href="{{ route($menu->slug) }}">
-                        <i class="{{ $menuIconMap[$menu->slug] ?? '' }}"></i><span> {{ $menu->menu_name }}</span>
-                    </a>
+                    <li class="treeview {{ request()->routeIs($menu->slug) ? 'active' : '' }}">
+                        <a class="waves-effect waves-dark" href="{{ route($menu->slug) }}">
+                            <i class="{{ $menuIconMap[$menu->slug] ?? '' }}"></i><span> {{ $menu->menu_name }}</span>
+                        </a>
                     </li>
                 @endif
             @endforeach

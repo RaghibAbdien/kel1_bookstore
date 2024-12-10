@@ -9,9 +9,8 @@
             <div class="card dashboard-product">
                 <span>Total <br> Employee</span>
                 <h2 class="dashboard-total-products">{{ $employeeCount }}</h2>
-                <a href="">Show</a>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
@@ -19,9 +18,8 @@
             <div class="card dashboard-product">
                 <span>Customer <br> Service</span>
                 <h2 class="dashboard-total-products">{{ $customerServiceCount }}</h2>
-                <a href="">Show</a>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
@@ -29,9 +27,8 @@
             <div class="card dashboard-product">
                 <span>Logistic <br> Manager</span>
                 <h2 class="dashboard-total-products">{{ $logisticManagerCount }}</h2>
-                <a href="">Show</a>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
@@ -39,9 +36,8 @@
             <div class="card dashboard-product">
                 <span>Purchasing <br> Agent</span>
                 <h2 class="dashboard-total-products">{{ $purchasingManagerCount }}</h2>
-                <a href="">Show</a>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
@@ -49,9 +45,8 @@
             <div class="card dashboard-product">
                 <span>Head <br> Manager</span>
                 <h2 class="dashboard-total-products">{{ $headManagerCount }}</h2>
-                <a href="">Show</a>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
@@ -59,9 +54,8 @@
             <div class="card dashboard-product">
                 <span>Cashier <br> Store</span>
                 <h2 class="dashboard-total-products"><span>{{ $cashierCount }}</span></h2>
-                <a href="">Show</a>
                 <div class="side-box">
-                    <i class="ti-direction-alt text-danger-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
@@ -69,9 +63,8 @@
             <div class="card dashboard-product">
                 <span>Admin</span>
                 <h2 class="dashboard-total-products"><span>{{ $adminCount }}</span></h2>
-                <a href="">Show</a>
                 <div class="side-box">
-                    <i class="ti-package text-info-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
@@ -79,9 +72,8 @@
             <div class="card dashboard-product">
                 <span>Customer</span>
                 <h2 class="dashboard-total-products"><span>{{ $customerCount }}</span></h2>
-                <a href="">Show</a>
                 <div class="side-box">
-                    <i class="ti-truck text-success-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
@@ -89,9 +81,8 @@
             <div class="card dashboard-product">
                 <span>Total User</span>
                 <h2 class="dashboard-total-products">{{ $users->count() }}</h2>
-                <a href="">Show</a>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>

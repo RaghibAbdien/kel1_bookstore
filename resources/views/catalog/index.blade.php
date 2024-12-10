@@ -8,120 +8,108 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Biography</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $biographyCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-truck text-success-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Comics</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $comicCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-package text-info-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Culture</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $cultureCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-direction-alt text-danger-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Self-Dev</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $developmentCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Economics</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $economicCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Geography</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $geographyCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>History</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $historyCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Language</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $languageCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Novel</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $novelCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Religion</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $religionCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Science</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $scienceCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Technology</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
+                <h2 class="dashboard-total-products">{{ $technologyCount }}</h2>
                 <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
+                    <i class="ti-filter text-primary-color"></i>
                 </div>
             </div>
         </div>

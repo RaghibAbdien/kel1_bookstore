@@ -42,7 +42,15 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputSupplierPrice" class="form-control-label">Supplier Price</label>
+                                    <input type="number" class="form-control" id="exampleInputSupplierPrice"
+                                        name="supplier_price" aria-describedby="SupplierPrice"
+                                        placeholder="Enter Supplier Price" value="{{ $products->supplier_price }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputProductPrice" class="form-control-label">Product Price</label>
                                     <input type="number" class="form-control" id="exampleInputProductPrice"
