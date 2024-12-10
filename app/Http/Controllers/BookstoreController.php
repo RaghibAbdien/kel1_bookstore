@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\DB;
 
 class BookstoreController extends Controller
 {
+
+    public function index()
+    {
+        return view('bookstore.index');
+    }
+
     public function bookstore()
     {
         $products = Stock::all();
@@ -128,4 +134,8 @@ class BookstoreController extends Controller
 
         return view('bookstore.invoice', compact('bookstore', 'customer_orders', 'variant_product', 'tax', 'discount'));
     }  
+
+    public function orderHistory(){
+        return view('bookstore.order-history');
+    }
 }

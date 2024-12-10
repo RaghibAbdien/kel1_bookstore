@@ -21,7 +21,7 @@
                 <li class="dropdown">
                     <a href="#!" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                         class="dropdown-toggle drop icon-circle drop-image">
-                        <span>John <b>Doe</b> <i class="icofont icofont-simple-down"></i></span>
+                        <span>{{ Auth::user()->name }} <i class="icofont icofont-simple-down"></i></span>
 
                     </a>
                     <ul class="dropdown-menu settings-menu">

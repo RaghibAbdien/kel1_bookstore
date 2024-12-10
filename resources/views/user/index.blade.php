@@ -8,7 +8,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Total <br> Employee</span>
-                <h2 class="dashboard-total-products">4500</h2>
+                <h2 class="dashboard-total-products">{{ $employeeCount }}</h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-wallet text-primary-color"></i>
@@ -18,7 +18,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Customer <br> Service</span>
-                <h2 class="dashboard-total-products">4500</h2>
+                <h2 class="dashboard-total-products">{{ $customerServiceCount }}</h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-wallet text-primary-color"></i>
@@ -28,7 +28,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Logistic <br> Manager</span>
-                <h2 class="dashboard-total-products">4500</h2>
+                <h2 class="dashboard-total-products">{{ $logisticManagerCount }}</h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-wallet text-primary-color"></i>
@@ -38,17 +38,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Purchasing <br> Agent</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
-                <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2 col-md-6">
-            <div class="card dashboard-product">
-                <span>Delivery <br> Driver</span>
-                <h2 class="dashboard-total-products">4500</h2>
+                <h2 class="dashboard-total-products">{{ $purchasingManagerCount }}</h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-wallet text-primary-color"></i>
@@ -58,7 +48,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Head <br> Manager</span>
-                <h2 class="dashboard-total-products">4500</h2>
+                <h2 class="dashboard-total-products">{{ $headManagerCount }}</h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-wallet text-primary-color"></i>
@@ -67,18 +57,8 @@
         </div>
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
-                <span>HR Manager</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
-                <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2 col-md-6">
-            <div class="card dashboard-product">
-                <span>Cashier</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <span>Cashier <br> Store</span>
+                <h2 class="dashboard-total-products"><span>{{ $cashierCount }}</span></h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-direction-alt text-danger-color"></i>
@@ -88,7 +68,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Admin</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <h2 class="dashboard-total-products"><span>{{ $adminCount }}</span></h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-package text-info-color"></i>
@@ -98,7 +78,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Customer</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <h2 class="dashboard-total-products"><span>{{ $customerCount }}</span></h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-truck text-success-color"></i>
@@ -108,7 +88,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Total User</span>
-                <h2 class="dashboard-total-products">4500</h2>
+                <h2 class="dashboard-total-products">{{ $users->count() }}</h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-wallet text-primary-color"></i>

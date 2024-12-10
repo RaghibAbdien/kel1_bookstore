@@ -14,29 +14,42 @@ class LoginController extends Controller
     }
     
     public function login(Request $request)
-    {
-        $infoLogin = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ],[
-            'email.required' => 'Email harus diisi!!',
-            'password.required' => 'Password tidak boleh kosong'
-        ]);
+{
+    $infoLogin = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ], [
+        'email.required' => 'Email harus diisi!!',
+        'password.required' => 'Password tidak boleh kosong'
+    ]);
 
-        try {
-            if (Auth::attempt($infoLogin)) {
-                $request->session()->regenerate();
-                return response()->json(['success' => 'Login successful! Redirecting to dashboard...', 'redirect' => '/dashboard']);
+    try {
+        // Cek login
+        if (Auth::attempt($infoLogin)) {
+            // Regenerasi session
+            $request->session()->regenerate();
+
+            // Dapatkan role user yang login
+            $userRole = Auth::user()->role->role_name;
+
+            // Redirect berdasarkan role
+            if ($userRole == 'Customer') {
+                return response()->json(['success' => 'Login successful! Redirecting to landing page...', 'redirect' => '/landing-page']);
             } else {
-                return response()->json([
-                    'errors' => ['Password atau Email salah.']
-                ], 401);
+                return response()->json(['success' => 'Login successful! Redirecting to dashboard...', 'redirect' => '/dashboard']);
             }
-        } catch (ValidationException $e) {
-            Log::error('An error occurred during authentication', ['exception' => $e]);
-            return response()->json(['errors' => $e->validator->errors()->all()], 422);
+        } else {
+            return response()->json([
+                'errors' => ['Password atau Email salah.']
+            ], 401);
         }
+    } catch (ValidationException $e) {
+        // Tangani exception jika ada error pada validasi
+        Log::error('An error occurred during authentication', ['exception' => $e]);
+        return response()->json(['errors' => $e->validator->errors()->all()], 422);
     }
+}
+
 
     public function logout()
     {

@@ -12,7 +12,43 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('user.index', compact('users'));
+
+        $adminCount = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Admin');
+        })->count();
+        $customerServiceCount = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Customer Service');
+        })->count();
+        $logisticManagerCount = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Logistic Manager');
+        })->count();
+        $purchasingManagerCount = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Purchasing Agent');
+        })->count();
+        $headManagerCount = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Head Manager');
+        })->count();
+        $cashierCount = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Cashier');
+        })->count();
+        $customerCount = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Customer');
+        })->count();
+        $employeeCount = User::whereHas('role', function ($query) {
+            $query->where('role_name', '!=', 'Customer');
+        })->count();
+        
+        return view('user.index', compact(
+            'users', 
+            'adminCount', 
+            'customerServiceCount', 
+            'logisticManagerCount', 
+            'purchasingManagerCount', 
+            'headManagerCount', 
+            'cashierCount', 
+            'customerCount',
+            'employeeCount'
+        ));
     }
 
     public function addUser()
