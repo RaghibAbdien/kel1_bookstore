@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('root-page', 'Manage Direct Sale')
+@section('root-page', 'Manage Virtual Sale')
 @section('page-title', 'Invoice')
 
 @section('content')
@@ -116,7 +116,7 @@
                             </dl>
                             <div class="row">
                                 <div class="col-md-2"></div>
-                                <a href="" class="btn btn-primary waves-effect waves-light"><i
+                                <a href="{{ route('manage-virtual-sale') }}" class="btn btn-primary waves-effect waves-light"><i
                                         class="ti-shopping-cart m-r-1"></i>Virtual Sale</a>
                                 <a href="#" id="confirmButton" class="btn btn-warning waves-effect waves-light">
                                     <i class="ti-check m-r-1"></i> Confirmed

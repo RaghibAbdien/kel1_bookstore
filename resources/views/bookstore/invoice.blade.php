@@ -114,9 +114,9 @@
                                 <dd class="col-sm-4 font-weight-bold">: ${{ $bookstore->grand_amount }}</dd>
                             </dl>
                             <div class="row">
-                                <a href="{{ route('manage-direct-sale') }}"
+                                <a href="{{ route('show-order-history') }}"
                                     class="btn btn-primary waves-effect waves-light"><i
-                                        class="ti-shopping-cart m-r-1"></i>Direct Sale</a>
+                                        class="ti-shopping-cart m-r-1"></i>Order History</a>
                                 <button type="submit" class="btn btn-primary waves-effect waves-light"><i
                                         class="ti-printer m-r-1"></i>Print</button>
                                 <div class="col-md-3"></div>

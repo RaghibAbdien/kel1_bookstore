@@ -8,7 +8,7 @@
         <div class="col-md-4">
             <div class="card dashboard-product">
                 <span>Total Order</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <h2 class="dashboard-total-products"><span>{{ $statusCount }}</span></h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-truck text-success-color"></i>
@@ -18,7 +18,7 @@
         <div class="col-md-4">
             <div class="card dashboard-product">
                 <span>Confirmed</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <h2 class="dashboard-total-products"><span>{{ $statusConfirmed }}</span></h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-package text-info-color"></i>
@@ -28,7 +28,7 @@
         <div class="col-md-4">
             <div class="card dashboard-product">
                 <span>Unconfirmed</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <h2 class="dashboard-total-products"><span>{{ $statusUnConfirmed }}</span></h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-direction-alt text-danger-color"></i>

@@ -26,7 +26,7 @@
                                     <label for="exampleInputProductname" class="form-control-label">Product Name</label>
                                     <input type="text" class="form-control" id="exampleInputProductname"
                                         name="product_name" aria-describedby="Productname" placeholder="Enter Productname"
-                                        value="{{ $purchasings->product->product_name }}">
+                                        value="{{ $purchasings->product->product_name }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleSuppliername" class="form-control-label">Supplier Name</label>

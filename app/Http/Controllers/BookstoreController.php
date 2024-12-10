@@ -135,7 +135,13 @@ class BookstoreController extends Controller
         return view('bookstore.invoice', compact('bookstore', 'customer_orders', 'variant_product', 'tax', 'discount'));
     }  
 
-    public function orderHistory(){
-        return view('bookstore.order-history');
+    public function orderHistory()
+    {
+        $customer_orders = CustomerOrder::with('bookstore')->get();
+        $statusConfirmed = Bookstore::where('status_delivery', true)->count();
+        $statusUnConfirmed = Bookstore::where('status_delivery', false)->count();
+        $statusCount = $statusConfirmed + $statusUnConfirmed;
+
+        return view('bookstore.order-history', compact('customer_orders', 'statusCount', 'statusConfirmed', 'statusUnConfirmed'));
     }
 }

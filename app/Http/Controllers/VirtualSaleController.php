@@ -14,7 +14,12 @@ class VirtualSaleController extends Controller
     {
         $bookstores = Bookstore::all();
 
-        return view('virtual_sale.index', compact('bookstores'));
+        // Hitung jumlah bookstore dengan status true
+        $statusConfirmed = Bookstore::where('status_delivery', true)->count();
+        $statusUnConfirmed = Bookstore::where('status_delivery', false)->count();
+        $statusCount = $statusConfirmed + $statusUnConfirmed;
+
+        return view('virtual_sale.index', compact('bookstores', 'statusCount', 'statusConfirmed', 'statusUnConfirmed'));
     }
 
     public function showInvoice($id)
