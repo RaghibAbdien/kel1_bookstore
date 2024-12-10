@@ -11,9 +11,62 @@ class ProductController extends Controller
 {
     public function index()
     {
+        // Ambil semua produk
         $products = Product::all();
 
-        return view('catalog.index', compact('products'));
+        // Hitung jumlah produk berdasarkan nama produk
+        $biographyCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Biography');
+        })->count();
+        $comicCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Comic');
+        })->count();
+        $cultureCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Culture');
+        })->count();
+        $developmentCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Development');
+        })->count();
+        $economicCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Economic');
+        })->count();
+        $geographyCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Geography');
+        })->count();
+        $historyCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'History');
+        })->count();
+        $languageCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Language');
+        })->count();
+        $novelCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Novel');
+        })->count();
+        $religionCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Religion');
+        })->count();
+        $scienceCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Science');
+        })->count();
+        $technologyCount = Product::whereHas('variant', function ($query) {
+            $query->where('variant_name', 'Technology');
+        })->count();
+
+        return view('catalog.index', compact(
+            'products', 
+            'biographyCount', 
+            'comicCount', 
+            'cultureCount',
+            'developmentCount',
+            'economicCount',
+            'geographyCount',
+            'historyCount',
+            'languageCount',
+            'novelCount',
+            'religionCount',
+            'scienceCount',
+            'technologyCount'
+        ));
     }
 
     public function addProduct()
@@ -97,12 +150,15 @@ class ProductController extends Controller
         'product_name' => 'required|string|max:255',
         'variant_id' => 'required|exists:variants,id',
         'product_price' => 'required|numeric',
+        'supplier_price' => 'required|numeric',
     ], [
         'product_name.required' => 'Product Name tidak boleh kosong',
         'variant_id.required' => 'Variant tidak boleh kosong',
         'variant_id.exists' => 'Variant yang dipilih tidak valid',
-        'product_price.required' => 'Price tidak boleh kosong',
-        'product_price.numeric' => 'Price harus berupa angka',
+        'product_price.required' => 'Product Price tidak boleh kosong',
+        'product_price.numeric' => 'Product Price harus berupa angka',
+        'supplier_price.required' => 'Supplier Price tidak boleh kosong',
+        'supplier_price.numeric' => 'Supplier Price harus berupa angka',
     ]);
 
     try {
@@ -111,6 +167,7 @@ class ProductController extends Controller
             'product_name' => $infoRole['product_name'],
             'variant_id' => $infoRole['variant_id'],
             'product_price' => $infoRole['product_price'],
+            'supplier_price' => $infoRole['supplier_price'],
         ]);
 
         // Mengembalikan response sukses

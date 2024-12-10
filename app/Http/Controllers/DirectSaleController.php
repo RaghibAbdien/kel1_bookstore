@@ -23,7 +23,7 @@ class DirectSaleController extends Controller
         $shiping = $global_pricing->shiping ?? 0;
         $discount = $global_pricing->discount ?? 0;
 
-        $payment_methods = PaymentMethod::all();
+        $payment_methods = PaymentMethod::whereIn('payment_method_name', ['Cash', 'Debit Card', 'Scan'])->get();
 
         return view('direct_sale.index', compact('products', 'customers', 'tax', 'shiping', 'discount', 'payment_methods'));
     }

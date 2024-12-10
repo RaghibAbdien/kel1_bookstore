@@ -3,50 +3,6 @@
 @section('page-title', 'Manage Warehouse')
 
 @section('content')
-    {{-- Warehouse Analytics --}}
-    <div class="row dashboard-header">
-        <div class="col-lg-3 col-md-6">
-            <div class="card dashboard-product">
-                <span>In Stock</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <a href="">Show</a>
-                <div class="side-box">
-                    <i class="ti-truck text-success-color"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card dashboard-product">
-                <span>Low of Stock</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <a href="">Show</a>
-                <div class="side-box">
-                    <i class="ti-package text-info-color"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card dashboard-product">
-                <span>Out of Stock</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                <a href="">Show</a>
-                <div class="side-box">
-                    <i class="ti-direction-alt text-danger-color"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card dashboard-product">
-                <span>Need Restock</span>
-                <h2 class="dashboard-total-products">4500</h2>
-                <a href="">Show</a>
-                <div class="side-box">
-                    <i class="ti-wallet text-primary-color"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- Warehouse Analytics --}}
     <!-- Warehouse table starts -->
     <div class="card">
         <div class="card-block">

@@ -17,6 +17,8 @@ class PaymentMethodsTableSeeder extends Seeder
             ['payment_method_name' => 'Cash'],
             ['payment_method_name' => 'Debit Card'],
             ['payment_method_name' => 'Scan'],
+            ['payment_method_name' => 'Pay Later'],
+            ['payment_method_name' => 'COD'],
         ]);
     }
 }

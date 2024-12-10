@@ -50,27 +50,30 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="login-card card-block bg-white">
-                        <form class="md-float-material" action="index.html">
+                        <form class="md-float-material" id="formRegister" action="{{ route('register') }}"
+                            method="POST">
+                            @csrf
                             <div class="text-center">
                                 <img src="assets/images/logo-black.png" alt="logo">
                             </div>
                             <h3 class="txt-primary text-center">Create an account </h3>
                             <div class="md-input-wrapper">
                                 <div class="md-input-wrapper">
-                                    <input type="text" class="md-form-control" required="">
+                                    <input type="text" class="md-form-control" required="required" name="name">
                                     <label>Full Name</label>
                                 </div>
                             </div>
                             <div class="md-input-wrapper">
-                                <input type="email" class="md-form-control" required="required">
+                                <input type="email" class="md-form-control" required="required" name="email">
                                 <label>Email Address</label>
                             </div>
                             <div class="md-input-wrapper">
-                                <input type="password" class="md-form-control" required="required">
+                                <input type="password" class="md-form-control" required="required" name="password">
                                 <label>Password</label>
                             </div>
                             <div class="md-input-wrapper">
-                                <input type="password" class="md-form-control" required="required">
+                                <input type="password" class="md-form-control" required="required"
+                                    name="password_confirmation">
                                 <label>Confirm Password</label>
                             </div>
 
@@ -161,6 +164,60 @@
 
     <!--text js-->
     <script type="text/javascript" src="assets/pages/elements.js"></script>
+    {{-- sweet alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $('#formRegister').on('submit', function(event) {
+                event.preventDefault();
+                var form = $(this);
+                // Menonaktifkan tombol submit 
+                form.find('button[type="submit"]').prop('disabled', true);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize(),
+                    success: function(response) {
+                        // Jika validasi berhasil, redirect atau lakukan tindakan lain
+                        Swal.fire({
+                            title: 'Success',
+                            text: response.success,
+                            icon: 'success',
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then((result) => {
+                            window.location.href = response.redirect;
+                        });
+                    },
+                    error: function(xhr) {
+                        // Jika validasi gagal, tampilkan pesan kesalahan menggunakan SweetAlert
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = '';
+
+                        if (Array.isArray(errors)) {
+                            // Jika errors adalah array (validasi gagal)
+                            $.each(errors, function(index, value) {
+                                errorMessage += value + '<br>';
+                            });
+                        } else {
+                            // Jika errors adalah string (autentikasi gagal)
+                            errorMessage = errors;
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: errorMessage
+                        });
+
+                        // Mengaktifkan kembali tombol submit 
+                        form.find('button[type="submit"]').prop('disabled', false);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

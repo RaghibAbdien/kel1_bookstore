@@ -64,5 +64,14 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'preventback' => \App\Http\Middleware\PreventBack::class,
+        'role.access' => \App\Http\Middleware\CheckRoleAccess::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'cashier' => \App\Http\Middleware\CashierMiddleware::class,
+        'customer' => \App\Http\Middleware\CustomerMiddleware::class,
+        'headManager' => \App\Http\Middleware\HeadManagerMiddleware::class,
+        'purchasingAgent' => \App\Http\Middleware\PurchasingAgentMiddleware::class,
+        'storeManager' => \App\Http\Middleware\StoreManagerMiddleware::class,
+        'logisticManager' => \App\Http\Middleware\LogisticManagerMiddleware::class,
+        'customerService' => \App\Http\Middleware\CustomerServiceMiddleware::class,
     ];
 }

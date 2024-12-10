@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-xs-12 forgot-phone text-right">
-                                    <a href="/forgot-password" class="f-w-600 text-right"> Forget Password?</a>
+                                    <a href="{{ route('forgot-password') }}" class="f-w-600 text-right"> Forget Password?</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -104,7 +104,7 @@
                             <!-- <div class="card-footer"> -->
                             <div class="col-sm-12 col-xs-12 text-center">
                                 <span class="text-muted">Don't have an account?</span>
-                                <a href="/register" class="f-w-600 p-l-5">Sign up Now</a>
+                                <a href="{{ route('show-register') }}" class="f-w-600 p-l-5">Sign up Now</a>
                             </div>
 
                             <!-- </div> -->

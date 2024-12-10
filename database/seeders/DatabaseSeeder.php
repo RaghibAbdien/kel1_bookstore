@@ -7,9 +7,12 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\VariantsSeeder;
 use Database\Seeders\SuppliersSeeder;
 use Database\Seeders\WarehouseSeeder;
+use Database\Seeders\MenusTableSeeder;
 use Database\Seeders\RolesTableSeeder;
 use Database\Seeders\UsersTableSeeder;
+use Database\Seeders\RoleMenuTableSeeder;
 use Database\Seeders\TaxAndDiscountSeeder;
+use Database\Seeders\PaymentMethodsTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +29,8 @@ class DatabaseSeeder extends Seeder
             SuppliersSeeder::class,
             TaxAndDiscountSeeder::class,
             PaymentMethodsTableSeeder::class,
+            MenusTableSeeder::class,
+            RoleMenuTableSeeder::class,
         ]);
     }
 }

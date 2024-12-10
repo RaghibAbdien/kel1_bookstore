@@ -65,7 +65,7 @@ class PurchasingController extends Controller
             ], 500);
         }
     }
-    
+
     public function editPurchase($id)
     {
         $purchasings = Purchasing::findOrFail($id);

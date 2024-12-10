@@ -6,6 +6,8 @@ use App\Models\Stock;
 use App\Models\Product;
 use App\Models\Variant;
 use App\Models\Purchasing;
+use App\Models\CustomerOrder;
+use App\Models\PaymentProduct;
 use App\Models\WarehouseProduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -74,5 +76,15 @@ class Product extends Model
     public function purchasing()
     {
         return $this->hasMany(Purchasing::class, 'product_id');
+    }
+
+    public function payment_product()
+    {
+        return $this->hasMany(PaymentProduct::class, 'product_id');
+    }
+
+    public function customer_order()
+    {
+        return $this->belongsTo(CustomerOrder::class, 'product_id');
     }
 }
