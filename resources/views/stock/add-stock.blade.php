@@ -22,6 +22,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="exampleInputProductname" class="form-control-label">Product Name</label>
+                                    <input type="text" class="form-control" id="exampleInputProductname"
+                                        name="product_name" aria-describedby="Productname" placeholder="Enter Product name"
+                                        value="{{ $stocks->product->product_name }}" readonly disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="exampleInputQuantity" class="form-control-label">Product Quantity</label>
                                     <input type="number" class="form-control" id="exampleInputQuantity" name="quantity"
                                         aria-describedby="Quantity" placeholder="Enter Quantity">

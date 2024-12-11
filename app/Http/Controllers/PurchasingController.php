@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Report;
 use App\Models\Supplier;
 use App\Models\Warehouse;
 use App\Models\Purchasing;
 use Illuminate\Http\Request;
 use App\Models\WarehouseProduct;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PurchasingController extends Controller
 {
@@ -54,6 +56,22 @@ class PurchasingController extends Controller
     
             // Tambahkan quantity yang sama ke warehouse product
             WarehouseProduct::updateOrCreateProduct($purchasing->product_id, $addedQuantity, 'add');
+
+            $transaction = 'Purchasing';
+            $employee = Auth::user()->name;
+
+            // Ambil nilai terakhir dari kolom purchase_id
+            $lastPurchase = Report::max('purchase_id');
+
+            // Tambahkan 1 pada nilai terakhir, atau inisialisasi dengan 1 jika null
+            $report_purchase = $lastPurchase ? $lastPurchase + 1 : 1;
+
+            // Buat laporan baru
+            Report::create([
+                'purchase_id' => $report_purchase,
+                'transaction' => $transaction,
+                'employee' => $employee,
+            ]);
     
             return response()->json([
                 'success' => 'Purchase quantity updated successfully! Redirecting to dashboard...',

@@ -8,7 +8,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Total <br> Invoice</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <h2 class="dashboard-total-products"><span>{{ $reports->count() }}</span></h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-package text-info-color"></i>
@@ -18,7 +18,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Stock <br> Invoice</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <h2 class="dashboard-total-products"><span>{{ $stockCount }}</span></h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-direction-alt text-danger-color"></i>
@@ -28,7 +28,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Purchasing <br> Invoice</span>
-                <h2 class="dashboard-total-products">4500</h2>
+                <h2 class="dashboard-total-products">{{ $purchaseCount }}</h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-wallet text-primary-color"></i>
@@ -38,7 +38,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Direct <br> Invoice</span>
-                <h2 class="dashboard-total-products">37,500</h2>
+                <h2 class="dashboard-total-products">{{ $directCount }}</h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-shopping-cart text-warning-color"></i>
@@ -48,7 +48,7 @@
         <div class="col-lg-2 col-md-6">
             <div class="card dashboard-product">
                 <span>Virtual <br> Invoice</span>
-                <h2 class="dashboard-total-products">$<span>30,780</span></h2>
+                <h2 class="dashboard-total-products"><span>{{ $virtualCount }}</span></h2>
                 <a href="">Show</a>
                 <div class="side-box">
                     <i class="ti-archive text-danger-color"></i>

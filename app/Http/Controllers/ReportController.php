@@ -17,7 +17,11 @@ class ReportController extends Controller
     public function index()
     {
         $reports = Report::all();
-        return view('report.index', compact('reports'));
+        $directCount = Report::where('transaction', 'Direct Sale')->count();
+        $virtualCount = Report::where('transaction', 'Virtual Sale')->count();
+        $stockCount = Report::where('transaction', 'Stock')->count();
+        $purchaseCount = Report::where('transaction', 'Purchasing')->count();
+        return view('report.index', compact('reports', 'directCount', 'virtualCount', 'stockCount', 'purchaseCount'));
     }
 
     public function detailReport($id)

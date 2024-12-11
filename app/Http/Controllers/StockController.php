@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
+use App\Models\Report;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use App\Models\WarehouseProduct;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
 {
@@ -57,6 +59,22 @@ class StockController extends Controller
 
             // Kurangi quantity yang sama pada WarehouseProduct
             WarehouseProduct::updateOrCreateProduct($stock->product_id, $quantityToAdd, 'subtract');
+
+            $transaction = 'Stock';
+            $employee = Auth::user()->name;
+
+            // Ambil nilai terakhir dari kolom stock_id
+            $lastStock = Report::max('stock_id');
+
+            // Tambahkan 1 pada nilai terakhir, atau inisialisasi dengan 1 jika null
+            $report_stock = $lastStock ? $lastStock + 1 : 1;
+
+            // Buat laporan baru
+            Report::create([
+                'stock_id' => $report_stock,
+                'transaction' => $transaction,
+                'employee' => $employee,
+            ]);
 
             return response()->json([
                 'success' => 'Stock quantity updated successfully! Redirecting to dashboard...',
