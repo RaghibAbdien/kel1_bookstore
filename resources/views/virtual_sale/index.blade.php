@@ -65,7 +65,7 @@
                                     <td>
                                         <label
                                             class="label label-lg {{ $bookstore->status_delivery ? 'label-success' : 'label-danger' }}">
-                                            {{ $bookstore->status ? 'CONFIRMED' : 'UNCONFIRMED' }}
+                                            {{ $bookstore->status_delivery ? 'CONFIRMED' : 'UNCONFIRMED' }}
                                         </label>
                                     </td>
                                     <td>

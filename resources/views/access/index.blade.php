@@ -37,13 +37,14 @@
                                                     <i class="ti-pencil"></i>
                                                 </a>
                                                 <a class="btn btn-danger waves-effect waves-light" data-toggle="tooltip"
-                                                    data-placement="top" title="Delete" href="#"
-                                                    onclick="event.preventDefault(); document.getElementById('deleteMenuForm{{ $menu->id }}').submit();">
+                                                    data-placement="top" title="Delete"
+                                                    href="{{ route('delete-menu', $menu->id) }}"
+                                                    id="deleteMenuForm{{ $menu->id }}">
                                                     <i class="ti-trash"></i>
                                                 </a>
 
                                                 <form action="{{ route('delete-menu', $menu->id) }}"
-                                                    id="deleteMenuForm{{ $menu->id }}" method="POST"
+                                                    id="delete-menu-form{{ $menu->id }}" method="POST"
                                                     style="display:none;">
                                                     @csrf
                                                     @method('DELETE')
@@ -100,13 +101,14 @@
                                                     <i class="ti-pencil"></i>
                                                 </a>
                                                 <a class="btn btn-danger waves-effect waves-light" data-toggle="tooltip"
-                                                    data-placement="top" title="Delete" href="#"
-                                                    onclick="event.preventDefault(); document.getElementById('deleteRoleForm{{ $role->id }}').submit();">
+                                                    data-placement="top" title="Delete"
+                                                    href="{{ route('delete-role', $role->id) }}"
+                                                    id="deleteRoleForm{{ $role->id }}">
                                                     <i class="ti-trash"></i>
                                                 </a>
 
-                                                <form action="{{ route('delete-role', $role->id) }}"
-                                                    id="deleteRoleForm{{ $role->id }}" method="POST"
+                                                <form action="{{ route('delete-menu', $role->id) }}"
+                                                    id="delete-role-form{{ $role->id }}" method="POST"
                                                     style="display:none;">
                                                     @csrf
                                                     @method('DELETE')
@@ -130,51 +132,41 @@
     @push('js')
         @foreach ($menus as $menu)
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const deleteForm = document.querySelector(`#deleteMenuForm{{ $menu->id }}`);
-                    const deleteButton = document.querySelector(`#deleteButton{{ $menu->id }}`);
-
-                    deleteButton.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "Are you sure you want to delete this menu?",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, do it!'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                deleteForm.submit();
-                            }
-                        });
-                    });
+                document.getElementById('deleteMenuForm{{ $menu->id }}').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Are you sure delete this menu?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, do it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('delete-menu-form{{ $menu->id }}').submit();
+                        }
+                    })
                 });
             </script>
         @endforeach
         @foreach ($roles as $role)
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const deleteForm = document.querySelector(`#deleteRoleForm{{ $role->id }}`);
-                    const deleteButton = document.querySelector(`#deleteButton{{ $role->id }}`);
-
-                    deleteButton.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "Are you sure you want to delete this role?",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, do it!'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                deleteForm.submit();
-                            }
-                        });
-                    });
+                document.getElementById('deleteRoleForm{{ $role->id }}').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Are you sure delete this role?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, do it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('delete-role-form{{ $role->id }}').submit();
+                        }
+                    })
                 });
             </script>
         @endforeach

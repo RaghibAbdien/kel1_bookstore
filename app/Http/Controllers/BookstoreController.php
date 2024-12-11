@@ -13,6 +13,7 @@ use App\Models\PaymentProduct;
 use App\Models\TaxAndDiscount;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BookstoreController extends Controller
 {
@@ -68,6 +69,7 @@ class BookstoreController extends Controller
 
             // Tentukan status
             $status = $paymentMethod->payment_method_name === 'COD' ? false : true;
+            $status_delivery = Auth::user()->role_id !== 2;
 
             // Simpan data ke tabel payments
             $bookstore = Bookstore::create([
@@ -78,6 +80,7 @@ class BookstoreController extends Controller
                 'grand_amount' => $request->grand_amount,
                 'payment_method_id' => $request->payment_method_id,
                 'status' => $status,
+                'status_delivery' => $status_delivery,
             ]);
 
             // Simpan data ke tabel payment_products dan update stok
@@ -140,11 +143,11 @@ class BookstoreController extends Controller
 
     public function orderHistory()
     {
-        $customer_orders = CustomerOrder::with('bookstore')->get();
+        $bookstores = Bookstore::with('customer_order.product')->get();
         $statusConfirmed = Bookstore::where('status_delivery', true)->count();
         $statusUnConfirmed = Bookstore::where('status_delivery', false)->count();
         $statusCount = $statusConfirmed + $statusUnConfirmed;
 
-        return view('bookstore.order-history', compact('customer_orders', 'statusCount', 'statusConfirmed', 'statusUnConfirmed'));
+        return view('bookstore.order-history', compact('bookstores', 'statusCount', 'statusConfirmed', 'statusUnConfirmed'));
     }
 }

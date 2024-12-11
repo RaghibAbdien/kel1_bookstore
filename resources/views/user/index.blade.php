@@ -136,13 +136,14 @@
                                             <i class="ti-pencil"></i>
                                         </a>
                                         <a class="btn btn-danger waves-effect waves-light" data-toggle="tooltip"
-                                            data-placement="top" title="Delete" href="#"
-                                            onclick="event.preventDefault(); document.getElementById('deleteUserForm{{ $user->id }}').submit();">
+                                            data-placement="top" title="Delete"
+                                            href="{{ route('delete-user', $user->id) }}"
+                                            id="deleteUserForm{{ $user->id }}">
                                             <i class="ti-trash"></i>
                                         </a>
 
-                                        <form action="{{ route('delete-role', $user->id) }}"
-                                            id="deleteUserForm{{ $user->id }}" method="POST" style="display:none;">
+                                        <form action="{{ route('delete-user', $user->id) }}"
+                                            id="delete-user-form{{ $user->id }}" method="POST" style="display:none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
@@ -157,4 +158,39 @@
         </div>
     </div>
     <!-- User table ends -->
+    @push('js')
+        @foreach ($users as $user)
+            <script>
+                document.getElementById('deleteUserForm{{ $user->id }}').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Are you sure delete this user?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, do it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('delete-user-form{{ $user->id }}').submit();
+                        }
+                    })
+                });
+            </script>
+        @endforeach
+        @if (session('success'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Success',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                });
+            </script>
+        @endif
+    @endpush
 @endsection

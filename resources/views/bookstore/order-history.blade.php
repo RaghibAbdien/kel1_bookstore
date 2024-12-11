@@ -52,29 +52,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($customer_orders as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->product->product_name }}</td>
-                                    <td>{{ $item->quantity }}</td>
-                                    <td>{{ $item->created_at }}</td>
-                                    <td>
-                                        <label
-                                            class="label label-lg {{ $item->bookstore->status_delivery ? 'label-success' : 'label-danger' }}">
-                                            {{ $item->bookstore->status_delivery ? 'CONFIRMED' : 'UNCONFIRMED' }}
-                                        </label>
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="btn btn-info waves-effect waves-light" data-toggle="tooltip"
-                                            data-placement="top" title="" href="{{ route('show-bookstore-invoice', $item->bookstore_id) }}" role="button"
-                                            data-original-title="detail ">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                            @forelse ($bookstores as $bookstore)
+                                @foreach ($bookstore->customer_order as $order)
+                                    <tr>
+                                        <td>{{ $loop->parent->iteration }}</td>
+                                        <td>{{ $order->product->product_name ?? 'No Product' }}</td>
+                                        <td>{{ $order->quantity }}</td>
+                                        <td>{{ $bookstore->created_at->format('Y-m-d H:i:s') }}</td>
+                                        <td>
+                                            <label
+                                                class="label label-lg {{ $bookstore->status_delivery ? 'label-success' : 'label-danger' }}">
+                                                {{ $bookstore->status_delivery ? 'CONFIRMED' : 'UNCONFIRMED' }}
+                                            </label>
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="btn btn-info waves-effect waves-light" data-toggle="tooltip"
+                                                data-placement="top"
+                                                href="{{ route('show-bookstore-invoice', $bookstore->id) }}" role="button"
+                                                title="Detail">
+                                                <i class="ti-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @empty
-                                <span>Belum memiliki order</span>
+                                <tr>
+                                    <td colspan="6" class="text-center">No data available</td>
+                                </tr>
                             @endforelse
+
                         </tbody>
                     </table>
                 </div>
