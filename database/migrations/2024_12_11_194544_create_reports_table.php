@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('stock_id')->nullable();
+            $table->unsignedBigInteger('purchase_id')->nullable();
+            $table->unsignedBigInteger('payment_id')->nullable();
+            $table->unsignedBigInteger('bookstore_id')->nullable();
             $table->enum('transaction', ['Stock', 'Purchasing', 'Direct Sale', 'Virtual Sale']);
             $table->string('employee');
             $table->string('due from')->nullable();
