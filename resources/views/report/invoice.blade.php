@@ -39,29 +39,58 @@
                         </div>
                         <div class="col-md-6">
                             <div class="card-block">
-                                <dl class="dl-horizontal row">
-                                    <dt class="col-sm-6 m-b-10">Invoice ID</dt>
-                                    <dd class="col-sm-6">: <strong>#{{ $payment->id }}</strong></dd>
+                                @if ($transaction === 'Direct Sale')
+                                    <dl class="dl-horizontal row">
+                                        <dt class="col-sm-6 m-b-10">Invoice ID</dt>
+                                        <dd class="col-sm-6">: <strong>#{{ $payment->id }}</strong></dd>
 
-                                    <dt class="col-sm-6 m-b-10">Due Date</dt>
-                                    <dd class="col-sm-6">: {{ $payment->created_at }}</dd>
+                                        <dt class="col-sm-6 m-b-10">Due Date</dt>
+                                        <dd class="col-sm-6">: {{ $payment->created_at }}</dd>
 
-                                    <dt class="col-sm-6 m-b-10">Product Varian</dt>
-                                    <dd class="col-sm-6">: {{ $variant_product }}</dd>
+                                        <dt class="col-sm-6 m-b-10">Product Varian</dt>
+                                        <dd class="col-sm-6">: {{ $variant_direct }}</dd>
 
-                                    <dt class="col-sm-6 m-b-10">Amount</dt>
-                                    <dd class="col-sm-6">: ${{ $payment->grand_amount }}</dd>
+                                        <dt class="col-sm-6 m-b-10">Amount</dt>
+                                        <dd class="col-sm-6">: ${{ $payment->grand_amount }}</dd>
 
-                                    <dt class="col-sm-6 m-b-10">Status</dt>
-                                    <dd class="col-sm-6 d-flex">:
-                                        <div class="label-main m-l-2">
-                                            <label
-                                                class="label label-lg {{ $payment->status ? 'label-success' : 'label-danger' }}">
-                                                {{ $payment->status ? 'PAID' : 'UNPAID' }}
-                                            </label>
-                                        </div>
-                                    </dd>
-                                </dl>
+                                        <dt class="col-sm-6 m-b-10">Status</dt>
+                                        <dd class="col-sm-6 d-flex">:
+                                            <div class="label-main m-l-2">
+                                                <label
+                                                    class="label label-lg {{ $payment->status ? 'label-success' : 'label-danger' }}">
+                                                    {{ $payment->status ? 'PAID' : 'UNPAID' }}
+                                                </label>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                @elseif ($transaction === 'Virtual Sale')
+                                    <dl class="dl-horizontal row">
+                                        <dt class="col-sm-6 m-b-10">Invoice ID</dt>
+                                        <dd class="col-sm-6">: <strong>#{{ $bookstore->id }}</strong></dd>
+
+                                        <dt class="col-sm-6 m-b-10">Due Date</dt>
+                                        <dd class="col-sm-6">: {{ $bookstore->created_at }}</dd>
+
+                                        <dt class="col-sm-6 m-b-10">Product Varian</dt>
+                                        <dd class="col-sm-6">: {{ $variant_virtual }}</dd>
+
+                                        <dt class="col-sm-6 m-b-10">Amount</dt>
+                                        <dd class="col-sm-6">: ${{ $bookstore->grand_amount }}</dd>
+
+                                        <dt class="col-sm-6 m-b-10">Status</dt>
+                                        <dd class="col-sm-6 d-flex">:
+                                            <div class="label-main m-l-2">
+                                                <label
+                                                    class="label label-lg {{ $bookstore->status ? 'label-success' : 'label-danger' }}">
+                                                    {{ $bookstore->status ? 'CONFIRMED' : 'UNCONFIRMED' }}
+                                                </label>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                @else
+                                    <p>No data available for the selected transaction type.</p>
+                                @endif
+
                                 <hr>
                             </div>
                         </div>
@@ -81,15 +110,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($payment_products as $payment_product)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $payment_product->product->product_name }}</td>
-                                            <td>{{ $payment_product->quantity }}</td>
-                                            <td>{{ $payment_product->product->product_price }}</td>
-                                            <td>{{ $payment_product->sub_total }}</td>
-                                        </tr>
-                                    @endforeach
+                                    @if ($transaction === 'Direct Sale')
+                                        @foreach ($payment_products as $payment_product)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $payment_product->product->product_name }}</td>
+                                                <td>{{ $payment_product->quantity }}</td>
+                                                <td>{{ $payment_product->product->product_price }}</td>
+                                                <td>{{ $payment_product->sub_total }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @elseif ($transaction === 'Virtual Sale')
+                                        @foreach ($customer_orders as $customer_order)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $customer_order->product->product_name }}</td>
+                                                <td>{{ $customer_order->quantity }}</td>
+                                                <td>{{ $customer_order->product->product_price }}</td>
+                                                <td>{{ $customer_order->sub_total }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -100,27 +141,52 @@
                     <div class="col-md-6"></div>
                     <div class="col-md-6">
                         <div class="card-block">
-                            <dl class="dl-horizontal row">
-                                <dt class="col-sm-8 font-weight-normal">Sub Total</dt>
-                                <dd class="col-sm-4">: ${{ $payment->total_amount }}</dd>
-                                <dt class="col-sm-8 font-weight-normal">Estimated Tax ({{ $tax }}%)</dt>
-                                <dd class="col-sm-4">: ${{ $payment->estimated_tax }}</dd>
-                                <dt class="col-sm-8 font-weight-normal">Discount ({{ $discount }}%)</dt>
-                                <dd class="col-sm-4">: ${{ $payment->discount }}</dd>
-                            </dl>
-                            <hr>
-                            <dl class="dl-horizontal row">
-                                <dt class="col-sm-8">Grand Amount</dt>
-                                <dd class="col-sm-4 font-weight-bold">: ${{ $payment->grand_amount }}</dd>
-                            </dl>
-                            <div class="row">
-                                <a href="{{ route('manage-direct-sale') }}"
-                                    class="btn btn-primary waves-effect waves-light"><i
-                                        class="ti-shopping-cart m-r-1"></i>Direct Sale</a>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light"><i
-                                        class="ti-printer m-r-1"></i>Print</button>
-                                <div class="col-md-3"></div>
-                            </div>
+                            @if ($transaction === 'Direct Sale')
+                                <dl class="dl-horizontal row">
+                                    <dt class="col-sm-8 font-weight-normal">Sub Total</dt>
+                                    <dd class="col-sm-4">: ${{ $payment->total_amount }}</dd>
+                                    <dt class="col-sm-8 font-weight-normal">Estimated Tax ({{ $tax }}%)</dt>
+                                    <dd class="col-sm-4">: ${{ $payment->estimated_tax }}</dd>
+                                    <dt class="col-sm-8 font-weight-normal">Discount ({{ $discount }}%)</dt>
+                                    <dd class="col-sm-4">: ${{ $payment->discount }}</dd>
+                                </dl>
+                                <hr>
+                                <dl class="dl-horizontal row">
+                                    <dt class="col-sm-8">Grand Amount</dt>
+                                    <dd class="col-sm-4 font-weight-bold">: ${{ $payment->grand_amount }}</dd>
+                                </dl>
+                                <div class="row">
+                                    <a href="{{ route('manage-direct-sale') }}"
+                                        class="btn btn-primary waves-effect waves-light"><i
+                                            class="ti-shopping-cart m-r-1"></i>Direct Sale</a>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light"><i
+                                            class="ti-printer m-r-1"></i>Print</button>
+                                    <div class="col-md-3"></div>
+                                </div>
+                            @elseif ($transaction === 'Virtual Sale')
+                                <dl class="dl-horizontal row">
+                                    <dt class="col-sm-8 font-weight-normal">Sub Total</dt>
+                                    <dd class="col-sm-4">: ${{ $bookstore->total_amount }}</dd>
+                                    <dt class="col-sm-8 font-weight-normal">Estimated Tax ({{ $tax }}%)</dt>
+                                    <dd class="col-sm-4">: ${{ $bookstore->estimated_tax }}</dd>
+                                    <dt class="col-sm-8 font-weight-normal">Discount ({{ $discount }}%)</dt>
+                                    <dd class="col-sm-4">: ${{ $bookstore->discount }}</dd>
+                                </dl>
+                                <hr>
+                                <dl class="dl-horizontal row">
+                                    <dt class="col-sm-8">Grand Amount</dt>
+                                    <dd class="col-sm-4 font-weight-bold">: ${{ $bookstore->grand_amount }}</dd>
+                                </dl>
+                                <div class="row">
+                                    <a href="{{ route('manage-direct-sale') }}"
+                                        class="btn btn-primary waves-effect waves-light"><i
+                                            class="ti-shopping-cart m-r-1"></i>Direct Sale</a>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light"><i
+                                            class="ti-printer m-r-1"></i>Print</button>
+                                    <div class="col-md-3"></div>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Stock;
+use App\Models\Report;
 use App\Models\Payment;
 use App\Models\Bookstore;
 use Illuminate\Http\Request;
@@ -94,6 +95,14 @@ class BookstoreController extends Controller
                     'product_id' => $productId,
                     'quantity' => $request->quantity[$index],
                     'sub_total' => $request->sub_total[$index],
+                ]);
+
+                $transaction = 'Virtual Sale';
+                $employee = Auth::user()->name;
+                Report::create([
+                    'bookstore_id' => $bookstore->id,
+                    'transaction' => $transaction,
+                    'employee' => $employee,
                 ]);
 
                 $stock = Stock::where('product_id', $productId)->first();
