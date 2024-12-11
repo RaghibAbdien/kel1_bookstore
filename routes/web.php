@@ -134,8 +134,10 @@ Route::middleware(['preventback'])->group(function () {
         });
         
         // Route Reports & Analytics
-        Route::get('/manage-report', [ReportController::class, 'index'])->name('manage-report');
-        Route::get('/detail-report/{id}', [ReportController::class, 'detailReport'])->name('detail-report');
+        Route::middleware(['role.access:dashboard', 'headManager'])->group(function () {
+            Route::get('/manage-report', [ReportController::class, 'index'])->name('manage-report');
+            Route::get('/detail-report/{id}', [ReportController::class, 'detailReport'])->name('detail-report');
+        });
 
         // Route Bookstore
         Route::middleware(['customer'])->group(function () {
