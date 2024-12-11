@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
+use App\Models\Report;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
@@ -10,6 +11,7 @@ use App\Models\PaymentProduct;
 use App\Models\TaxAndDiscount;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -65,6 +67,14 @@ class PaymentController extends Controller
                     'product_id' => $productId,
                     'quantity' => $request->quantity[$index],
                     'sub_total' => $request->sub_total[$index],
+                ]);
+
+                $transaction = 'Direct Sale';
+                $employee = Auth::user()->name;
+                Report::create([
+                    'payment_id' => $payment->id,
+                    'transaction' => $transaction,
+                    'employee' => $employee,
                 ]);
 
                 $stock = Stock::where('product_id', $productId)->first();

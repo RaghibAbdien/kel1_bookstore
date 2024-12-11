@@ -104,5 +104,12 @@ class MenusTableSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+
+        DB::table('menus')->insert([
+            'menu_name' => 'Reports & Analitics',
+            'slug' => 'manage-report',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }

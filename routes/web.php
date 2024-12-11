@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookstoreController;
@@ -133,15 +134,8 @@ Route::middleware(['preventback'])->group(function () {
         });
         
         // Route Reports & Analytics
-        Route::get('/manage-report', function () {
-            return view('report.index')->name('manage-report');
-        });
-        Route::get('/detail-report', function () {
-            return view('report.detail-report');
-        });
-        Route::get('/edit-report', function () {
-            return view('report.edit-report');
-        });
+        Route::get('/manage-report', [ReportController::class, 'index'])->name('manage-report');
+        Route::get('/detail-report/{id}', [ReportController::class, 'detailReport'])->name('detail-report');
 
         // Route Bookstore
         Route::middleware(['customer'])->group(function () {
