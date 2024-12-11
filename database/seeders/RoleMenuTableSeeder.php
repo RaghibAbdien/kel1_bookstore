@@ -18,6 +18,7 @@ class RoleMenuTableSeeder extends Seeder
          $data = [
             ['role_id' => 1, 'menu_id' => 1],
             ['role_id' => 1, 'menu_id' => 2],
+            ['role_id' => 1, 'menu_id' => 3],
             
         ];
 

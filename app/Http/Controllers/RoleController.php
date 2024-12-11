@@ -32,13 +32,12 @@ class RoleController extends Controller
         // Validasi input
         $infoRole = $request->validate([
             'role_name' => 'required|unique:roles|string|max:255',
-            'menu_id' => 'required|array',
+            'menu_id' => 'array',
             'menu_id.*' => 'exists:menus,id',
         ], [
             'role_name.required' => 'Role name tidak boleh kosong',
             'role_name.unique' => 'Role name sudah ada, silakan gunakan yang lain',
             'role_name.string' => 'Role name harus berupa string',
-            'menu_id.required' => 'Pilih setidaknya satu menu',
             'menu_id.array' => 'Data menu tidak valid',
             'menu_id.*.exists' => 'Menu yang dipilih tidak valid',
         ]);
@@ -49,13 +48,15 @@ class RoleController extends Controller
                 'role_name' => $infoRole['role_name'],
             ]);
     
-            // Simpan menu_id ke tabel role_menus
-            foreach ($infoRole['menu_id'] as $menuId) {
-                RoleMenu::create([
-                    'role_id' => $role->id,
-                    'menu_id' => $menuId,
-                ]);
-            }
+            if ($request->has('menu_id')) {
+                // Key 'menu_id' ada dalam request
+                foreach ($infoRole['menu_id'] as $menuId) {
+                    RoleMenu::create([
+                        'role_id' => $role->id,
+                        'menu_id' => $menuId,
+                    ]);
+                }
+            }            
     
             return response()->json([
                 'success' => 'Role created successfully! Redirecting to dashboard...',
