@@ -25,7 +25,6 @@ class VariantsSeeder extends Seeder
             'Religion',
             'Science',
             'Technology',
-            'Translation',
             'Language'
         ];
 

@@ -19,7 +19,7 @@ class ProductController extends Controller
             $query->where('variant_name', 'Biography');
         })->count();
         $comicCount = Product::whereHas('variant', function ($query) {
-            $query->where('variant_name', 'Comic');
+            $query->where('variant_name', 'Comics');
         })->count();
         $cultureCount = Product::whereHas('variant', function ($query) {
             $query->where('variant_name', 'Culture');
@@ -28,7 +28,7 @@ class ProductController extends Controller
             $query->where('variant_name', 'Development');
         })->count();
         $economicCount = Product::whereHas('variant', function ($query) {
-            $query->where('variant_name', 'Economic');
+            $query->where('variant_name', 'Economics');
         })->count();
         $geographyCount = Product::whereHas('variant', function ($query) {
             $query->where('variant_name', 'Geography');

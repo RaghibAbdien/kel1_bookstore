@@ -143,8 +143,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $product->variant->variant_name }}</td>
                                     <td>{{ $product->product_name }}</td>
-                                    <td>{{ $product->supplier_price }}</td>
-                                    <td>{{ $product->product_price }}</td>
+                                    <td>${{ $product->supplier_price }}</td>
+                                    <td>${{ $product->product_price }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning waves-effect waves-light" data-toggle="tooltip"
                                             data-placement="top" title=""

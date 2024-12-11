@@ -15,73 +15,61 @@
                     <!-- Biography -->
                     <button type="button" class="btn btn-default waves-effect">
                         Biography
-                        <span class="badge">70</span>
                     </button>
 
                     <!-- Comics -->
                     <button type="button" class="btn btn-primary waves-effect waves-light">
                         Comics
-                        <span class="badge">90</span>
                     </button>
 
                     <!-- Culture -->
                     <button type="button" class="btn btn-success waves-effect waves-light">
                         Culture
-                        <span class="badge">70</span>
                     </button>
 
                     <!-- Self-Dev -->
                     <button type="button" class="btn btn-warning waves-effect waves-light">
                         Self-Dev
-                        <span class="badge">170</span>
                     </button>
 
                     <!-- Economics -->
                     <button type="button" class="btn btn-danger waves-effect waves-light">
                         Economics
-                        <span class="badge">07</span>
                     </button>
 
                     <!-- Tech -->
                     <button type="button" class="btn btn-info waves-effect waves-light">
                         Tech
-                        <span class="badge">80</span>
                     </button>
 
                     <!-- Geography -->
                     <button type="button" class="btn btn-info waves-effect waves-light">
                         Geography
-                        <span class="badge">80</span>
                     </button>
 
                     <!-- History -->
                     <button type="button" class="btn btn-default waves-effect">
                         History
-                        <span class="badge">70</span>
                     </button>
 
                     <!-- Language -->
                     <button type="button" class="btn btn-primary waves-effect waves-light">
                         Language
-                        <span class="badge">90</span>
                     </button>
 
                     <!-- Novel -->
                     <button type="button" class="btn btn-success waves-effect waves-light">
                         Novel
-                        <span class="badge">70</span>
                     </button>
 
                     <!-- Religion -->
                     <button type="button" class="btn btn-warning waves-effect waves-light">
                         Religion
-                        <span class="badge">170</span>
                     </button>
 
                     <!-- Science -->
                     <button type="button" class="btn btn-danger waves-effect waves-light">
                         Science
-                        <span class="badge">07</span>
                     </button>
 
                 </div>
@@ -120,7 +108,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $product->product->product_name }}</td>
                                             <td>{{ $product->quantity }}</td>
-                                            <td>{{ $product->product->product_price }}</td>
+                                            <td>${{ $product->product->product_price }}</td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary waves-effect waves-light add-product-btn"
                                                     data-toggle="tooltip" data-placement="top" title="Add Product"
